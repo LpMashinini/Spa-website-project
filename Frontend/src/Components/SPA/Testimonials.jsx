@@ -90,11 +90,22 @@ const Testimonials = () => {
           </div>
 
           <div className="testimonials-pic btn">
-            <img src={test1} alt="User 1" className="user-pic" />
-            <img src={test2} alt="User 2" className="user-pic" />
-            <img src={test3} alt="User 3 active-pic" className="user-pic" />
-            <img src={test6} alt="User 4" className="user-pic" />
-            <img src={test5} alt="User 5" className="user-pic" />
+            <div className="user-review">
+              <span>JR</span>
+            </div>
+            <div className="user-review">
+              <span>LM</span>
+            </div>
+            <div className="user-review">
+              <span>PM</span>
+            </div>
+            <div className="user-review">
+              <span>TM</span>
+            </div>
+            <div className="user-review">
+              <span>LS</span>
+            </div>
+
           </div>
 
         </div>

@@ -125,6 +125,27 @@
 
 }
 
+.user-review {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    box-shadow: 0px 25px 30px var(--testShadow);
+    margin: 10px;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+}
+
+.user-review span {
+    font-size: 20px;
+    font-weight: 600;
+}
+
 .user-pic.active-pic {
     width: 130px;
 }
