@@ -1,4 +1,4 @@
-import "./Testemonials.css"
+import "./Testimonials.css"
 import test1 from "../../Assets/test1.jpg"
 import test2 from "../../Assets/test2.jpg"
 import test3 from "../../Assets/test3.jpg"
