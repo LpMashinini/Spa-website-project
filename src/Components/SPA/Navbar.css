@@ -1,0 +1,79 @@
+:root {
+    --primary-color: white;
+    --accent-color:  salmon;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    color: var(--primary-color);
+    position: relative;
+}
+
+.logo::after {
+    content: "";
+    width: 170px;
+    height: 4px;
+    background: var(--accent-color);
+    display: block;
+    margin-top: 5px;
+    border-radius: 2px;
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.logo span {
+    color: var(--accent-color); 
+}
+
+ul {
+    display: flex;
+    list-style: none;
+}
+
+ul li a{
+    text-decoration: none;
+    color: var(--primary-color); 
+    cursor: pointer;
+    font-size: 18px;
+    margin: 0px 20px;  
+    position: relative;
+}
+
+ul li a::after {
+    content: "";
+    width: 0%;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 2px;
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: 0.3s;
+}
+
+ul li a:hover::after {
+    width: 50%;
+}
+
+.appointment {
+    background-color: var(--accent-color);
+    border-radius: 20px;
+    padding: 8px 16px;
+    margin-top: -10px;
+    text-transform: capitalize;
+}
+
+.appointment a::after {
+    background: transparent;
+}
