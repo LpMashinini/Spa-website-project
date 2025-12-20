@@ -1,6 +1,6 @@
 :root {
     --primary-color: white;
-    --accent-color:  salmon;
+    --accent-color: salmon;
 }
 
 .nav-container {
@@ -32,7 +32,7 @@
 }
 
 .logo span {
-    color: var(--accent-color); 
+    color: var(--accent-color);
 }
 
 ul {
@@ -40,12 +40,12 @@ ul {
     list-style: none;
 }
 
-ul li a{
+ul li a {
     text-decoration: none;
-    color: var(--primary-color); 
+    color: var(--primary-color);
     cursor: pointer;
     font-size: 18px;
-    margin: 0px 20px;  
+    margin: 0px 20px;
     position: relative;
 }
 
@@ -67,13 +67,40 @@ ul li a:hover::after {
 }
 
 .appointment {
+    color: var(--primary-color);
     background-color: var(--accent-color);
     border-radius: 20px;
     padding: 8px 16px;
     margin-top: -10px;
+    text-decoration: none;
     text-transform: capitalize;
 }
 
 .appointment a::after {
     background: transparent;
+}
+
+.contact {
+    color: var(--primary-color);
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 13px;
+    font-size: 18px;
+    position: relative;
+}
+
+.contact::after {
+    content: "";
+    width: 0%;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 2px;
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: 0.3s;
+}
+.contact:hover::after {
+    width: 50%;
 }
