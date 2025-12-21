@@ -3,6 +3,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import NorthIcon from '@mui/icons-material/North';
+import { Link } from 'react-router-dom';
 
 const footer = () => {
   return (
@@ -16,7 +17,8 @@ const footer = () => {
 
         <button>book now</button>
 
-        <NorthIcon className='up-arrow' fontSize="large"/>
+        
+        <a href="#home"> <NorthIcon className='up-arrow' fontSize="large"/></a>
 
         <div className="footer">
 

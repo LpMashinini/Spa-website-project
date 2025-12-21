@@ -17,7 +17,7 @@ const Body = () => {
 
         <>
 
-            <div className="body-container">
+            <div className="body-container"  id="about">
 
 
                 <div className="left-div">
@@ -37,7 +37,7 @@ const Body = () => {
 
             </div>
 
-            <div className="service-section">
+            <div className="service-section" id="Service">
 
                 <span></span>
                 <h1>what we're offering</h1>

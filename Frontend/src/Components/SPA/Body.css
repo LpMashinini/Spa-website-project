@@ -104,15 +104,10 @@
 }
 
 .service-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 70px;
-    padding: 50px 20px;
-}
-
-.service-box {
-    width: 400px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 70px;
+    padding: 23px 70px;
 }
 
 .service-box img {
@@ -243,11 +238,11 @@
 }
 
 .socials .icons {
-   color: var(--primary-color);
-   background: var(--accent-color);
-   cursor: pointer;
-   padding: 5px;
-   font-size: 30px;
-   border-radius: 5px;
-   margin: 0px 10px;
+    color: var(--primary-color);
+    background: var(--accent-color);
+    cursor: pointer;
+    padding: 5px;
+    font-size: 30px;
+    border-radius: 5px;
+    margin: 0px 10px;
 }

@@ -103,7 +103,7 @@ const Appointment = () => {
             <input type="number" placeholder="enter cell number" />
           </div>
 
-          <div class="inputbox">
+          <div className="inputbox">
             <h4>Guest:</h4>
             <span>Please enter number of guest</span>
             <input type="number"/>

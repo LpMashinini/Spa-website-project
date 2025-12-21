@@ -32,12 +32,13 @@
 .appointment-header-text {
   display: flex;
   flex-direction: column;
-  margin-bottom: 6rem;
+  margin: 3rem 0px;
 }
 
 .appointment-header-text h2 {
   color: var(--accent-color);
   font-size: 2.5rem;
+  margin-left: 3rem;
 }
 
 .appointment-container {
