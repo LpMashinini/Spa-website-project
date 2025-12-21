@@ -1,0 +1,307 @@
+@import url("https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Parkinsans:wght@300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+
+:root {
+    --primary-color: white;
+    --accent-color: salmon;
+    --secondary-color: black;
+    --font--: "Playfair Display", serif;
+    --font2--: "EB Garamond", serif;
+    --pColor: rgb(136, 133, 133);
+    --teamBack: rgb(255, 255, 255);
+    --teamIcons: rgb(255, 159, 148);
+    --teamDetail: rgba(150, 147, 147, 0.942);
+}
+
+.contact-container {
+    width: 100%;
+    height: 700px;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(4, 49, 84, 0.715)),
+        url("../../src/assets/contactHeader.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 90px;
+}
+
+.logo-container h1 {
+    color: var(--primary-color);
+    font-size: 30px;
+    position: relative;
+}
+
+.logo-container h1::after {
+    content: "";
+    width: 170px;
+    height: 4px;
+    background: var(--accent-color);
+    display: block;
+    margin-top: 5px;
+    border-radius: 2px;
+    position: absolute;
+    bottom: -20px;
+    left: 45%;
+    transform: translateX(-50%);
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.home {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 18px;
+    margin-right: 20px;
+    cursor: pointer;
+    list-style: none;
+    position: relative;
+}
+
+.home::after {
+    content: "";
+    width: 0%;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 2px;
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: 0.3s;
+}
+
+.home:hover::after {
+    width: 50%;
+}
+
+.header-text {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 12rem;
+}
+
+
+.header-text h2 {
+    color: var(--primary-color);
+    font-size: 4.5rem;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+}
+
+.header-text p {
+    color: var(--primary-color);
+    font-size: 18px;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
+
+.contact-section {
+    padding: 40px 60px;
+}
+
+.location-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.location-header h2 {
+    color: var(--accent-color);
+    text-transform: capitalize;
+    text-align: center;
+    font-size: 2.5rem;
+    font-family: var(--font--);
+}
+
+.location-header span {
+    background-color: var(--accent-color);
+    border-radius: 5px;
+    width: 90px;
+    height: 4px;
+    text-align: center;
+    margin: 15px 0px;
+}
+
+.contact-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 0px 70px;
+}
+
+.contact-header-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 30px 0px;
+    padding: 30px 0px;
+}
+
+.contact-header-text h2 {
+    color: var(--accent-color);
+    text-transform: capitalize;
+    text-align: center;
+    font-size: 2.5rem;
+    font-family: var(--font--);
+}
+
+.contact-header-text span {
+    background-color: var(--accent-color);
+    border-radius: 5px;
+    width: 90px;
+    height: 4px;
+    text-align: center;
+    margin: 15px 0px;
+}
+
+.contact-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10rem;
+    padding: 0px 0px;
+}
+
+.input-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.input-headerText {
+    margin-bottom: 80px;
+}
+
+.input-headerText h2 {
+    margin-bottom: 20px;
+}
+
+.input-headerText p {
+    font-size: 19px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.first-col {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+.inputbox {
+    padding: 10px 30px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+    margin: 20px 20px;
+}
+
+.inputbox input {
+    border: 0;
+    outline: none;
+    text-transform: capitalize;
+}
+
+.inputbox input::placeholder {
+    text-transform: capitalize;
+    padding: 0px;
+    margin: 0px;
+}
+
+.second-col {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.second-col .inputbox {
+    width: 500px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+    margin: 20px 20px;
+}
+
+.inputbox-textarea textarea {
+
+    padding: 10px;
+    text-transform: capitalize;
+    font-size: 16px;
+    font-family: sans-serif;
+    margin-bottom: 30px;
+    outline: none;
+
+}
+
+.input-container button {
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--secondary-color);
+    width: 100px;
+    float: left;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--secondary-color);
+    margin-left: 20px;
+    transition: all 0.3s ease;
+}
+
+.input-container button:hover {
+    color: var(--primary-color);
+    border: 1px solid transparent;
+    background-color: var(--accent-color);
+}
+
+
+.input-headerText {
+    margin-bottom: 80px;
+}
+
+.details-section .input-headerText h2 {
+    margin-top: -45px;
+}
+
+.details-section .input-headerText p {
+    font-size: 19px;
+}
+
+.details-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.details {
+    margin-bottom: 20px;
+}
+
+.details h3 {
+    margin-bottom: 10px;
+}
+
+.details p {
+    margin-bottom: 5px;
+}
+
+.details p span {
+    color: var(--spanColor);
+    font-weight: 200;
+}
