@@ -4,7 +4,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 
-const Appointment = () => {
+const Appointment = ({currentYear}) => {
 
   return (
 
@@ -119,7 +119,7 @@ const Appointment = () => {
         <div className="footer">
 
           <div className="left-footer">
-            <h4>2024 all rights reserved | @ Blissful & Balance Touch</h4>
+            <h4>{currentYear} all rights reserved | @ Blissful & Balance Touch</h4>
           </div>
 
           <div className="right-footer">

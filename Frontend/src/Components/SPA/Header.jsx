@@ -2,6 +2,8 @@ import Navbar from './Navbar'
 import './Header.css'
 
 const Header = () => {
+
+
   return (
     
     <div className='container' id='home'>

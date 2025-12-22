@@ -3,15 +3,18 @@ import Body from "./Body"
 import Testimonials from "./Testimonials"
 import Footer from "./Footer_Component"
 
-const Home = () => {
+const Home = ({ currentYear }) => {
+
   return (
+
     <div>
-    <Header/>
-    <Body/>
-    <Testimonials/>
-    <Footer/>
+      <Header />
+      <Body />
+      <Testimonials />
+      <Footer currentYear={currentYear} />
     </div>
   )
+
 }
 
 export default Home

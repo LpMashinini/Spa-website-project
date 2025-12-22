@@ -5,7 +5,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import NorthIcon from '@mui/icons-material/North';
 import { Link } from 'react-router-dom';
 
-const footer = () => {
+const footer = ({currentYear}) => {
   return (
 
 
@@ -23,7 +23,7 @@ const footer = () => {
         <div className="footer">
 
           <div className="left-footer">
-            <h4>2024 all rights reserved | @ Blissful & Balance Touch</h4>
+            <h4>{currentYear} all rights reserved | @ Blissful & Balance Touch</h4>
           </div>
 
           <div className="right-footer">
