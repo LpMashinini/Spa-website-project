@@ -109,3 +109,17 @@
   cursor: pointer;
   margin: 0px 18px;
 }
+
+/* Media Query for Responsiveness */
+
+@media (min-width: 300px) and (max-width: 480px) {
+
+  /* Mobile - Portrait */
+
+  .footer-content h2 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+}

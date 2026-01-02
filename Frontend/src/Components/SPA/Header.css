@@ -45,17 +45,17 @@
 
     /* Mobile - Portrait */
 
-    /* .header-content {
+    .header-content {
         margin-top: 170px;
-        padding: 0px 15px;
+        padding: 0px 30px;
     }
 
     .header-content h3 {
-        font-size: 3.5rem;
+        font-size: 2rem;
     }
 
     .header-content p {
-        font-size: 17px;
-    } */
+        font-size: 14px;
+    }
 
 }

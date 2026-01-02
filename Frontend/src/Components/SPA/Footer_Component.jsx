@@ -6,11 +6,14 @@ import NorthIcon from '@mui/icons-material/North';
 import { Link } from 'react-router-dom';
 
 const footer = ({currentYear}) => {
+
   return (
 
 
     <section className="footer-section">
+
       <div className="footer-content">
+
         <p className="headerText">our special offer</p>
         <h2 className="headerText">YOU OWE YOURSELF THIS MOMENT</h2>
         <p className="headerText">Visit one of our multiple sessions of relaxation.</p>
@@ -37,6 +40,7 @@ const footer = ({currentYear}) => {
         </div>
 
       </div>
+      
     </section>
   )
 }

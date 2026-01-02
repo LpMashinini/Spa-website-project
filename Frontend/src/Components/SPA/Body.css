@@ -246,3 +246,61 @@
     border-radius: 5px;
     margin: 0px 10px;
 }
+
+
+/* Media Query for Responsiveness */
+
+
+@media (min-width: 300px) and (max-width: 480px) {
+
+    /* Mobile - Portrait */
+
+    .left-div {
+        display: none;
+    }
+
+    .body-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 50px 40px;
+    }
+    
+    .right-div p {
+        font-size: 15px;
+        line-height: 19px;
+        width: 170px;
+    }
+
+    .right-div h3 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .right-div h3::after {
+        background: transparent;
+        display: none;
+    }
+
+    .team-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .team-member {
+        width: 270px;
+    }
+
+    .team-member .team-details {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 30px;
+        width: 200px;
+    }
+
+    
+}

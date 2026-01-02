@@ -24,8 +24,11 @@ const Body = () => {
                 <div className="left-div">
                     <img src={aboutBg} alt="" />
                 </div>
+
                 <div className="right-div">
+
                     <h3>Get to know us</h3>
+                    
                     <p>
                         At Blissful & Balance we believe in the power of self-care to transform not just your appearance, but your overall well-being.
                         Our luxurious spa & beauty salon offers a range of premium treatments designed to rejuvenate, relax, and revitalize.

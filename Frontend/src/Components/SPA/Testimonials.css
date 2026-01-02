@@ -161,3 +161,30 @@
     }
 
 }
+
+
+/* Media Query for Responsiveness */
+
+@media (min-width: 300px) and (max-width: 480px) {
+
+    /* Mobile - Portrait */
+
+    .testimonials-pic {
+        display: none;
+    }
+
+    .testimonial {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .testimonials-text {
+        width: 290px;
+        height: 420px;
+    }
+
+    .user-text span {
+        display: none;
+    }
+}
