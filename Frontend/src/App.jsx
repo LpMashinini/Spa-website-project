@@ -10,6 +10,7 @@ const App = () => {
   };
 
   return (
+
     <div>
 
       <Routes>
@@ -18,9 +19,9 @@ const App = () => {
         <Route path="/appointment" element={<Appointment currentYear={currentYear()}/>} />
       </Routes>
 
-
     </div>
   )
+  
 }
 
 export default App

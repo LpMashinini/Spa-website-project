@@ -1,10 +1,4 @@
 import "./Testimonials.css"
-import test1 from "../../Assets/test1.jpg"
-import test2 from "../../Assets/test2.jpg"
-import test3 from "../../Assets/test3.jpg"
-import test6 from "../../Assets/test6.jpg"
-import test5 from "../../Assets/test5.jpg"
-
 
 const Testimonials = () => {
 
