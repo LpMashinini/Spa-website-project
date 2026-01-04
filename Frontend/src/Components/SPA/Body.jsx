@@ -16,7 +16,7 @@ const Body = () => {
 
     return (
 
-        <>
+        <section className="body-section">
 
             <div className="body-container"  id="about">
 
@@ -185,7 +185,7 @@ const Body = () => {
 
             </section>
 
-        </>
+        </section>
 
     )
 

@@ -169,6 +169,14 @@
 
     /* Mobile - Portrait */
 
+    .testimonial {
+        padding: 30px 0px;
+    }
+
+    .testimonials-header-text p {
+        margin-top: 5rem;
+    }
+
     .testimonials-pic {
         display: none;
     }
@@ -186,5 +194,84 @@
 
     .user-text span {
         display: none;
+    }
+}
+
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+    /* Mobile - Landscape */
+
+    .testimonial {
+        padding: 30px 0px;
+    }
+
+    .testimonials-header-text p {
+        margin-top: 5rem;
+    }
+
+    .testimonials-pic {
+        display: none;
+    }
+
+    .testimonial {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .testimonials-text {
+        width: 290px;
+        height: 420px;
+    }
+
+    .user-text span {
+        display: none;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* Tablet - portrait */
+
+
+    .testimonials-header-text p {
+        margin-top: 5rem;
+    }
+
+    .testimonials-pic {
+        margin-top: 7.5rem;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+
+    /* Tablet - Landscape*/
+
+    .testimonials-header-text p {
+        margin-top: 5rem;
+    }
+
+    .testimonials-pic {
+        margin-top: 7.5rem;
+    }
+
+
+}
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+
+    /* Laptop/ Desktop */
+
+
+}
+
+@media (min-width: 1281px) {
+    /* Desktop */
+
+    .testimonials {
+
+        padding: 60px 0px;
     }
 }
