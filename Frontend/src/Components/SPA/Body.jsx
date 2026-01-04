@@ -18,7 +18,7 @@ const Body = () => {
 
         <section className="body-section">
 
-            <div className="body-container"  id="about">
+            <div className="body-container" id="about">
 
 
                 <div className="left-div">
@@ -28,7 +28,7 @@ const Body = () => {
                 <div className="right-div">
 
                     <h3>Get to know us</h3>
-                    
+
                     <p>
                         At Blissful & Balance we believe in the power of self-care to transform not just your appearance, but your overall well-being.
                         Our luxurious spa & beauty salon offers a range of premium treatments designed to rejuvenate, relax, and revitalize.
@@ -74,8 +74,9 @@ const Body = () => {
                         <div className="service-details">
                             <h3>body massage</h3>
                             <p>
-                                uses smooth, heated stones placed on specific points of the body. The heat helps to relax muscles, improve circulation,
-                                and relieve tension. Cold stones may also be used to reduce inflammation and stimulate energy flow.
+                                Body massage involves manipulating muscles and soft tissues to promote relaxation and
+                                improve well-being. It helps reduce stress, alleviate pain, and enhance circulation. Common
+                                types include Swedish, deep tissue, and hot stone massages.
                             </p>
                             <button>book now</button>
                         </div>
@@ -89,8 +90,9 @@ const Body = () => {
                         <div className="service-details">
                             <h3>Herbal treatment</h3>
                             <p>
-                                uses smooth, heated stones placed on specific points of the body. The heat helps to relax muscles, improve circulation,
-                                and relieve tension. Cold stones may also be used to reduce inflammation and stimulate energy flow.
+                                Herbal treatment uses plant-based remedies to improve health and treat various conditions.
+                                It includes herbs, roots, and flowers in forms like teas and tinctures. Often part of
+                                traditional medicine, it complement modern healthcare.
                             </p>
                             <button>book now</button>
                         </div>
@@ -126,10 +128,10 @@ const Body = () => {
 
                             <div className="socials">
                                 {/* social media icons  */}
-                                  <InstagramIcon className="icons" />
-                                 <FacebookIcon className="icons"  />
-                                 <TwitterIcon  className="icons" />
-                                 <LinkedInIcon  className="icons" />
+                                <InstagramIcon className="icons" />
+                                <FacebookIcon className="icons" />
+                                <TwitterIcon className="icons" />
+                                <LinkedInIcon className="icons" />
                             </div>
 
                         </div>
@@ -148,10 +150,10 @@ const Body = () => {
 
                             <div className="socials">
                                 {/* social media icons  */}
-                                  <InstagramIcon className="icons"  />
-                                 <FacebookIcon className="icons" />
-                                 <TwitterIcon className="icons" />
-                                 <LinkedInIcon className="icons" />
+                                <InstagramIcon className="icons" />
+                                <FacebookIcon className="icons" />
+                                <TwitterIcon className="icons" />
+                                <LinkedInIcon className="icons" />
                             </div>
 
                         </div>
@@ -169,10 +171,10 @@ const Body = () => {
 
                             <div className="socials">
                                 {/* social media icons  */}
-                                 <InstagramIcon className="icons"  />
-                                 <FacebookIcon className="icons" />
-                                 <TwitterIcon className="icons" />
-                                 <LinkedInIcon className="icons" />
+                                <InstagramIcon className="icons" />
+                                <FacebookIcon className="icons" />
+                                <TwitterIcon className="icons" />
+                                <LinkedInIcon className="icons" />
                             </div>
 
                         </div>
