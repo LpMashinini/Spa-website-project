@@ -58,7 +58,7 @@
     margin-top: 5px;
     border-radius: 2px;
     position: absolute;
-    bottom: -95px;
+    bottom: -9rem;
     left: 72%;
     transform: translateX(-50%);
 }
@@ -274,6 +274,7 @@
         font-size: 15px;
         line-height: 19px;
         width: 170px;
+        margin-left: -1rem;
     }
 
     .right-div h3 {
@@ -455,6 +456,10 @@
         margin-left: 50px;
     }
 
+    .right-div h3 {
+        margin-right: 10px;
+    }
+
     /* Team */
 
     .team-container {
@@ -466,7 +471,7 @@
 }
 
 @media (min-width: 1281px) {
-    /* Desktop */
 
+    /* Desktop */
 
 }

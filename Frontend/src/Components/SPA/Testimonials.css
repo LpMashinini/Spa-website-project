@@ -189,7 +189,7 @@
 
     .testimonials-text {
         width: 290px;
-        height: 420px;
+        height: 520px;
     }
 
     .user-text span {
@@ -263,6 +263,18 @@
 @media (min-width: 1024px) and (max-width: 1280px) {
 
     /* Laptop/ Desktop */
+
+    .testimonial {
+        padding: 0px 0px;
+    } 
+
+    .testimonials-header-text {
+        padding: 40px 0px;
+    }
+
+    .testimonials-header-text p {
+        margin-top: 8rem;
+    }
 
 
 }
