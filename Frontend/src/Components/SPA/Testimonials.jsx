@@ -1,6 +1,30 @@
+import { useEffect } from "react"
 import "./Testimonials.css"
 
 const Testimonials = () => {
+
+  const openReview = (e) => {
+
+    let userTexts = document.querySelectorAll(".user-text");
+    let users = document.querySelectorAll(".user-review");
+
+    for (let userText of userTexts) {
+      userText.classList.remove("active-text")
+    }
+
+    for (let user of users) {
+      user.classList.remove("active-pic")
+    }
+
+    let i = Array.from(users).indexOf(e.currentTarget);
+
+    
+
+    users[i].classList.add("active-pic");
+    userTexts[i].classList.add("active-text");
+
+  }
+
 
   return (
 
@@ -26,7 +50,7 @@ const Testimonials = () => {
 
           <div className="testimonials-text left-slide">
 
-            <div className="user-text">
+            <div className="user-text active-text">
 
               <p>
                 From the moment I walked in, I felt at ease. The serene environment, coupled with expert
@@ -36,7 +60,7 @@ const Testimonials = () => {
               <span>James Rodriguez</span>
             </div>
 
-            <div className="user-text active-text">
+            <div className="user-text">
               <p>
                 I couldn’t have asked for a better spa experience. The services were amazing, and the
                 peaceful setting made it easy to forget about the world. A must-try if you're in need of
@@ -84,19 +108,19 @@ const Testimonials = () => {
           </div>
 
           <div className="testimonials-pic btn">
-            <div className="user-review">
+            <div className="user-review active-pic" onClick={openReview}>
               <span>JR</span>
             </div>
-            <div className="user-review">
+            <div className="user-review" onClick={openReview}>
               <span>LM</span>
             </div>
-            <div className="user-review">
+            <div className="user-review" onClick={openReview}>
               <span>PM</span>
             </div>
-            <div className="user-review">
+            <div className="user-review" onClick={openReview}>
               <span>TM</span>
             </div>
-            <div className="user-review">
+            <div className="user-review" onClick={openReview}>
               <span>LS</span>
             </div>
 
