@@ -8,7 +8,6 @@
     align-items: center;
     justify-content: space-between;
     padding: 30px;
-    overflow: hidden;
 }
 
 .logo {
@@ -112,11 +111,13 @@ ul li a:hover::after {
     color: var(--primary-color);
     font-size: 2rem;
     display: none;
+    margin-top: 10px;
 }
 
 ul.open {
     right: 0px;
     transition: 0.5s;
+    display: block;
 }
 
 
@@ -140,6 +141,7 @@ ul.open {
         position: absolute;
         top: 0;
         right: -200%;
+        display: none;
         transition: 0.5s;
     }
 

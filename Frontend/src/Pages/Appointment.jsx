@@ -8,7 +8,8 @@ const Appointment = ({currentYear}) => {
 
   return (
 
-    <>
+    <section className='appointment-section'>
+
       <div className='app-container'>
 
         <div className="logo-container">
@@ -38,7 +39,8 @@ const Appointment = ({currentYear}) => {
         <form className='appointment-container'>
 
           <div className="inputbox" id="select">
-            <h1>Title</h1>
+
+            <h1>Title:</h1>
             <span>Please select your title</span>
 
             <select className='title'>
@@ -135,7 +137,7 @@ const Appointment = ({currentYear}) => {
 
       </section>
 
-    </>
+    </section>
 
   )
 }

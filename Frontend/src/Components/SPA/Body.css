@@ -15,6 +15,7 @@
 
 .body-section {
     padding: 60px 0px;
+    overflow: hidden;
 }
 
 .body-container {
