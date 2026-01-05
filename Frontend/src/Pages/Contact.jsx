@@ -83,7 +83,7 @@ const Contact = ({currentYear}) => {
                   </div>
 
                   <div className="inputbox-textarea">
-                    <textarea placeholder="Message" style={{ height: "150px", width: "500px" }}></textarea>
+                    <textarea placeholder="Message" ></textarea>
                   </div>
 
                 </div>
@@ -99,7 +99,7 @@ const Contact = ({currentYear}) => {
               <div className="input-headerText">
 
                 <h2>Contact Details</h2>
-                <p>If you want to ask anything just fill in the form below and send us.</p>
+                <p>If you want to ask anything just contact the number below or send us an email.</p>
 
               </div>
 

@@ -114,7 +114,7 @@ const Appointment = ({ currentYear }) => {
         </form>
 
         <div className="inputbox-btn">
-          <button>booking now</button>
+          <button>book now</button>
         </div>
 
 

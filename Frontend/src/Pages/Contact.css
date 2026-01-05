@@ -243,14 +243,14 @@
 }
 
 .inputbox-textarea textarea {
-
+    height: 150px;
+    width: 500px;
     padding: 10px;
     text-transform: capitalize;
     font-size: 16px;
     font-family: sans-serif;
     margin-bottom: 30px;
     outline: none;
-
 }
 
 .input-container button {
@@ -306,4 +306,194 @@
 .details p span {
     color: var(--spanColor);
     font-weight: 200;
+}
+
+
+
+
+/* Media Query for Responsiveness */
+
+@media (min-width: 300px) and (max-width: 480px) {
+
+    /* Mobile - Portrait */
+    .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .logo-container h1 {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .navigation {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .navigation .home {
+        margin: 15px 35px;
+        text-align: center;
+    }
+
+    .header-text {
+        padding: 10px 20px;
+        text-align: center;
+    }
+
+    .header-text h2 {
+        font-size: 1rem;
+    }
+
+    .header-text p {
+        font-size: 17px;
+    }
+
+    .contact-details {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .input-headerText {
+        text-align: center;
+    }
+
+    .input-headerText h2 {
+        font-size: 20px;
+    }
+
+    .input-headerText p {
+        font-size: 13px;
+    }
+
+    .first-col {
+        flex-direction: column;
+    }
+
+    .inputbox {
+        width: 300px;
+    }
+
+    .second-col .inputbox {
+        width: 300px;
+    }
+
+    .inputbox-textarea textarea {
+        width: 300px;
+    }
+
+    .details-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .details-section .input-headerText h2 {
+        font-size: 20px;
+    }
+
+    .details-section .input-headerText p {
+        font-size: 13px;
+    }
+
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    /* Mobile - Landscape */
+
+    .header-text {
+        padding: 10px 20px;
+        text-align: center;
+    }
+
+    .header-text h2 {
+        font-size: 1rem;
+    }
+
+    .header-text p {
+        font-size: 17px;
+    }
+
+    .contact-details {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .input-headerText {
+        text-align: center;
+    }
+
+    .input-headerText h2 {
+        font-size: 20px;
+    }
+
+    .input-headerText p {
+        font-size: 13px;
+    }
+
+    .first-col {
+        flex-direction: column;
+    }
+
+    .inputbox {
+        width: 300px;
+    }
+
+    .second-col .inputbox {
+        width: 300px;
+    }
+
+    .inputbox-textarea textarea {
+        width: 300px;
+    }
+
+    .details-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .details-section .input-headerText h2 {
+        font-size: 20px;
+    }
+
+    .details-section .input-headerText p {
+        font-size: 13px;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* Tablet - portrait */
+
+    .contact-details {
+        flex-direction: column;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+
+    /* Tablet - Landscape*/
+
+}
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+
+    /* Laptop/ Desktop */
+
+}
+
+@media (min-width: 1281px) {
+    /* Desktop */
+
 }
