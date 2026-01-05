@@ -4,7 +4,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 
-const Appointment = ({currentYear}) => {
+const Appointment = ({ currentYear }) => {
 
   return (
 
@@ -108,7 +108,7 @@ const Appointment = ({currentYear}) => {
           <div className="inputbox">
             <h4>Guest:</h4>
             <span>Please enter number of guest</span>
-            <input type="number"/>
+            <input type="number" />
           </div>
 
         </form>
@@ -117,7 +117,7 @@ const Appointment = ({currentYear}) => {
           <button>booking now</button>
         </div>
 
-        
+
         <div className="footer">
 
           <div className="left-footer">
