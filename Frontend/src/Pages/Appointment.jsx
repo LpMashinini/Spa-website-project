@@ -3,8 +3,46 @@ import { Link } from "react-router-dom"
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import { useState } from 'react';
+import axios from 'axios';
 
 const Appointment = ({ currentYear }) => {
+
+  const [values, setValues] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    guest: '',
+    title: '',
+    treatment: '',
+    arrival: ''
+  });
+
+  const handleSubmit = async (e) => {
+
+    e.preventDefault();
+
+    try {
+      const res = await axios.post("'http://localhost:5001/appointment", values);
+
+      if (res.data.status == "success") {
+
+        alert("Information submitted successfully");
+
+      } else {
+
+        alert("Information not submitted");
+
+      }
+
+    } catch (err) {
+
+      console.log(err);
+
+    }
+
+
+  }
 
   return (
 
@@ -36,14 +74,14 @@ const Appointment = ({ currentYear }) => {
         </div>
 
 
-        <form className='appointment-container'>
+        <form className='appointment-container' onSubmit={handleSubmit}>
 
           <div className="inputbox" id="select">
 
             <h1>Title:</h1>
             <span>Please select your title</span>
 
-            <select className='title'>
+            <select required onChange={e => setValues({ ...values, title: e.target.value })} className='title'>
               <option value="Title">--select one--</option>
               <option value="Mr">Mr</option>
               <option value="Mrs">Mrs</option>
@@ -54,11 +92,12 @@ const Appointment = ({ currentYear }) => {
           </div>
 
           <div className="inputbox" id="select">
+
             <h4>Treatment:</h4>
 
             <span className="input-text">Please select treatment</span>
 
-            <select className="title">
+            <select required onChange={e => setValues({ ...values, treatment: e.target.value })} className="title">
 
               {/* Treatment selection */}
 
@@ -84,36 +123,54 @@ const Appointment = ({ currentYear }) => {
           <div className="inputbox">
             <h4>Arrival Date:</h4>
             <span>Please enter arrival date</span>
-            <input type="date" placeholder="arrival date" />
+            <input
+              type="date"
+              placeholder="arrival date"
+              onChange={e => setValues({ ...values, arrival: e.target.value })}
+            />
           </div>
 
           <div className="inputbox">
             <h4>Name:</h4>
             <span>Please enter your names</span>
-            <input type="text" placeholder="enter name" />
+            <input
+              type="text"
+              placeholder="enter name"
+              onChange={e => setValues({ ...values, name: e.target.value })}
+            />
           </div>
 
           <div className="inputbox">
             <h4>Email:</h4>
             <span>Please enter your email address</span>
-            <input type="email" placeholder="email address" />
+            <input
+              type="email"
+              placeholder="email address"
+              onChange={e => setValues({ ...values, email: e.target.value })}
+            />
           </div>
 
           <div className="inputbox">
             <h4>Phone:</h4>
             <span>Please enter your cell number </span>
-            <input type="number" placeholder="enter cell number" />
+            <input
+              type="number"
+              placeholder="enter cell number"
+              onChange={e => setValues({ ...values, phone: e.target.value })}
+            />
           </div>
 
           <div className="inputbox">
             <h4>Guest:</h4>
             <span>Please enter number of guest</span>
-            <input type="number" />
+            <input
+              type="number"
+              onChange={e => setValues({ ...values, guest: e.target.value })} />
           </div>
 
         </form>
 
-        <div className="inputbox-btn">
+        <div className="inputbox-btn" onClick={handleSubmit}>
           <button>book now</button>
         </div>
 
