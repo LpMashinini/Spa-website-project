@@ -3,10 +3,11 @@ import { Link, useNavigate } from "react-router-dom"
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
 import axios from 'axios';
 
 const Appointment = ({ currentYear }) => {
+
 
   const [values, setValues] = useState({
     name: '',
@@ -40,7 +41,7 @@ const Appointment = ({ currentYear }) => {
     e.preventDefault();
 
     // if one or more input is empty the function is called
-    if (checkEmptyInput()) return; 
+    if (checkEmptyInput()) return;
 
 
     try {
@@ -60,12 +61,12 @@ const Appointment = ({ currentYear }) => {
 
     } catch (err) {
 
-      console.log(err);
+      console.log(err.message);
 
     }
 
 
-  }
+  };
 
   return (
 
