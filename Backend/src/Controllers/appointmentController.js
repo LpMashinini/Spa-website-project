@@ -1,4 +1,3 @@
-import appointmentDb from "../Backend/models/appointmentDb.js"
 
 export async function createAppointment(req, res) {
 
