@@ -1,9 +1,19 @@
+import mysql from "mysql2"
+import express, { json } from "express"
 
 export async function createAppointment(req, res) {
 
+    // Database connection
+    const db = mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        password: "root",
+        database: "spa"
+    });
+
     try {
 
-        const sql = "INSERT INTO appointment (`name`,`email`,`phone`,`guest`,`title`,`treatment`,`arrival`) VALUES(?,?,?,?,?,?,?)";
+        const sql = "INSERT INTO appointment (`name`,`email`,`phone`,`guest`,`title`,`treatment`,`arrival_Date`) VALUES(?,?,?,?,?,?,?)";
 
         const values = [
             req.body.name,
@@ -16,11 +26,10 @@ export async function createAppointment(req, res) {
         ];
 
         db.query(sql, values, (err, result) => {
-            if (err) return res, json({ ERROR: "Error Inserting data to database" });
-            res.json({ status: "success" })
+            if (err) return res.status(500).json({ ERROR: "Error Inserting data to database" });
+            res.status(201).json({ status: "success" })
+            db.end();
         })
-
-        const db = new appointmentDb();
 
     } catch (err) {
 

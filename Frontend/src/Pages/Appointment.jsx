@@ -18,12 +18,13 @@ const Appointment = ({ currentYear }) => {
     arrival: ''
   });
 
+
   const handleSubmit = async (e) => {
 
     e.preventDefault();
 
     try {
-      const res = await axios.post("'http://localhost:5001/appointment", values);
+      const res = await axios.post("http://localhost:5001/api/appointment", values);
 
       if (res.data.status == "success") {
 
@@ -32,7 +33,8 @@ const Appointment = ({ currentYear }) => {
       } else {
 
         alert("Information not submitted");
-
+        console.log(res);
+        
       }
 
     } catch (err) {
