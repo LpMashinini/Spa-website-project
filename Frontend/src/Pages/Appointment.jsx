@@ -1,5 +1,5 @@
 import './Appointment.css'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -18,23 +18,44 @@ const Appointment = ({ currentYear }) => {
     arrival: ''
   });
 
+  const navigation = useNavigate();
+
+  const checkEmptyInput = () => {
+
+    // This function check for any empty input before submitting
+
+    for (let input in values) {
+      if (!values[input]) {
+        alert("Please fill in all fields before submitting.")
+        return true;
+      }
+
+      return false;
+    }
+
+  }
 
   const handleSubmit = async (e) => {
 
     e.preventDefault();
 
+    // if one or more input is empty the function is called
+    if (checkEmptyInput()) return; 
+
+
     try {
+      // pass user data to the backend
       const res = await axios.post("http://localhost:5001/api/appointment", values);
 
       if (res.data.status == "success") {
 
         alert("Information submitted successfully");
+        // Navigate to the home page
+        navigation('/')
 
       } else {
 
         alert("Information not submitted");
-        console.log(res);
-        
       }
 
     } catch (err) {
