@@ -1,15 +1,29 @@
 import mysql from "mysql2"
+import dotenv from "dotenv"
 import express, { json } from "express"
+
+dotenv.config();
 
 export async function createAppointment(req, res) {
 
     // Database connection
     const db = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "root",
-        database: "spa"
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME
     });
+
+    db.connect((err) => {
+
+        if (err) {
+
+            console.error('Database connection failed:', err);
+            return;
+        }
+
+        console.log('Connected to database.');
+    })
 
     try {
 
