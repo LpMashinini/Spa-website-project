@@ -2,7 +2,7 @@ FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 
-RUN useradd --system --create-home appuser
+RUN adduser --system --create-home appuser
 
 COPY target/*.jar app.jar
 
