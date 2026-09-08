@@ -130,7 +130,7 @@ jobs:
         with:
           context: ./Backend
           file: ./Backend/Dockerfile
-          push: false
+          push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/spa-website-project:latest
             ${{ secrets.DOCKER_USERNAME }}/spa-website-project:${{ github.sha }}
@@ -139,7 +139,7 @@ jobs:
       - name: Scan Docker image
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          image-ref: ${{ secrets.DOCKER_USERNAME }}/spa-website-project:${{ github.sha }}
+          image-ref: docker://${{ secrets.DOCKER_USERNAME }}/spa-website-project:${{ github.sha }}
           severity: CRITICAL,HIGH
           exit-code: 0
 
