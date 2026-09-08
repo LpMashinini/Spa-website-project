@@ -85,6 +85,13 @@
 			<version>2.21.5</version> <!-- Use the latest stable version -->
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat</artifactId>
+			<version>11.0.22</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
