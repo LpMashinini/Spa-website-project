@@ -130,7 +130,7 @@ jobs:
         with:
           context: ./Backend
           file: ./Backend/Dockerfile
-          push: true
+          push: false
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/spa-website-project:latest
             ${{ secrets.DOCKER_USERNAME }}/spa-website-project:${{ github.sha }}
