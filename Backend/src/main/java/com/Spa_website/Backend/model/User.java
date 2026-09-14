@@ -24,13 +24,19 @@ public class User {
     @Column( name = "_email", nullable = false, unique = true, length = 255)
     private String email;
 
+    @Column(name = "phone_number", unique = true)
+    private String phoneNumber;
+
     @Column(name = "_password", nullable = false, length = 255)
     private String password;
 
     @Column(name = "_confirm_password", nullable = false, length = 255)
     private String confirmPassword;
 
-    @Column(name = "_role", nullable = false, length = 255)
+    @Column(name = " is_verified", nullable = false)
+    private Boolean isVerified= false;
+
+    @Column(name = "_role", nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
 
