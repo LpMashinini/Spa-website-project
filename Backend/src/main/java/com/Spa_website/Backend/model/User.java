@@ -7,6 +7,7 @@ import lombok.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Entity
 @Table(name = "user_auth")
 public class User {
