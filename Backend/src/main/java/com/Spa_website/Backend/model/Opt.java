@@ -33,7 +33,8 @@ public class Opt {
     @Column(name = "type", nullable = false)
     private OtpType type;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 }

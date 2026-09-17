@@ -44,7 +44,13 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            name = "user_opt",
+            joinColumns = @JoinColumn(name = "opt_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+
     private List<Opt> opt = new ArrayList<>();
 
 }
