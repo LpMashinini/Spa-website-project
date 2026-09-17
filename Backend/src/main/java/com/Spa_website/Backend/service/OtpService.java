@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -33,7 +34,7 @@ public class OtpService {
 
     public Otp createOtp(User user, OtpType type){
 
-        //cleanUpExpiredOtp(user.getId());
+        cleanUpExpiredOtps(user.getId());
 
         String code = generateOtp();
         LocalDateTime now = LocalDateTime.now();
@@ -69,6 +70,12 @@ public class OtpService {
         }
 
         return false;
+    }
+
+    private void cleanUpExpiredOtps(Long userid){
+        LocalDateTime now = LocalDateTime.now();
+        List<Otp> exiredOtps = otpRepository.findByUser_IdAndVerifiedIsFalseAndExpiresAtBefore(userid, now);
+        otpRepository.deleteAll(exiredOtps);
     }
 
 }
