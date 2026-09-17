@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -48,4 +49,26 @@ public class OtpService {
 
         return  otpRepository.save(otp);
     }
+
+
+    public boolean ValidateOtp(User user, String code, OtpType type){
+
+        LocalDateTime now = LocalDateTime.now();
+        Optional<Otp> otpOptional = otpRepository.findByCodeAndUser_IdAndTypeAndVerifiedIsFalseAndExpiresAtAfter(
+                code, user.getId(), type, now
+
+        );
+
+        if (otpOptional.isPresent()){
+            Otp otp = otpOptional.get();
+            otp.setVerified(true);
+            otpRepository.save(otp);
+
+            return true;
+
+        }
+
+        return false;
+    }
+
 }
