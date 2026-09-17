@@ -3,6 +3,9 @@ package com.Spa_website.Backend.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -40,5 +43,8 @@ public class User {
     @Column(name = "_role", nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Opt> opt = new ArrayList<>();
 
 }
