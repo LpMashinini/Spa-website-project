@@ -51,6 +51,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
 
-    private List<Opt> opt = new ArrayList<>();
+    private List<Otp> opt = new ArrayList<>();
 
 }
