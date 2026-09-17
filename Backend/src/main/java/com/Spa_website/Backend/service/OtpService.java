@@ -1,9 +1,13 @@
 package com.Spa_website.Backend.service;
 
+import com.Spa_website.Backend.model.Otp;
+import com.Spa_website.Backend.model.OtpType;
+import com.Spa_website.Backend.model.User;
 import com.Spa_website.Backend.repository.OtpRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Random;
 
 @Service
@@ -24,5 +28,24 @@ public class OtpService {
         }
 
         return otp.toString();
+    }
+
+    public Otp createOtp(User user, OtpType type){
+
+        //cleanUpExpiredOtp(user.getId());
+
+        String code = generateOtp();
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime expiredAt = now.plusMinutes(OTP_EXPIRATION_MINUTES);
+
+        Otp otp = new Otp();
+        otp.setCode(code);
+        otp.setCreatedAt(now);
+        otp.setVerified(false);
+        otp.setType(type);
+        otp.setExpiresAt(expiredAt);
+        otp.setUser(user);
+
+        return  otpRepository.save(otp);
     }
 }
