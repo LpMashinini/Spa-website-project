@@ -19,12 +19,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "_first_name", nullable = false, length = 255)
-    private String firstName;
-
-    @Column(name = "_last_name", nullable = false, length = 255)
-    private String lastName;
-
     @Column( name = "_email", nullable = false, unique = true, length = 255)
     private String email;
 
@@ -33,9 +27,6 @@ public class User {
 
     @Column(name = "_password", nullable = false, length = 255)
     private String password;
-
-    @Column(name = "_confirm_password", nullable = false, length = 255)
-    private String confirmPassword;
 
     @Column(name = " is_verified", nullable = false)
     private Boolean isVerified= false;

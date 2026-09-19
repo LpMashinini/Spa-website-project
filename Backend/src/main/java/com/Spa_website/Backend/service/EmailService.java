@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class EmailService {
 
     private final JavaMailSender mailSender;
-    private Environment env;
+    private final Environment env;
 
     public void sendOtpEmail(String toEmail, String otpCode){
 
