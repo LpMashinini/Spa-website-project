@@ -76,4 +76,23 @@ public class AuthController {
         userService.initiateEmailVerification(email);
         return ResponseEntity.ok("OTP resent successfully");
     }
+
+    @PostMapping("/verify-phone")
+    public ResponseEntity<?> verifyPhone(@RequestBody OtpVerificationRequest request){
+
+        boolean isValid = userService.verifyPhoneOtp(request.getUserId(), request.getCode());
+
+        if (isValid){
+            return ResponseEntity.ok("Phone verified successfully");
+        } else {
+            return ResponseEntity.badRequest().body("Invalid or expired OTP");
+        }
+    }
+
+    @PostMapping("/initiate-verification")
+    public ResponseEntity<?> initiatePhoneVerification(@RequestBody Long userId){
+
+        userService.initiatePhoneVerification(userId);
+        return ResponseEntity.ok("OTP sent to phone number");
+    }
 }
