@@ -70,4 +70,10 @@ public class AuthController {
             return ResponseEntity.badRequest().body("invalid or expired OTP");
         }
     }
+
+    @PostMapping("/resend-email-otp")
+    public ResponseEntity<?> resendEmailOtp(@RequestBody String email){
+        userService.initiateEmailVerification(email);
+        return ResponseEntity.ok("OTP resent successfully");
+    }
 }
