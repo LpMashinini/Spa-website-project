@@ -73,4 +73,11 @@ public class UserService {
         return isValid;
     }
 
+    public boolean verifyPhoneOtp(Long userId, String code){
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        return otpService.ValidateOtp(user, code, OtpType.PHONE_VERIFICATION);
+    }
+
 }
