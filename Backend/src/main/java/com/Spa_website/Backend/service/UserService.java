@@ -45,5 +45,17 @@ public class UserService {
         emailService.sendOtpEmail(user.getEmail(), otp.getCode());
     }
 
+    public void initiatePhoneVerification(Long userId){
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        if (user.getPhoneNumber() == null) {
+            throw new RuntimeException("phone number not set");
+        }
+
+        Otp otp = otpService.createOtp(user, OtpType.PHONE_VERIFICATION);
+        smsService.sendOtpSms(user.getPhoneNumber(), otp.getCode());
+    }
 
 }
