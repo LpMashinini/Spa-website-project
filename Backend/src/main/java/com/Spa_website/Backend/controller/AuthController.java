@@ -2,6 +2,7 @@ package com.Spa_website.Backend.controller;
 
 import com.Spa_website.Backend.dto.AuthRequest;
 import com.Spa_website.Backend.dto.AuthResponse;
+import com.Spa_website.Backend.dto.OtpVerificationRequest;
 import com.Spa_website.Backend.dto.UserRegistrationRequest;
 import com.Spa_website.Backend.jwtAuth.JwtUtil;
 import com.Spa_website.Backend.model.User;
@@ -56,5 +57,17 @@ public class AuthController {
 
         User user = userService.getUserByEmail(request.getEmail());
         return ResponseEntity.ok(new AuthResponse(token, user.getId(), user.getEmail(), user.getIsVerified()));
+    }
+
+    @PostMapping("/verify-email")
+    public ResponseEntity<?> verifyEmail(@RequestBody OtpVerificationRequest request){
+
+        boolean isValid = userService.verifyEmailOtp(request.getUserId(), request.getCode());
+
+        if (isValid){
+            return ResponseEntity.ok("email verified successfully");
+        } else {
+            return ResponseEntity.badRequest().body("invalid or expired OTP");
+        }
     }
 }
