@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class SMSService {
+public class SmsService {
 
     private final Environment env;
 
