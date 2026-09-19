@@ -58,4 +58,19 @@ public class UserService {
         smsService.sendOtpSms(user.getPhoneNumber(), otp.getCode());
     }
 
+    public Boolean verifyEmailOtp(Long userId, String code){
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        boolean isValid = otpService.ValidateOtp(user, code, OtpType.EMAIL_VERIFICATION);
+
+        if (isValid){
+            user.setIsVerified(true);
+            userRepository.save(user);
+        }
+
+        return isValid;
+    }
+
 }
