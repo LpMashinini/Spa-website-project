@@ -1,5 +1,7 @@
 package com.Spa_website.Backend.controller;
 
+import com.Spa_website.Backend.dto.AuthRequest;
+import com.Spa_website.Backend.dto.AuthResponse;
 import com.Spa_website.Backend.dto.UserRegistrationRequest;
 import com.Spa_website.Backend.jwtAuth.JwtUtil;
 import com.Spa_website.Backend.model.User;
@@ -7,6 +9,9 @@ import com.Spa_website.Backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,5 +37,24 @@ public class AuthController {
         userService.initiateEmailVerification(user.getEmail());
 
         return ResponseEntity.ok("User registered successfully. Verification OTP sent to email");
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> createAuthentication(@RequestBody AuthRequest request) throws Exception {
+
+        try{
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
+            );
+
+        } catch (BadCredentialsException e){
+            throw new Exception("Incorrect username or password", e);
+        }
+
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
+        final String token = jwtUtil.generateToken(userDetails);
+
+        User user = userService.getUserByEmail(request.getEmail());
+        return ResponseEntity.ok(new AuthResponse(token, user.getId(), user.getEmail(), user.getIsVerified()));
     }
 }

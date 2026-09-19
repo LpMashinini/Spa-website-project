@@ -80,4 +80,10 @@ public class UserService {
         return otpService.ValidateOtp(user, code, OtpType.PHONE_VERIFICATION);
     }
 
+    public User getUserByEmail(String email) {
+
+        return userRepository.findByEmail(email)
+                .orElseThrow( () -> new RuntimeException("User not found"));
+
+    }
 }
