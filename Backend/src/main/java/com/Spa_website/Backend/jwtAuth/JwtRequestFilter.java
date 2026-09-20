@@ -1,6 +1,7 @@
 package com.Spa_website.Backend.jwtAuth;
 
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,39 +25,69 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain
+    ) throws ServletException, IOException {
 
-        final String requestTokenHeader = request.getHeader("Authorization");
+        final String requestTokenHeader =
+                request.getHeader("Authorization");
 
         String username = null;
-        String jwtToken =  null;
+        String jwtToken = null;
 
-        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")){
-            jwtToken = requestTokenHeader.substring(7);
+        // Check whether the request contains a Bearer token
+        if (requestTokenHeader != null
+                && requestTokenHeader.startsWith("Bearer ")) {
 
-            try{
-                username = jwtUtil.extractUsername(jwtToken);
-            } catch (IllegalArgumentException e){
-                logger.error("Unable to get JWT token");
-            } catch (ExpiredJwtException e) {
-                logger.error("JWT Token has expired");
+            jwtToken = requestTokenHeader.substring(7).trim();
+
+            // Check whether the token is empty
+            if (!jwtToken.isBlank()) {
+
+                try {
+                    username = jwtUtil.extractUsername(jwtToken);
+
+                } catch (ExpiredJwtException e) {
+
+                    logger.warn("JWT token has expired");
+
+                } catch (JwtException | IllegalArgumentException e) {
+
+                    logger.warn("Invalid JWT token: {}");
+                }
             }
         }
 
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null){
+        // Authenticate only when a username was successfully extracted
+        if (username != null
+                && SecurityContextHolder.getContext()
+                .getAuthentication() == null) {
 
-            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+            UserDetails userDetails =
+                    userDetailsService.loadUserByUsername(username);
 
             if (jwtUtil.validateToken(jwtToken, userDetails)) {
-                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities());
 
-                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                UsernamePasswordAuthenticationToken authenticationToken =
+                        new UsernamePasswordAuthenticationToken(
+                                userDetails,
+                                null,
+                                userDetails.getAuthorities()
+                        );
 
-                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                authenticationToken.setDetails(
+                        new WebAuthenticationDetailsSource()
+                                .buildDetails(request)
+                );
+
+                SecurityContextHolder.getContext()
+                        .setAuthentication(authenticationToken);
             }
-
         }
+
+        // Continue the request through the security filter chain
         filterChain.doFilter(request, response);
     }
 }

@@ -15,16 +15,20 @@ public class SmsService {
 
     public void sendOtpSms(String phoneNumber, String otpCode){
 
-        String accountSid = env.getProperty("twilio.account.sid");
-        String authToken = env.getProperty("twilio.auth.token");
-        String twilioNumber = env.getProperty("twilio.phone.number");
+        String accountSid = env.getProperty("twilio.account-sid");
+        String authToken = env.getProperty("twilio.auth-token");
+        String twilioNumber = env.getProperty("twilio.phone-number");
+
+        if (accountSid == null || authToken == null || twilioNumber == null){
+            throw new IllegalStateException("Twilio configuration is missing");
+        }
 
         Twilio.init(accountSid, authToken);
 
         Message.creator(
                 new PhoneNumber(phoneNumber),
                 new PhoneNumber(twilioNumber),
-                "Your OTP code is : ." + otpCode + "This code will expire in 5 minutes."
+                "sms_2fa"
         ).create();
 
     }

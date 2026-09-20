@@ -1,9 +1,6 @@
 package com.Spa_website.Backend.controller;
 
-import com.Spa_website.Backend.dto.AuthRequest;
-import com.Spa_website.Backend.dto.AuthResponse;
-import com.Spa_website.Backend.dto.OtpVerificationRequest;
-import com.Spa_website.Backend.dto.UserRegistrationRequest;
+import com.Spa_website.Backend.dto.*;
 import com.Spa_website.Backend.jwtAuth.JwtUtil;
 import com.Spa_website.Backend.model.User;
 import com.Spa_website.Backend.service.UserService;
@@ -89,10 +86,10 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/initiate-verification")
-    public ResponseEntity<?> initiatePhoneVerification(@RequestBody Long userId){
+    @PostMapping("/initiate-phone-verification")
+    public ResponseEntity<?> initiatePhoneVerification(@RequestBody PhoneVerificationRequest request){
 
-        userService.initiatePhoneVerification(userId);
+        userService.initiatePhoneVerification(request.getUserId());
         return ResponseEntity.ok("OTP sent to phone number");
     }
 }

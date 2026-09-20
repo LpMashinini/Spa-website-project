@@ -7,6 +7,7 @@ import com.Spa_website.Backend.repository.OtpRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -21,15 +22,11 @@ public class OtpService {
 
     private final OtpRepository otpRepository;
 
-    public String generateOtp(){
-        Random random = new Random();
-        StringBuilder otp = new StringBuilder();
+    private final SecureRandom secureRandom = new SecureRandom();
 
-        for (int i = 0; i < OTP_LENGTH; i++){
-            otp.append(random.nextDouble(10));
-        }
-
-        return otp.toString();
+    public String generateOtp() {
+        int otp = 100000 + secureRandom.nextInt(900000);
+        return String.valueOf(otp);
     }
 
     public Otp createOtp(User user, OtpType type){
@@ -74,8 +71,8 @@ public class OtpService {
 
     private void cleanUpExpiredOtps(Long userid){
         LocalDateTime now = LocalDateTime.now();
-        List<Otp> exiredOtps = otpRepository.findByUser_IdAndVerifiedIsFalseAndExpiresAtBefore(userid, now);
-        otpRepository.deleteAll(exiredOtps);
+        List<Otp> expiredOtps = otpRepository.findByUser_IdAndVerifiedIsFalseAndExpiresAtBefore(userid, now);
+        otpRepository.deleteAll(expiredOtps);
     }
 
 }
