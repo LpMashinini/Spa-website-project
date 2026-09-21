@@ -1,6 +1,8 @@
 package com.Spa_website.Backend.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,23 +21,28 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "_title", nullable = false)
+    @NotBlank(message = "Title is required")
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "_email", nullable = false)
+    @NotBlank(message = "Email is required")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "_phone_number", nullable = false)
+    @NotBlank(message = "Phone number is required")
+    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-
+    @NotNull(message = "Number of guest is required")
     @Column(name = "number_of_guest", nullable = false)
     private Integer numberOfGuest;
 
-    @Column(name = "_treatment", nullable = false)
+    @NotBlank(message = "Treatment is required")
+    @Column(name = "treatment", nullable = false)
     private String treatment;
 
-    @Column(name = "arrival_date", nullable = false)
+    @NotNull(message = "Appointment date is required")
+    @Column(name = "appointment_date", nullable = false)
     private LocalDate appointmentDate;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
