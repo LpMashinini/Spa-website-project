@@ -16,10 +16,21 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String email;
-    private String phone;
-    private String guest;
+    @Column(name = "_title", nullable = false)
     private String title;
+
+    @Column(name = "_email", nullable = false, unique = true)
+    private String email;
+
+    @Column(name = "_phone_number", nullable = false)
+    private String phoneNumber;
+
+    @Column(name = "number_of_guest", nullable = false)
+    private String guestNumber;
+
+    @Column(name = "_treatment", nullable = false)
     private String treatment;
-    private String arrival;
+
+    @Column(name = "arrival_date", nullable = false)
+    private String arrivalDate;
 }
