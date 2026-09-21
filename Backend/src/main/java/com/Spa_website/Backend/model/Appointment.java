@@ -1,7 +1,6 @@
 package com.Spa_website.Backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +11,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "appointment")
 public class Appointment {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String email;
     private String phone;
     private String guest;
