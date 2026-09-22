@@ -21,18 +21,6 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Title is required")
-    @Column(name = "title", nullable = false)
-    private String title;
-
-    @NotBlank(message = "Email is required")
-    @Column(name = "email", nullable = false)
-    private String email;
-
-    @NotBlank(message = "Phone number is required")
-    @Column(name = "phone_number", nullable = false)
-    private String phoneNumber;
-
     @NotNull(message = "Number of guest is required")
     @Column(name = "number_of_guest", nullable = false)
     private Integer numberOfGuest;

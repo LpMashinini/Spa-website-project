@@ -11,12 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserRegistrationRequest {
 
-    @Column(nullable = false)
     private String email;
-
-    @Column(length = 20, nullable = false)
     private String password;
-
-    @Column(nullable = false)
     private String phoneNumber;
 }
