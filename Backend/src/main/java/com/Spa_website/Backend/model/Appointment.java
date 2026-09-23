@@ -49,5 +49,5 @@ public class Appointment {
         orphanRemoval = true
     )
 
-    private List<String> treatment = new ArrayList<>();
+    private List<Appointment_treatments> treatment = new ArrayList<>();
 }
