@@ -25,6 +25,6 @@ public class CreateAppointmentRequest {
     private Integer numberOfGuests;
 
     @NotEmpty(message = "Treatment is required")
-    private List<Long> treatmentIds;
+    private Long treatmentId;
 
 }
