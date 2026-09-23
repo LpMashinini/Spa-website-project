@@ -9,6 +9,7 @@ import com.Spa_website.Backend.repository.AppointmentRepository;
 import com.Spa_website.Backend.repository.TreatmentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -36,6 +37,16 @@ public class AppointmentServices {
        appointment.setTreatment(treatment);
 
        return appointmentRepository.save(appointment);
+    }
+
+    private User getAuthenticatedUser(){
+
+        String email = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getName();
+
+        return userService.getUserByEmail(email);
     }
 
 }
