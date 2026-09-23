@@ -1,13 +1,15 @@
 package com.Spa_website.Backend.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -21,13 +23,13 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty(message = "Title is required")
+    @Column(name = "user_title", nullable = false)
+    private String title;
+
     @NotNull(message = "Number of guest is required")
     @Column(name = "number_of_guest", nullable = false)
     private Integer numberOfGuest;
-
-    @NotBlank(message = "Treatment is required")
-    @Column(name = "treatment", nullable = false)
-    private String treatment;
 
     @NotNull(message = "Appointment date is required")
     @Column(name = "appointment_date", nullable = false)
@@ -40,4 +42,12 @@ public class Appointment {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @OneToMany(
+        mappedBy = "appointment",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+
+    private List<String> treatment = new ArrayList<>();
 }
