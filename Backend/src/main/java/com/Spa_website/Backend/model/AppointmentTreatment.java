@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "appointment_treatments")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Appointment_treatments {
+public class AppointmentTreatment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,5 +22,6 @@ public class Appointment_treatments {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "treatments_id", nullable = false)
-    private Treatments treatments;
+    private Treatment treatments;
+
 }
