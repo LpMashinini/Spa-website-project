@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 @RequiredArgsConstructor
 public class AppointmentServices {
@@ -19,6 +21,16 @@ public class AppointmentServices {
     private final AppointmentRepository appointmentRepository;
     private final TreatmentRepository treatmentRepository;
     private final UserService userService;
+
+    private User getAuthenticatedUser(){
+
+        String email = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getName();
+
+        return userService.getUserByEmail(email);
+    }
 
 
     @Transactional
@@ -43,14 +55,35 @@ public class AppointmentServices {
        return appointmentRepository.save(appointment);
     }
 
-    private User getAuthenticatedUser(){
+    @Transactional
+    public Appointment cancelAppointment(Long appointmentId){
 
-        String email = SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getName();
+        User user = getAuthenticatedUser();
 
-        return userService.getUserByEmail(email);
+        Appointment appointment = appointmentRepository.findById(appointmentId)
+                .orElseThrow(() -> new IllegalArgumentException("Appointment not found"));
+
+        if(!appointment.getUser().getId().equals(user.getId())){
+            throw new IllegalArgumentException("You are not allowed to cancel this appointment");
+        }
+
+        if (appointment.getStatus() == AppointmentStatus.CANCELLED){
+            throw new IllegalStateException("Appointment has already been cancelled");
+        }
+
+        if (appointment.getStatus() == AppointmentStatus.COMPLETED){
+            throw new IllegalStateException("Completed appointments cannot be cancelled");
+        }
+
+        if (!LocalDate.now().isBefore(appointment.getAppointmentDate())){
+            throw new IllegalStateException("Appointments cannot be cancelled on or after the appointment date");
+        }
+
+        appointment.setStatus(AppointmentStatus.CANCELLED);
+
+        return appointmentRepository.save(appointment);
     }
+
+
 
 }
