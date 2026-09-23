@@ -43,5 +43,8 @@ public class Appointment {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "treatment_id", nullable = false)
+    private Treatment treatment;
 
 }
