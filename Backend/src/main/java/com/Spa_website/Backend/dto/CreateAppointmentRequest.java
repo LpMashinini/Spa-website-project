@@ -1,5 +1,6 @@
 package com.Spa_website.Backend.dto;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -15,6 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateAppointmentRequest {
+
+    @NotEmpty(message = "Title is required")
+    private String title;
 
     @NotNull(message = "Appointment date is required")
     @FutureOrPresent(message = "Appointment date cannot be in the past")
