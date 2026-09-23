@@ -24,6 +24,9 @@ public class AppointmentServices {
     @Transactional
     public Appointment createAppointment(CreateAppointmentRequest request){
 
+        User user = getAuthenticatedUser();
+
+
         Treatment treatment = treatmentRepository.findById(request.getTreatmentId())
                 .orElseThrow(() -> new IllegalArgumentException("Treatment not found"));
 
@@ -31,9 +34,10 @@ public class AppointmentServices {
        Appointment appointment = new Appointment();
 
        appointment.setTitle(request.getTitle());
+       appointment.setUser(user);
        appointment.setNumberOfGuest(request.getNumberOfGuests());
        appointment.setAppointmentDate(request.getAppointmentDate());
-       appointment.setStatus(AppointmentStatus.BOOKED);
+       appointment.setStatus(AppointmentStatus.PENDING);
        appointment.setTreatment(treatment);
 
        return appointmentRepository.save(appointment);
