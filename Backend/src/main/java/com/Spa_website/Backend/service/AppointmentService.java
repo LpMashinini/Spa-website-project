@@ -16,7 +16,7 @@ import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
-public class AppointmentServices {
+public class AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
     private final TreatmentRepository treatmentRepository;
