@@ -28,7 +28,7 @@ public class CreateAppointmentRequest {
     @Min(value = 1, message = "At least one guest is required")
     private Integer numberOfGuests;
 
-    @NotEmpty(message = "Treatment is required")
+    @NotNull(message = "Treatment is required")
     private Long treatmentId;
 
 }

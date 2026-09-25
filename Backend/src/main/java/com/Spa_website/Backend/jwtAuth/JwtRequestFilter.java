@@ -11,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -30,6 +31,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain
     ) throws ServletException, IOException {
+
+        System.out.println("REQUEST: " + request.getMethod()+ " " + request.getRequestURI());
 
         final String requestTokenHeader =
                 request.getHeader("Authorization");
@@ -56,6 +59,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 } catch (JwtException | IllegalArgumentException e) {
 
                     logger.warn("Invalid JWT token: {}");
+                    logger.error(e.getMessage());
                 }
             }
         }
@@ -65,25 +69,34 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 && SecurityContextHolder.getContext()
                 .getAuthentication() == null) {
 
-            UserDetails userDetails =
-                    userDetailsService.loadUserByUsername(username);
+            try {
+                UserDetails userDetails =
+                        userDetailsService.loadUserByUsername(username);
 
-            if (jwtUtil.validateToken(jwtToken, userDetails)) {
+                if (jwtUtil.validateToken(jwtToken, userDetails)) {
 
-                UsernamePasswordAuthenticationToken authenticationToken =
-                        new UsernamePasswordAuthenticationToken(
-                                userDetails,
-                                null,
-                                userDetails.getAuthorities()
-                        );
+                    UsernamePasswordAuthenticationToken authenticationToken =
+                            new UsernamePasswordAuthenticationToken(
+                                    userDetails,
+                                    null,
+                                    userDetails.getAuthorities()
+                            );
 
-                authenticationToken.setDetails(
-                        new WebAuthenticationDetailsSource()
-                                .buildDetails(request)
-                );
+                    authenticationToken.setDetails(
+                            new WebAuthenticationDetailsSource()
+                                    .buildDetails(request)
+                    );
 
-                SecurityContextHolder.getContext()
-                        .setAuthentication(authenticationToken);
+                    SecurityContextHolder.getContext()
+                            .setAuthentication(authenticationToken);
+                }
+
+
+            } catch (UsernameNotFoundException e) {
+                // User in token no longer exists in the database.
+                // Leave the SecurityContext unauthenticated and let the
+                // authorization rules decide whether to allow the request.
+                logger.warn("JWT references unknown user '" + username + "'; skipping authentication.");
             }
         }
 

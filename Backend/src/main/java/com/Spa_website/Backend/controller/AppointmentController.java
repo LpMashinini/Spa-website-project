@@ -1,5 +1,6 @@
 package com.Spa_website.Backend.controller;
 
+import com.Spa_website.Backend.dto.AppointmentResponse;
 import com.Spa_website.Backend.dto.CreateAppointmentRequest;
 import com.Spa_website.Backend.model.Appointment;
 import com.Spa_website.Backend.service.AppointmentService;
@@ -11,17 +12,18 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/appointment")
+@RequestMapping("/api/appointments")
 public class AppointmentController {
 
     private final AppointmentService appointmentService;
 
-    @PostMapping
-    public ResponseEntity<Appointment> createAppointment(@Valid @RequestBody CreateAppointmentRequest request){
+    @PostMapping("/book-appointment")
+    public ResponseEntity<AppointmentResponse> createAppointment(@Valid @RequestBody CreateAppointmentRequest request){
 
-        Appointment appointment=  appointmentService.createAppointment(request);
+        AppointmentResponse response =  appointmentService.createAppointment(request);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(appointment);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @DeleteMapping("/{appointmentId}")

@@ -1,5 +1,6 @@
 package com.Spa_website.Backend.service;
 
+import com.Spa_website.Backend.dto.AppointmentResponse;
 import com.Spa_website.Backend.dto.CreateAppointmentRequest;
 import com.Spa_website.Backend.model.Appointment;
 import com.Spa_website.Backend.model.AppointmentStatus;
@@ -34,25 +35,35 @@ public class AppointmentService {
 
 
     @Transactional
-    public Appointment createAppointment(CreateAppointmentRequest request){
+    public AppointmentResponse createAppointment(CreateAppointmentRequest request){
 
         User user = getAuthenticatedUser();
 
+        Treatment treatment = treatmentRepository
+                .findById(request.getTreatmentId())
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Treatment not found"));
 
-        Treatment treatment = treatmentRepository.findById(request.getTreatmentId())
-                .orElseThrow(() -> new IllegalArgumentException("Treatment not found"));
+        Appointment appointment = new Appointment();
 
+        appointment.setTitle(request.getTitle());
+        appointment.setUser(user);
+        appointment.setNumberOfGuest(request.getNumberOfGuests());
+        appointment.setAppointmentDate(request.getAppointmentDate());
+        appointment.setStatus(AppointmentStatus.PENDING);
+        appointment.setTreatment(treatment);
 
-       Appointment appointment = new Appointment();
+        appointmentRepository.save(appointment);
 
-       appointment.setTitle(request.getTitle());
-       appointment.setUser(user);
-       appointment.setNumberOfGuest(request.getNumberOfGuests());
-       appointment.setAppointmentDate(request.getAppointmentDate());
-       appointment.setStatus(AppointmentStatus.PENDING);
-       appointment.setTreatment(treatment);
-
-       return appointmentRepository.save(appointment);
+        return new AppointmentResponse(
+                appointment.getId(),
+                appointment.getTitle(),
+                appointment.getNumberOfGuest(),
+                appointment.getAppointmentDate(),
+                appointment.getStatus(),
+                treatment.getId(),
+                treatment.getName()
+        );
     }
 
     @Transactional
