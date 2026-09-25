@@ -96,5 +96,26 @@ public class AppointmentService {
         return appointmentRepository.save(appointment);
     }
 
+    @Transactional
+    public List<AppointmentResponse> getAllAppointments(){
+
+        User user = getAuthenticatedUser();
+
+        List<Appointment> appointments = appointmentRepository.findByUserId(user.getId());
+
+
+        return appointments.stream()
+                .map(appointment -> new AppointmentResponse(
+                        appointment.getId(),
+                        appointment.getTitle(),
+                        appointment.getNumberOfGuest(),
+                        appointment.getAppointmentDate(),
+                        appointment.getStatus(),
+                        appointment.getTreatment().getId(),
+                        appointment.getTreatment().getName()
+                )).toList();
+    }
+
+
 
 }
