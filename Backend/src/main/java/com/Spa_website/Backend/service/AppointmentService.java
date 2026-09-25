@@ -10,6 +10,7 @@ import com.Spa_website.Backend.repository.AppointmentRepository;
 import com.Spa_website.Backend.repository.TreatmentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -114,6 +115,32 @@ public class AppointmentService {
                         appointment.getTreatment().getId(),
                         appointment.getTreatment().getName()
                 )).toList();
+    }
+
+    @Transactional
+    public AppointmentResponse getAppointmentById(Long appointmentId){
+
+        User user = getAuthenticatedUser();
+
+        Appointment appointment = appointmentRepository.findById(appointmentId)
+                .orElseThrow(() -> new IllegalArgumentException("Appointment not found"));
+
+
+        if (!appointment.getUser().getId().equals(user.getId())){
+            throw new IllegalArgumentException("You are not allowed to view this appointment");
+        }
+
+        return new AppointmentResponse(
+                appointment.getId(),
+                appointment.getTitle(),
+                appointment.getNumberOfGuest(),
+                appointment.getAppointmentDate(),
+                appointment.getStatus(),
+                appointment.getTreatment().getId(),
+                appointment.getTreatment().getName()
+        );
+
+
     }
 
 
