@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/appointments")
@@ -34,4 +36,7 @@ public class AppointmentController {
         return ResponseEntity.ok("Appointment cancelled successfully");
 
     }
+
+
+
 }

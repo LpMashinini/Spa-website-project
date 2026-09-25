@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -94,7 +95,6 @@ public class AppointmentService {
 
         return appointmentRepository.save(appointment);
     }
-
 
 
 }
