@@ -45,6 +45,13 @@ public class AppointmentController {
         return ResponseEntity.ok(appointments);
     }
 
+    @GetMapping("/{appointmentId}")
+    public ResponseEntity<AppointmentResponse> getAppointmentById(@PathVariable Long appointmentId){
+
+        AppointmentResponse response = appointmentService.getAppointmentById(appointmentId);
+
+        return ResponseEntity.ok(response);
+    }
 
 
 }
