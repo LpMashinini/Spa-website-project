@@ -6,8 +6,6 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Setter
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -19,19 +17,22 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column( name = "_email", nullable = false, unique = true, length = 255)
+    @Column(name = "name", nullable = false, unique = false, length = 255)
+    private String name;
+
+    @Column(name = "email", nullable = false, unique = true, length = 255)
     private String email;
 
     @Column(name = "phone_number", unique = true)
     private String phoneNumber;
 
-    @Column(name = "_password", nullable = false, length = 255)
+    @Column(name = "password", nullable = false, length = 255)
     private String password;
 
-    @Column(name = " is_verified", nullable = false)
-    private Boolean isVerified= false;
+    @Column(name = "isVerified", nullable = false)
+    private Boolean isVerified = false;
 
-    @Column(name = "_role", nullable = false)
+    @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
 
