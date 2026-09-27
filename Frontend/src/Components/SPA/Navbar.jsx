@@ -1,5 +1,6 @@
 import "./Navbar.css"
 import { Link } from "react-router-dom"
+import { FiUser } from "react-icons/fi";
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from "react";
@@ -26,7 +27,8 @@ const Navbar = () => {
         <li><a href="#about">About us</a></li>
         <li> <a href="#Service">Service</a></li>
         <Link to="/contact" className="contact"><li>Contact</li> </Link>
-        <Link to="/appointment" className="appointment"><li>appointment</li></Link>
+        <Link to="/appointment" className="contact"><li>appointment</li> </Link>
+        <li className="account-item"> <Link to="/Signup" className="account-link"> <FiUser className="account-icon" /></Link> </li>
       </ul>
 
     </div>

@@ -1,0 +1,273 @@
+.login-page {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+
+    background:
+        linear-gradient(
+            rgba(31, 45, 42, 0.72),
+            rgba(31, 45, 42, 0.72)
+        ),
+        url("../assets/body_massage.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    font-family: "Poppins", sans-serif;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 460px;
+
+    padding: 42px;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.25);
+
+    backdrop-filter: blur(12px);
+}
+
+.login-header {
+    text-align: center;
+
+    margin-bottom: 32px;
+}
+
+.login-logo {
+    width: 58px;
+    height: 58px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #6f8f83;
+
+    color: white;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+.login-header h1 {
+    margin: 0 0 8px;
+
+    color: #273b35;
+
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.login-header p {
+    margin: 0;
+
+    color: #777;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+.login-form-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.login-form-group label {
+    color: #374840;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.login-form-group input {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 13px 15px;
+
+    border: 1px solid #d9dfdc;
+
+    border-radius: 11px;
+
+    background: #fafcfb;
+
+    color: #26352f;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.login-form-group input::placeholder {
+    color: #a7afab;
+}
+
+.login-form-group input:focus {
+    background: white;
+
+    border-color: #6f8f83;
+
+    box-shadow:
+        0 0 0 3px rgba(111, 143, 131, 0.14);
+}
+
+.forgot-password {
+    text-align: right;
+
+    margin-top: -5px;
+}
+
+.forgot-password a {
+    color: #5f7f73;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    text-decoration: none;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+.login-button {
+    width: 100%;
+
+    margin-top: 5px;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #6f8f83;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.login-button:hover:not(:disabled) {
+    background: #5f7f73;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(95, 127, 115, 0.25);
+}
+
+.login-button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.login-button:disabled {
+    opacity: 0.65;
+
+    cursor: not-allowed;
+}
+
+.login-error {
+    padding: 12px 14px;
+
+    border-radius: 10px;
+
+    background: #fff0f0;
+
+    border: 1px solid #f2caca;
+
+    color: #b42318;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+.login-footer {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    margin-top: 25px;
+
+    color: #777;
+
+    font-size: 13px;
+}
+
+.login-footer a {
+    color: #5f7f73;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .login-page {
+        padding: 25px 15px;
+    }
+
+    .login-card {
+        padding: 30px 22px;
+
+        border-radius: 20px;
+    }
+
+    .login-header h1 {
+        font-size: 25px;
+    }
+}
+
