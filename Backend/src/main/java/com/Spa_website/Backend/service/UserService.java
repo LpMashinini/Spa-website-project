@@ -6,6 +6,7 @@ import com.Spa_website.Backend.model.OtpType;
 import com.Spa_website.Backend.model.Role;
 import com.Spa_website.Backend.model.User;
 import com.Spa_website.Backend.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,10 +24,15 @@ public class UserService implements UserDetailsService {
     private final EmailService emailService;
     private final SmsService smsService;
 
+    @Transactional
     public User registerUser(UserRegistrationRequest request){
 
         if (userRepository.existsByEmail(request.getEmail())){
             throw new RuntimeException("Email already in use");
+        }
+
+        if(userRepository.existsByPhoneNumber(request.getPhoneNumber())){
+            throw new RuntimeException("Phone number already in use");
         }
 
         User user = new User();
