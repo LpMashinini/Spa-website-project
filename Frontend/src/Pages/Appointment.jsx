@@ -16,6 +16,8 @@ const Appointment = ({ currentYear }) => {
       treatmentId: ''
   });
 
+  const [treatments, setTreatments] = useState([]);
+
   const navigation = useNavigate();
 
   const checkEmptyInput = () => {
@@ -46,7 +48,7 @@ const Appointment = ({ currentYear }) => {
 
       // pass user data to the backend
       const res = await axios.post(
-        "http://localhost:8080/api/appointments/book-appointment",
+        "http://localhost:8080/api/v1/appointments/book-appointment",
         {
           title: values.title,
           appointmentDate: values.appointmentDate,
@@ -60,7 +62,7 @@ const Appointment = ({ currentYear }) => {
         }
       );
 
-      if (res.data.status === 201) {
+      if (res.status === 201) {
 
         alert("Appointment created successfully");
         // Navigate to the home page
@@ -85,6 +87,20 @@ const Appointment = ({ currentYear }) => {
 
 
   };
+
+  useEffect(() => {
+
+    const fetchTreatments = async () => {
+      try {
+        const res = await axios.get("http://localhost:8080/api/v1/treatments");
+        setTreatments(res.data);
+      } catch (err) {
+        console.error("Failed to fetch treatments:", err);
+      }
+    };
+
+    fetchTreatments();
+  }, []);
 
   return (
 
@@ -124,7 +140,7 @@ const Appointment = ({ currentYear }) => {
             <span>Please select your title</span>
 
             <select required onChange={e => setValues({ ...values, title: e.target.value })} className='title'>
-              <option value="Title">--select one--</option>
+              <option value="">--select one--</option>
               <option value="Mr">Mr</option>
               <option value="Mrs">Mrs</option>
               <option value="Ms">Ms</option>
@@ -139,46 +155,31 @@ const Appointment = ({ currentYear }) => {
 
             <span className="input-text">Please select treatment</span>
 
-            <select required onChange={e => setValues({ ...values, treatment: e.target.value })} className="title">
+            <select required value={values.treatmentId} onChange={(e) => setValues({ ...values, treatmentId: e.target.value })} className="title">
 
               {/* Treatment selection */}
 
-              <option value="Title">--select--</option>
+              <option value="">--select treatment--</option>
 
-              <option value="Hydration Strategy - Brilliance">
-                Hydration Strategy - Brilliance
-              </option>
-
-              <option value="Reverse - Ageing Ritual - Lift">
-                Reverse - Ageing Ritual - Lift(1h30)
-              </option>
-
-              <option value="Instant Glow Green Tea Facial">
-                Instant Glow Green Tea Facial(30 min)
-              </option>
-
-              <option value="Ensuring better life">Ensuring better life</option>
+              {treatments.map((treatment) => (
+                <option key={treatment.id} value={treatment.id}>
+                  {treatment.name}
+                </option>
+              ))}
 
             </select>
+
           </div>
 
           <div className="inputbox">
-            <h4>Arrival Date:</h4>
-            <span>Please enter arrival date</span>
+            <h4>Appointment Date:</h4>
+            <span>Please enter appointment date</span>
             <input
               type="date"
-              placeholder="arrival date"
-              onChange={e => setValues({ ...values, arrival: e.target.value })}
-            />
-          </div>
-
-          <div className="inputbox">
-            <h4>Name:</h4>
-            <span>Please enter your names</span>
-            <input
-              type="text"
-              placeholder="enter name"
-              onChange={e => setValues({ ...values, name: e.target.value })}
+              value={values.appointmentDate}
+              required
+              min={new Date().toISOString().split("T")[0]} // Prevent selecting past dates
+              onChange={e => setValues({ ...values, appointmentDate: e.target.value })}
             />
           </div>
 
@@ -187,7 +188,10 @@ const Appointment = ({ currentYear }) => {
             <span>Please enter number of guest</span>
             <input
               type="number"
-              onChange={e => setValues({ ...values, guest: e.target.value })} />
+              min="1"
+              value={values.numberOfGuests}
+              required
+              onChange={e => setValues({ ...values, numberOfGuests: e.target.value })} />
           </div>
 
         </form>
