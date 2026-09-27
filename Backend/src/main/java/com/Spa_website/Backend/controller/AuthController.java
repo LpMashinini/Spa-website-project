@@ -40,7 +40,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> createAuthentication(@RequestBody AuthRequest request) throws Exception {
+    public ResponseEntity<?> createAuthentication(@Valid @RequestBody AuthRequest request) throws Exception {
 
         try{
             authenticationManager.authenticate(
