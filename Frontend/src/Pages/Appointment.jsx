@@ -10,13 +10,10 @@ const Appointment = ({ currentYear }) => {
 
 
   const [values, setValues] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    guest: '',
-    title: '',
-    treatment: '',
-    arrival: ''
+      title: '',
+      appointmentDate: '',
+      numberOfGuests: '',
+      treatmentId: ''
   });
 
   const navigation = useNavigate();
@@ -30,11 +27,10 @@ const Appointment = ({ currentYear }) => {
         alert("Please fill in all fields before submitting.")
         return true;
       }
-
-      return false;
     }
+    return false;
 
-  }
+  };
 
   const handleSubmit = async (e) => {
 
@@ -45,12 +41,28 @@ const Appointment = ({ currentYear }) => {
 
 
     try {
+
+        const token = localStorage.getItem("token");
+
       // pass user data to the backend
-      const res = await axios.post("http://localhost:5001/api/appointment", values);
+      const res = await axios.post(
+        "http://localhost:8080/api/appointments/book-appointment",
+        {
+          title: values.title,
+          appointmentDate: values.appointmentDate,
+          numberOfGuests: Number(values.numberOfGuests),
+          treatmentId: Number(values.treatmentId)
+        },
+        {
+          headers: {
+              Authorization: `Bearer ${token}`
+          }
+        }
+      );
 
-      if (res.data.status == "success") {
+      if (res.data.status === 201) {
 
-        alert("Information submitted successfully");
+        alert("Appointment created successfully");
         // Navigate to the home page
         navigation('/')
 
@@ -60,9 +72,15 @@ const Appointment = ({ currentYear }) => {
       }
 
     } catch (err) {
+        console.error(err);
 
-      console.log(err.message);
+        if(err.response){
+          console.log("Status:", err.response.status);
+          console.error("Response:",err.response.data);
+        }
 
+
+        alert("Failed to create appointment.");
     }
 
 
@@ -161,26 +179,6 @@ const Appointment = ({ currentYear }) => {
               type="text"
               placeholder="enter name"
               onChange={e => setValues({ ...values, name: e.target.value })}
-            />
-          </div>
-
-          <div className="inputbox">
-            <h4>Email:</h4>
-            <span>Please enter your email address</span>
-            <input
-              type="email"
-              placeholder="email address"
-              onChange={e => setValues({ ...values, email: e.target.value })}
-            />
-          </div>
-
-          <div className="inputbox">
-            <h4>Phone:</h4>
-            <span>Please enter your cell number </span>
-            <input
-              type="number"
-              placeholder="enter cell number"
-              onChange={e => setValues({ ...values, phone: e.target.value })}
             />
           </div>
 
