@@ -3,7 +3,9 @@ package com.Spa_website.Backend.controller;
 import com.Spa_website.Backend.dto.*;
 import com.Spa_website.Backend.jwtAuth.JwtUtil;
 import com.Spa_website.Backend.model.User;
+import com.Spa_website.Backend.service.EmailService;
 import com.Spa_website.Backend.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,7 +30,7 @@ public class AuthController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody UserRegistrationRequest request){
+    public ResponseEntity<?> registerUser(@Valid @RequestBody UserRegistrationRequest request){
 
         User user = userService.registerUser(request);
 
@@ -69,8 +71,10 @@ public class AuthController {
     }
 
     @PostMapping("/resend-email-otp")
-    public ResponseEntity<?> resendEmailOtp(@RequestBody String email){
-        userService.initiateEmailVerification(email);
+    public ResponseEntity<?> resendEmailOtp(@RequestBody EmailVerificationRequest request){
+
+        userService.initiateEmailVerification(request.getEmail());
+
         return ResponseEntity.ok("OTP resent successfully");
     }
 
