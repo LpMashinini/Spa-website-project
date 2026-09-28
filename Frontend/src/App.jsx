@@ -3,6 +3,7 @@ import Appointment from "./Pages/Appointment"
 import Home from "./Components/SPA/Home"
 import Signup from "./Pages/Signup"
 import Login from "./Pages/Login"
+import VerifyEmail from "./Pages/VerifyEmail"
 import { Route, Routes } from "react-router-dom"
 
 const App = () => {
@@ -20,7 +21,8 @@ const App = () => {
         <Route path="/contact" element={<Contact currentYear={currentYear()}/>} />
         <Route path="/appointment" element={<Appointment currentYear={currentYear()}/>} />
         <Route path="/signup" element={<Signup />} />
-         <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
       </Routes>
 
     </div>
