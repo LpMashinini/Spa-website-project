@@ -3,7 +3,6 @@ package com.Spa_website.Backend.controller;
 import com.Spa_website.Backend.dto.*;
 import com.Spa_website.Backend.jwtAuth.JwtUtil;
 import com.Spa_website.Backend.model.User;
-import com.Spa_website.Backend.service.EmailService;
 import com.Spa_website.Backend.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +35,14 @@ public class AuthController {
 
         userService.initiateEmailVerification(user.getEmail());
 
-        return ResponseEntity.ok("User registered successfully. Verification OTP sent to email");
+        RegisterResponse response = new RegisterResponse(
+                user.getId(),
+                user.getEmail(),
+                user.getIsVerified(),
+                "User registered successfully. Verification OTP sent to email"
+        );
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/login")
