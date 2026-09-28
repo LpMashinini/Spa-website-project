@@ -71,7 +71,8 @@ function Signup() {
 
             // Save the email so the verification page knows
             // which account is being verified.
-            sessionStorage.setItem("verificationEmail", email);
+            sessionStorage.setItem("verificationEmail", response.data.email);
+            sessionStorage.setItem("verificationUserId", response.data.userId);
 
             // Go to email verification page
             navigate("/verify-email");
