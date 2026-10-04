@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -29,7 +30,13 @@ public class PayStackService {
     private String callbackUrl;
 
 
-
+    private String generateReference(Long appointmentId){
+        return  "SPA-" + appointmentId
+                + "-" +
+                UUID.randomUUID()
+                        .toString()
+                        .replace("-", "");
+    }
 
     private User getAuthenticatedUser(){
 
