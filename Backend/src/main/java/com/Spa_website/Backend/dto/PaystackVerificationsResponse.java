@@ -9,5 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PaystackVerificationsResponse {
 
+    private boolean status;
+    private String message;
+    private PaystackVerifyData data;
 
 }
