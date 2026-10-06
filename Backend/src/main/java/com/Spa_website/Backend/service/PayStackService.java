@@ -2,6 +2,7 @@ package com.Spa_website.Backend.service;
 
 import com.Spa_website.Backend.dto.PayStackInitializeResponse;
 import com.Spa_website.Backend.dto.PaystackInitializeRequest;
+import com.Spa_website.Backend.dto.PaystackVerifyResponse;
 import com.Spa_website.Backend.model.Appointment;
 import com.Spa_website.Backend.model.AppointmentStatus;
 import com.Spa_website.Backend.model.User;
@@ -115,6 +116,37 @@ public class PayStackService {
                 .getName();
 
         return userService.getUserByEmail(email);
+
+
+    }
+
+    public PaystackVerifyResponse verifyTransaction(String reference){
+
+        if (reference == null || reference.isBlank()){
+            throw new IllegalArgumentException("Payment reference is required");
+        }
+
+        RestClient restClient = RestClient
+                .builder()
+                .baseUrl(baseUrl)
+                .defaultHeader(
+                        HttpHeaders.AUTHORIZATION,
+                        "Bearer " + secretKey
+                ).build();
+
+        PaystackVerifyResponse response = restClient
+                .get()
+                .uri("/transaction/verify/{reference}", reference)
+                .retrieve()
+                .body(PaystackVerifyResponse.class);
+
+        if (response == null || !response.isStatus()){
+            throw new IllegalStateException("Unable to verify paystack transactions");
+        }
+
+
+        return response;
+
     }
 
 

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaystackVerificationsResponse {
+public class PaystackVerifyResponse {
 
     private boolean status;
     private String message;
