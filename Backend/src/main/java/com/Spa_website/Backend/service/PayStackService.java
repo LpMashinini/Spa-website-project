@@ -7,6 +7,7 @@ import com.Spa_website.Backend.model.Appointment;
 import com.Spa_website.Backend.model.AppointmentStatus;
 import com.Spa_website.Backend.model.User;
 import com.Spa_website.Backend.repository.AppointmentRepository;
+import com.Spa_website.Backend.repository.PaymentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -24,6 +25,7 @@ public class PayStackService {
 
     private final AppointmentRepository appointmentRepository;
     private final UserService userService;
+    private final PaymentRepository paymentRepository;
 
     @Value("${paystack.secret-key}")
     private String secretKey;
