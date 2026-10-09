@@ -3,12 +3,11 @@ package com.Spa_website.Backend.service;
 import com.Spa_website.Backend.dto.PayStackInitializeResponse;
 import com.Spa_website.Backend.dto.PaystackInitializeRequest;
 import com.Spa_website.Backend.dto.PaystackVerifyResponse;
-import com.Spa_website.Backend.model.Appointment;
-import com.Spa_website.Backend.model.AppointmentStatus;
-import com.Spa_website.Backend.model.User;
+import com.Spa_website.Backend.model.*;
 import com.Spa_website.Backend.repository.AppointmentRepository;
 import com.Spa_website.Backend.repository.PaymentRepository;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.weaver.IClassFileProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -17,6 +16,7 @@ import org.springframework.web.client.RestClient;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
@@ -54,6 +54,10 @@ public class PayStackService {
             throw new IllegalStateException("Only pending appointments can be paid");
         }
 
+        if (paymentRepository.existsByAppointment(appointmentId)){
+            throw new IllegalStateException("A payment already exists for this appointment");
+        }
+
 
         BigDecimal treatmentPrice = appointment.getTreatment().getPrice();
 
@@ -73,6 +77,7 @@ public class PayStackService {
 
         request.setEmail(user.getEmail());
         request.setAmount(String.valueOf(amountInCents));
+        request.setCurrency("ZAR");
         request.setReference(reference);
         request.setCallback_url(callbackUrl);
 
@@ -96,6 +101,22 @@ public class PayStackService {
         if (response == null || !response.isStatus()){
             throw new IllegalStateException("Unable to initialize Paystack payment");
         }
+
+        if (response.getData() == null || response.getData().getReference() == null){
+            throw new IllegalStateException("Paystack returned an invalid payment response");
+        }
+
+        Payment payment = new Payment();
+
+        payment.setAppointment(appointment);
+        payment.setReference(response.getData().getReference());
+        payment.setAmount(treatmentPrice);
+        payment.setCurrency("ZAR");
+        payment.setStatus(PaymentStatus.PENDING);
+        payment.setCreatedAt(LocalDateTime.now());
+
+
+        paymentRepository.save(payment);
 
         return response;
 
