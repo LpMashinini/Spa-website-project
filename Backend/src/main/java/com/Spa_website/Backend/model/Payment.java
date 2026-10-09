@@ -35,7 +35,7 @@ public class Payment {
     )
     private Appointment appointment;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = false, length = 100)
     private String reference;
 
     @Column(name = "paystack_transaction_id")
