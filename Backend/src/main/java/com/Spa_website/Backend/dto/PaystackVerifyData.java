@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PaystackVerifyData {
 
-    private String id;
+    private long id;
     private String status;
     private String reference;
     private String amount;

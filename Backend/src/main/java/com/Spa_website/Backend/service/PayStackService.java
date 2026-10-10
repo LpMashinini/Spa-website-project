@@ -203,7 +203,7 @@ public class PayStackService {
         if (payment.getStatus() != PaymentStatus.SUCCESS){
 
             payment.setStatus(PaymentStatus.SUCCESS);
-            payment.setTransactionId(Long.parseLong(transaction.getId()));
+            payment.setTransactionId(transaction.getId());
             payment.setPaidAt(LocalDateTime.now());
 
             payment.getAppointment().setStatus(AppointmentStatus.BOOKED);
