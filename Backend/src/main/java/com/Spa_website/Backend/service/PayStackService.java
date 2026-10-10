@@ -2,12 +2,13 @@ package com.Spa_website.Backend.service;
 
 import com.Spa_website.Backend.dto.PayStackInitializeResponse;
 import com.Spa_website.Backend.dto.PaystackInitializeRequest;
+import com.Spa_website.Backend.dto.PaystackVerifyData;
 import com.Spa_website.Backend.dto.PaystackVerifyResponse;
 import com.Spa_website.Backend.model.*;
 import com.Spa_website.Backend.repository.AppointmentRepository;
 import com.Spa_website.Backend.repository.PaymentRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.IClassFileProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -143,11 +144,16 @@ public class PayStackService {
 
     }
 
+    @Transactional
     public PaystackVerifyResponse verifyTransaction(String reference){
 
         if (reference == null || reference.isBlank()){
             throw new IllegalArgumentException("Payment reference is required");
         }
+
+        Payment payment = paymentRepository.findByReference(reference)
+                .orElseThrow(() -> new IllegalArgumentException("Payment not found"));
+
 
         RestClient restClient = RestClient
                 .builder()
@@ -167,6 +173,46 @@ public class PayStackService {
             throw new IllegalStateException("Unable to verify paystack transactions");
         }
 
+        var transaction = response.getData();
+
+        if (!"success".equalsIgnoreCase(transaction.getStatus())){
+            throw new IllegalStateException("Paystack transaction is not successful");
+        }
+
+        long expectAmount = payment.getAmount()
+                .movePointRight(2)
+                .longValueExact();
+
+        if (transaction.getAmount() == null || !transaction.getAmount().equals(expectAmount)){
+            throw new IllegalStateException("Payment amount mismatch");
+        }
+
+        if (transaction.getCurrency() == null || !payment.getCurrency().equalsIgnoreCase(transaction.getCurrency())){
+            throw new IllegalStateException("Payment currrency mismatch");
+        }
+
+        //verify the reference
+        if (transaction.getReference() == null ||
+                !payment.getReference().equals(transaction.getReference()) || payment.getReference().equals(reference)){
+
+            throw new IllegalStateException("Payment reference mismatch");
+        }
+
+
+
+        if (payment.getStatus() != PaymentStatus.SUCCESS){
+
+            payment.setStatus(PaymentStatus.SUCCESS);
+            payment.setTransactionId(Long.parseLong(transaction.getId()));
+            payment.setPaidAt(LocalDateTime.now());
+
+            payment.getAppointment().setStatus(AppointmentStatus.BOOKED);
+
+            paymentRepository.save(payment);
+
+            appointmentRepository.save(payment.getAppointment());
+
+        }
 
         return response;
 
