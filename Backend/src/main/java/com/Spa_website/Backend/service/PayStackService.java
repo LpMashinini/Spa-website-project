@@ -144,16 +144,12 @@ public class PayStackService {
 
     }
 
-    @Transactional
+
     public PaystackVerifyResponse verifyTransaction(String reference){
 
         if (reference == null || reference.isBlank()){
             throw new IllegalArgumentException("Payment reference is required");
         }
-
-        Payment payment = paymentRepository.findByReferenceForUpdate(reference)
-                .orElseThrow(()-> new IllegalArgumentException("Payment not found"));
-
 
         RestClient restClient = RestClient
                 .builder()
@@ -179,40 +175,8 @@ public class PayStackService {
             throw new IllegalStateException("Paystack transaction is not successful");
         }
 
-        long expectAmount = payment.getAmount()
-                .movePointRight(2)
-                .longValueExact();
-
-        if (transaction.getAmount() == null || !transaction.getAmount().equals(expectAmount)){
-            throw new IllegalStateException("Payment amount mismatch");
-        }
-
-        if (transaction.getCurrency() == null || !payment.getCurrency().equalsIgnoreCase(transaction.getCurrency())){
-            throw new IllegalStateException("Payment currrency mismatch");
-        }
-
-        //verify the reference
-        if (transaction.getReference() == null ||
-                !payment.getReference().equals(transaction.getReference()) || !payment.getReference().equals(reference)){
-
-            throw new IllegalStateException("Payment reference mismatch");
-        }
 
 
-
-        if (payment.getStatus() != PaymentStatus.SUCCESS){
-
-            payment.setStatus(PaymentStatus.SUCCESS);
-            payment.setTransactionId(transaction.getId());
-            payment.setPaidAt(LocalDateTime.now());
-
-            payment.getAppointment().setStatus(AppointmentStatus.BOOKED);
-
-            paymentRepository.save(payment);
-
-            appointmentRepository.save(payment.getAppointment());
-
-        }
 
         return response;
 
