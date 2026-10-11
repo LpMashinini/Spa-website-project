@@ -151,8 +151,8 @@ public class PayStackService {
             throw new IllegalArgumentException("Payment reference is required");
         }
 
-        Payment payment = paymentRepository.findByReference(reference)
-                .orElseThrow(() -> new IllegalArgumentException("Payment not found"));
+        Payment payment = paymentRepository.findByReferenceForUpdate(reference)
+                .orElseThrow(()-> new IllegalArgumentException("Payment not found"));
 
 
         RestClient restClient = RestClient
