@@ -169,7 +169,7 @@ public class PayStackService {
                 .retrieve()
                 .body(PaystackVerifyResponse.class);
 
-        if (response == null || !response.isStatus()){
+        if (response == null || !response.isStatus() || response.getData() == null){
             throw new IllegalStateException("Unable to verify paystack transactions");
         }
 
@@ -193,7 +193,7 @@ public class PayStackService {
 
         //verify the reference
         if (transaction.getReference() == null ||
-                !payment.getReference().equals(transaction.getReference()) || payment.getReference().equals(reference)){
+                !payment.getReference().equals(transaction.getReference()) || !payment.getReference().equals(reference)){
 
             throw new IllegalStateException("Payment reference mismatch");
         }
