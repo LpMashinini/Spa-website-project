@@ -2,12 +2,10 @@ package com.Spa_website.Backend.service;
 
 import com.Spa_website.Backend.dto.PayStackInitializeResponse;
 import com.Spa_website.Backend.dto.PaystackInitializeRequest;
-import com.Spa_website.Backend.dto.PaystackVerifyData;
 import com.Spa_website.Backend.dto.PaystackVerifyResponse;
 import com.Spa_website.Backend.model.*;
 import com.Spa_website.Backend.repository.AppointmentRepository;
 import com.Spa_website.Backend.repository.PaymentRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -174,9 +172,6 @@ public class PayStackService {
         if (!"success".equalsIgnoreCase(transaction.getStatus())){
             throw new IllegalStateException("Paystack transaction is not successful");
         }
-
-
-
 
         return response;
 

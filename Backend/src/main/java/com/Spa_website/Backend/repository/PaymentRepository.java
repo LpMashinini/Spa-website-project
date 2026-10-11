@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @Query("SELECT p FROM payment p WHERE p.reference= :reference")
+    @Query("SELECT p FROM Payment p WHERE p.reference = :reference")
     Optional<Payment> findByReferenceForUpdate(
             @Param("reference") String reference
     );
