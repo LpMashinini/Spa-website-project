@@ -23,7 +23,7 @@ public class PaystackController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/verify-payment{reference}")
+    @GetMapping("/verify-payment/{reference}")
     public ResponseEntity<PaystackVerifyResponse> verifyPayment( @PathVariable String reference){
 
         PaystackVerifyResponse response = payStackService.verifyTransaction(reference);
