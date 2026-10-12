@@ -3,20 +3,22 @@ import { Link, useNavigate } from "react-router-dom"
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { useState , useEffect} from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 const Appointment = ({ currentYear }) => {
 
 
   const [values, setValues] = useState({
-      title: '',
-      appointmentDate: '',
-      numberOfGuests: '',
-      treatmentId: ''
+    title: '',
+    appointmentDate: '',
+    numberOfGuests: '',
+    treatmentId: ''
   });
 
   const [treatments, setTreatments] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const submissionLock = useRef(false);
 
   const navigation = useNavigate();
 
@@ -38,16 +40,24 @@ const Appointment = ({ currentYear }) => {
 
     e.preventDefault();
 
-    // if one or more input is empty the function is called
-    if (checkEmptyInput()) return;
+    if (submissionLock.current || checkEmptyInput()) return;
 
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("You must be logged in to book an appointment.");
+      navigation("/login");
+      return;
+    }
+
+    submissionLock.current = true;
+    setIsSubmitting(true);
+
+    let appointmentCreated = false;
 
     try {
-
-        const token = localStorage.getItem("token");
-
-      // pass user data to the backend
-      const res = await axios.post(
+      // 1. Create the appointment
+      const bookingResponse = await axios.post(
         "http://localhost:8080/api/v1/appointments/book-appointment",
         {
           title: values.title,
@@ -57,34 +67,89 @@ const Appointment = ({ currentYear }) => {
         },
         {
           headers: {
-              Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
           }
         }
       );
 
-      if (res.status === 201) {
+      appointmentCreated = true;
 
-        alert("Appointment created successfully");
-        // Navigate to the home page
-        navigation('/')
+      const appointmentId = bookingResponse.data?.id;
 
-      } else {
-
-        alert("Information not submitted");
+      if (!appointmentId) {
+        console.error("Appointment response:", bookingResponse.data);
+        throw new Error(
+          "The appointment was created, but its ID was not returned. Check your backend response before trying again."
+        );
       }
 
-    } catch (err) {
-        console.error(err);
-
-        if(err.response){
-          console.log("Status:", err.response.status);
-          console.error("Response:",err.response.data);
+      // 2. Initialize payment using your existing controller
+      const paymentResponse = await axios.post(
+        `http://localhost:8080/api/v1/payments/appointment/${appointmentId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
         }
+      );
 
+      console.log("Payment initialization response:", paymentResponse.data);
 
-        alert("Failed to create appointment.");
+      // 3. Extract the Paystack authorization URL
+      const authorizationUrl =
+        paymentResponse.data?.data?.authorization_url ??
+        paymentResponse.data?.authorization_url;
+
+      if (typeof authorizationUrl !== "string") {
+        console.error("Paystack response:", paymentResponse.data);
+        throw new Error("The Paystack checkout URL was not returned.");
+      }
+
+      let checkoutUrl;
+
+      try {
+        checkoutUrl = new URL(authorizationUrl);
+      } catch {
+        throw new Error("Paystack returned an invalid checkout URL.");
+      }
+
+      if (
+        checkoutUrl.protocol !== "https:" ||
+        checkoutUrl.hostname !== "checkout.paystack.com"
+      ) {
+        console.error("Unexpected checkout URL:", authorizationUrl);
+        throw new Error("The checkout URL is not a recognised Paystack checkout URL.");
+      }
+
+      // 4. Redirect to Paystack
+      window.location.assign(checkoutUrl.href);
+
+    } catch (err) {
+      console.error("Booking/payment error:", err);
+
+      if (err.response) {
+        console.error("HTTP status:", err.response.status);
+        console.error("Backend response:", err.response.data);
+      }
+
+      const message =
+        err.response?.data?.message ||
+        err.message ||
+        "An unexpected error occurred.";
+
+      if (appointmentCreated) {
+        alert(
+          `Your appointment may already have been created, but payment initialization failed. ${message} Check your existing appointment before submitting again.`
+        );
+      } else {
+        alert(`Booking failed: ${message}`);
+      }
+
+    } finally {
+      submissionLock.current = false;
+      setIsSubmitting(false);
     }
-
 
   };
 
@@ -101,6 +166,16 @@ const Appointment = ({ currentYear }) => {
 
     fetchTreatments();
   }, []);
+
+  const getLocalDate = () => {
+    const today = new Date();
+
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  };
 
   return (
 
@@ -139,7 +214,7 @@ const Appointment = ({ currentYear }) => {
             <h1>Title:</h1>
             <span>Please select your title</span>
 
-            <select required onChange={e => setValues({ ...values, title: e.target.value })} className='title'>
+            <select required value={values.title} onChange={e => setValues({ ...values, title: e.target.value })} className='title'>
               <option value="">--select one--</option>
               <option value="Mr">Mr</option>
               <option value="Mrs">Mrs</option>
@@ -178,7 +253,7 @@ const Appointment = ({ currentYear }) => {
               type="date"
               value={values.appointmentDate}
               required
-              min={new Date().toISOString().split("T")[0]} // Prevent selecting past dates
+              min={getLocalDate()} // Prevent selecting past dates
               onChange={e => setValues({ ...values, appointmentDate: e.target.value })}
             />
           </div>
@@ -194,11 +269,14 @@ const Appointment = ({ currentYear }) => {
               onChange={e => setValues({ ...values, numberOfGuests: e.target.value })} />
           </div>
 
+          <div className="inputbox-btn">
+            <button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Preparing payment" : "Book and Pay"}
+            </button>
+          </div>
+
         </form>
 
-        <div className="inputbox-btn" onClick={handleSubmit}>
-          <button>book now</button>
-        </div>
 
 
         <div className="footer">

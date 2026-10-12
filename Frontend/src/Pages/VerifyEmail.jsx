@@ -198,7 +198,6 @@ function VerifyEmail() {
                             inputMode="numeric"
                             autoComplete="one-time-code"
                             maxLength="6"
-                            placeholder="000000"
                             value={otp}
                             onChange={handleOtpChange}
                             className="otp-input"
