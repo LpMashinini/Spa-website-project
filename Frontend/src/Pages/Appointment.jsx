@@ -4,6 +4,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { useState, useEffect, useRef } from 'react';
+import LoginRequiredModal from '../Pages/LoginRequiredModal';
 import axios from 'axios';
 
 const Appointment = ({ currentYear }) => {
@@ -19,6 +20,7 @@ const Appointment = ({ currentYear }) => {
   const [treatments, setTreatments] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const submissionLock = useRef(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const navigation = useNavigate();
 
@@ -39,13 +41,13 @@ const Appointment = ({ currentYear }) => {
 
     e.preventDefault();
 
+
     if (submissionLock.current || checkEmptyInput()) return;
 
     const token = localStorage.getItem("token");
 
     if (!token) {
-      alert("You must be logged in to book an appointment.");
-      navigation("/login");
+      showLoginModal(true);
       return;
     }
 
@@ -94,7 +96,7 @@ const Appointment = ({ currentYear }) => {
       );
 
       console.log("Payment initialization response:", paymentResponse.data);
-      
+
 
       // 3. Extract the Paystack authorization URL
       const authorizationUrl =
@@ -133,18 +135,23 @@ const Appointment = ({ currentYear }) => {
         console.error("Backend response:", err.response.data);
       }
 
-      const message =
-        err.response?.data?.message ||
-        err.message ||
-        "An unexpected error occurred.";
 
-      if (appointmentCreated) {
-        alert(
-          `Your appointment may already have been created, but payment initialization failed. ${message} Check your existing appointment before submitting again.`
-        );
+      if (err.response?.status === 401) {
+        setShowLoginModal(true);
       } else {
-        alert(`Booking failed: ${message}`);
+        const message =
+          err.response?.data?.message ||
+          "Something went wrong. Please try again.";
+
+        if (appointmentCreated) {
+          alert(
+            `Your appointment may already have been created, but payment initialization failed. ${message} Check your existing appointment before submitting again.`
+          );
+        } else {
+          alert(`Booking failed: ${message}`);
+        }
       }
+
 
     } finally {
       submissionLock.current = false;
@@ -276,6 +283,13 @@ const Appointment = ({ currentYear }) => {
           </div>
 
         </form>
+
+
+        <LoginRequiredModal
+          isOpen={showLoginModal}
+          onClose={() => setShowLoginModal(false)}
+        />
+
 
 
 
