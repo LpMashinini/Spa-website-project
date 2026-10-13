@@ -66,7 +66,6 @@ jobs:
           exit 1
 
       - name: Run tests
-        run: mvn -B clean verify
         working-directory: ./Backend
         env:
           SPRING_DATASOURCE_URL: jdbc:mysql://127.0.0.1:3306/${{ secrets.MYSQL_DATABASE }}
@@ -74,6 +73,7 @@ jobs:
           SPRING_DATASOURCE_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
           PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY }}
           PAYSTACK_CALLBACK_URL: http://localhost:5173/payment/callback
+        run: mvn -B clean verify
 
 
   build:
