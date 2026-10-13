@@ -36,8 +36,23 @@ public class PaymentProcessingService {
                 .movePointRight(2)
                 .longValueExact();
 
-        if (transaction.getAmount() == null || !transaction.getAmount().equals(expectedAmount)){
-            throw new IllegalStateException("Payment amount mismatch");
+        if (transaction.getAmount() == null ){
+            throw new IllegalStateException("Payment amount is missing");
+        }
+
+        long paystackAmount;
+
+        try{
+            paystackAmount = Long.parseLong(transaction.getAmount());
+        } catch (NumberFormatException e) {
+            throw new IllegalStateException("Invalid Paystack amount");
+        }
+
+        if (paystackAmount != expectedAmount){
+            throw new IllegalStateException(
+                    "Payment amount mismatch. Expected: " + expectedAmount
+                    + ", received" + paystackAmount
+            );
         }
 
         if (transaction.getCurrency() == null || !payment.getCurrency().equalsIgnoreCase(transaction.getCurrency())){
