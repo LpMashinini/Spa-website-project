@@ -21,10 +21,11 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
 
     Optional<Payment> findByReference(String reference);
 
-    Optional<Payment> findByAppointmentId(Long appointmentId);
+    Optional<Payment> findByAppointment_Id(Long appointmentId);
 
-    Boolean existsByReference(String reference);
+    boolean existsByReference(String reference);
 
-    Boolean existsByAppointment(Long appointmentId);
+    boolean existsByAppointment_Id(Long appointmentId);
+
 
 }

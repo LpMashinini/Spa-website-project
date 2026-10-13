@@ -6,11 +6,13 @@ import com.Spa_website.Backend.dto.PaystackVerifyResponse;
 import com.Spa_website.Backend.model.*;
 import com.Spa_website.Backend.repository.AppointmentRepository;
 import com.Spa_website.Backend.repository.PaymentRepository;
+import com.Spa_website.Backend.repository.TreatmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestClient;
 
 import java.math.BigDecimal;
@@ -25,6 +27,7 @@ public class PayStackService {
     private final AppointmentRepository appointmentRepository;
     private final UserService userService;
     private final PaymentRepository paymentRepository;
+    private final TreatmentRepository treatmentRepository;
 
     @Value("${paystack.secret-key}")
     private String secretKey;
@@ -53,12 +56,16 @@ public class PayStackService {
             throw new IllegalStateException("Only pending appointments can be paid");
         }
 
-        if (paymentRepository.existsByAppointment(appointmentId)){
+        if (paymentRepository.existsByAppointment_Id(appointmentId)){
             throw new IllegalStateException("A payment already exists for this appointment");
         }
 
+        Treatment treatment = treatmentRepository.findById(
+                appointment.getTreatment().getId()
+        ).orElseThrow(() -> new IllegalArgumentException("Treatment not found"));
 
-        BigDecimal treatmentPrice = appointment.getTreatment().getPrice();
+
+        BigDecimal treatmentPrice = treatment.getPrice();
 
         if (treatmentPrice == null || treatmentPrice.compareTo(BigDecimal.ZERO) <= 0){
             throw new IllegalStateException("Invalid treatment price");
