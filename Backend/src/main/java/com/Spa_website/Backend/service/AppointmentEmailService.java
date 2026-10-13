@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
@@ -23,7 +23,7 @@ public class AppointmentEmailService {
     private final JavaMailSender mailSender;
 
     @Value("${spring.mail.username}")
-    private final String senderEmail;
+    private String senderEmail;
 
 
     public void sendAppointmentConfirmation(
@@ -31,7 +31,7 @@ public class AppointmentEmailService {
             String customerEmail,
             String treatmentName,
             BigDecimal amount,
-            LocalDateTime appointmentDate,
+            LocalDate appointmentDate,
             Integer numberOfGuests,
             Long appointmentId,
             String paymentReference
