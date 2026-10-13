@@ -17,14 +17,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 @Service
-@RequiredArgsConstructor
 public class AppointmentEmailService {
 
-    private JavaMailSender mailSender;
+    private final JavaMailSender mailSender;
+    private final String senderEmail;
 
-    @Value("${spring.mail.username}")
-    private String senderEmail;
-
+    public AppointmentEmailService(
+            @org.springframework.beans.factory.annotation.Autowired(required = false)
+            JavaMailSender mailSender,
+            @Value("${spring.mail.username:}") String senderEmail) {
+        this.mailSender = mailSender;
+        this.senderEmail = senderEmail;
+    }
 
     public void sendAppointmentConfirmation(
             String customerName,
