@@ -20,7 +20,6 @@ public class AppointmentConfirmationListener {
     private final PaymentRepository paymentRepository;
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
-    @Transactional(readOnly = true)
     public void handleAppointmentConfirmed(AppointmentConfirmedEvent event){
 
         Appointment appointment = appointmentRepository.findById(event.appointmentId())
