@@ -20,7 +20,7 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class AppointmentEmailService {
 
-    private final JavaMailSender mailSender;
+    private JavaMailSender mailSender;
 
     @Value("${spring.mail.username}")
     private String senderEmail;
