@@ -2,6 +2,7 @@ package com.Spa_website.Backend.service;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -21,11 +22,17 @@ public class AppointmentEmailService {
     private final JavaMailSender mailSender;
     private final String senderEmail;
 
-    public AppointmentEmailService(JavaMailSender mailSender,
-            @Value("${spring.mail.username:}") String senderEmail) {
+    public AppointmentEmailService(@Autowired(required = false) JavaMailSender mailSender, @Value("${spring.mail.username:}") String senderEmail)
+    {
         this.mailSender = mailSender;
         this.senderEmail = senderEmail;
     }
+
+//    public AppointmentEmailService(JavaMailSender mailSender,
+//            @Value("${spring.mail.username:}") String senderEmail) {
+//        this.mailSender = mailSender;
+//        this.senderEmail = senderEmail;
+//    }
 
     public void sendAppointmentConfirmation(
             String customerName,
