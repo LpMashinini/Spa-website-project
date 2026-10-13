@@ -7,6 +7,7 @@ import com.Spa_website.Backend.repository.PaymentRepository;
 import com.Spa_website.Backend.service.AppointmentEmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
@@ -19,6 +20,7 @@ public class AppointmentConfirmationListener {
     private final PaymentRepository paymentRepository;
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+    @Transactional(readOnly = true)
     public void handleAppointmentConfirmed(AppointmentConfirmedEvent event){
 
         Appointment appointment = appointmentRepository.findById(event.appointmentId())
