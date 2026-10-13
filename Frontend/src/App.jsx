@@ -4,6 +4,7 @@ import Home from "./Components/SPA/Home"
 import Signup from "./Pages/Signup"
 import Login from "./Pages/Login"
 import VerifyEmail from "./Pages/VerifyEmail"
+import PaymentCallback from "./Pages/PaymentCallback"
 import { Route, Routes } from "react-router-dom"
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/payment/callback" element={<PaymentCallback />} />
       </Routes>
 
     </div>

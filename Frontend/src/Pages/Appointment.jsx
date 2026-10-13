@@ -25,7 +25,6 @@ const Appointment = ({ currentYear }) => {
   const checkEmptyInput = () => {
 
     // This function check for any empty input before submitting
-
     for (let input in values) {
       if (!values[input]) {
         alert("Please fill in all fields before submitting.")
@@ -95,6 +94,7 @@ const Appointment = ({ currentYear }) => {
       );
 
       console.log("Payment initialization response:", paymentResponse.data);
+      
 
       // 3. Extract the Paystack authorization URL
       const authorizationUrl =
