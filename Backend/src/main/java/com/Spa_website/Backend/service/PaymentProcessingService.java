@@ -19,6 +19,7 @@ public class PaymentProcessingService {
 
     private final PaymentRepository paymentRepository;
     private final AppointmentRepository appointmentRepository;
+    private final AppointmentEmailService appointmentEmailService;
 
     @Transactional
     public void processVerifiedPayment(String reference , PaystackVerifyData transaction){
@@ -78,6 +79,7 @@ public class PaymentProcessingService {
 
         Appointment appointment = payment.getAppointment();
         appointment.setStatus(AppointmentStatus.BOOKED);
+
 
         paymentRepository.save(payment);
         appointmentRepository.save(appointment);
