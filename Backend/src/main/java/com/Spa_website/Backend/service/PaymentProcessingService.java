@@ -5,10 +5,12 @@ import com.Spa_website.Backend.entity.Appointment;
 import com.Spa_website.Backend.entity.AppointmentStatus;
 import com.Spa_website.Backend.entity.Payment;
 import com.Spa_website.Backend.entity.PaymentStatus;
+import com.Spa_website.Backend.events.AppointmentConfirmedEvent;
 import com.Spa_website.Backend.repository.AppointmentRepository;
 import com.Spa_website.Backend.repository.PaymentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,7 +21,7 @@ public class PaymentProcessingService {
 
     private final PaymentRepository paymentRepository;
     private final AppointmentRepository appointmentRepository;
-    private final AppointmentEmailService appointmentEmailService;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Transactional
     public void processVerifiedPayment(String reference , PaystackVerifyData transaction){
@@ -83,6 +85,10 @@ public class PaymentProcessingService {
 
         paymentRepository.save(payment);
         appointmentRepository.save(appointment);
+
+        eventPublisher.publishEvent(
+                new AppointmentConfirmedEvent(appointment.getId())
+        );
 
     }
 }
