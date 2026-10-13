@@ -1,4 +1,4 @@
-package com.Spa_website.Backend.model;
+package com.Spa_website.Backend.entity;
 
 public enum OtpType {
     EMAIL_VERIFICATION,

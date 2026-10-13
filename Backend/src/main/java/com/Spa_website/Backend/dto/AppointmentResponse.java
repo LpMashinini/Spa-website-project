@@ -1,6 +1,6 @@
 package com.Spa_website.Backend.dto;
 
-import com.Spa_website.Backend.model.AppointmentStatus;
+import com.Spa_website.Backend.entity.AppointmentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,6 @@
 package com.Spa_website.Backend.controller;
 
-import com.Spa_website.Backend.model.Treatment;
+import com.Spa_website.Backend.entity.Treatment;
 import com.Spa_website.Backend.repository.TreatmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

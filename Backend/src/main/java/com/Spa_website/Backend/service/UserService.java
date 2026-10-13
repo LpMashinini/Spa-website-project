@@ -1,10 +1,10 @@
 package com.Spa_website.Backend.service;
 
 import com.Spa_website.Backend.dto.UserRegistrationRequest;
-import com.Spa_website.Backend.model.Otp;
-import com.Spa_website.Backend.model.OtpType;
-import com.Spa_website.Backend.model.Role;
-import com.Spa_website.Backend.model.User;
+import com.Spa_website.Backend.entity.Otp;
+import com.Spa_website.Backend.entity.OtpType;
+import com.Spa_website.Backend.entity.Role;
+import com.Spa_website.Backend.entity.User;
 import com.Spa_website.Backend.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

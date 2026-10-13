@@ -1,10 +1,10 @@
 package com.Spa_website.Backend.service;
 
 import com.Spa_website.Backend.dto.PaystackVerifyData;
-import com.Spa_website.Backend.model.Appointment;
-import com.Spa_website.Backend.model.AppointmentStatus;
-import com.Spa_website.Backend.model.Payment;
-import com.Spa_website.Backend.model.PaymentStatus;
+import com.Spa_website.Backend.entity.Appointment;
+import com.Spa_website.Backend.entity.AppointmentStatus;
+import com.Spa_website.Backend.entity.Payment;
+import com.Spa_website.Backend.entity.PaymentStatus;
 import com.Spa_website.Backend.repository.AppointmentRepository;
 import com.Spa_website.Backend.repository.PaymentRepository;
 import jakarta.transaction.Transactional;

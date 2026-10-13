@@ -2,7 +2,6 @@ package com.Spa_website.Backend.controller;
 
 import com.Spa_website.Backend.dto.AppointmentResponse;
 import com.Spa_website.Backend.dto.CreateAppointmentRequest;
-import com.Spa_website.Backend.model.Appointment;
 import com.Spa_website.Backend.service.AppointmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

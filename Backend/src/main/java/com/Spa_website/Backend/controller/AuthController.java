@@ -2,7 +2,7 @@ package com.Spa_website.Backend.controller;
 
 import com.Spa_website.Backend.dto.*;
 import com.Spa_website.Backend.jwtAuth.JwtUtil;
-import com.Spa_website.Backend.model.User;
+import com.Spa_website.Backend.entity.User;
 import com.Spa_website.Backend.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

@@ -1,8 +1,8 @@
 package com.Spa_website.Backend.service;
 
-import com.Spa_website.Backend.model.Otp;
-import com.Spa_website.Backend.model.OtpType;
-import com.Spa_website.Backend.model.User;
+import com.Spa_website.Backend.entity.Otp;
+import com.Spa_website.Backend.entity.OtpType;
+import com.Spa_website.Backend.entity.User;
 import com.Spa_website.Backend.repository.OtpRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,6 @@ import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 @Service
 @RequiredArgsConstructor

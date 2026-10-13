@@ -1,6 +1,6 @@
 package com.Spa_website.Backend.service;
 
-import com.Spa_website.Backend.model.Treatment;
+import com.Spa_website.Backend.entity.Treatment;
 import com.Spa_website.Backend.repository.TreatmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

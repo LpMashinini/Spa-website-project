@@ -3,7 +3,7 @@ package com.Spa_website.Backend.service;
 import com.Spa_website.Backend.dto.PayStackInitializeResponse;
 import com.Spa_website.Backend.dto.PaystackInitializeRequest;
 import com.Spa_website.Backend.dto.PaystackVerifyResponse;
-import com.Spa_website.Backend.model.*;
+import com.Spa_website.Backend.entity.*;
 import com.Spa_website.Backend.repository.AppointmentRepository;
 import com.Spa_website.Backend.repository.PaymentRepository;
 import com.Spa_website.Backend.repository.TreatmentRepository;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestClient;
 
 import java.math.BigDecimal;
@@ -28,6 +27,7 @@ public class PayStackService {
     private final UserService userService;
     private final PaymentRepository paymentRepository;
     private final TreatmentRepository treatmentRepository;
+    private final PaymentProcessingService paymentProcessingService;
 
     @Value("${paystack.secret-key}")
     private String secretKey;
@@ -179,6 +179,13 @@ public class PayStackService {
         if (!"success".equalsIgnoreCase(transaction.getStatus())){
             throw new IllegalStateException("Paystack transaction is not successful");
         }
+
+        paymentProcessingService.processVerifiedPayment(
+                reference,
+                transaction
+        );
+
+
 
         return response;
 

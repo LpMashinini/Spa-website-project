@@ -1,6 +1,6 @@
 package com.Spa_website.Backend.repository;
 
-import com.Spa_website.Backend.model.User;
+import com.Spa_website.Backend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

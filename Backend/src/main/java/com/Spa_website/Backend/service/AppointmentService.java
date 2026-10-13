@@ -2,15 +2,14 @@ package com.Spa_website.Backend.service;
 
 import com.Spa_website.Backend.dto.AppointmentResponse;
 import com.Spa_website.Backend.dto.CreateAppointmentRequest;
-import com.Spa_website.Backend.model.Appointment;
-import com.Spa_website.Backend.model.AppointmentStatus;
-import com.Spa_website.Backend.model.Treatment;
-import com.Spa_website.Backend.model.User;
+import com.Spa_website.Backend.entity.Appointment;
+import com.Spa_website.Backend.entity.AppointmentStatus;
+import com.Spa_website.Backend.entity.Treatment;
+import com.Spa_website.Backend.entity.User;
 import com.Spa_website.Backend.repository.AppointmentRepository;
 import com.Spa_website.Backend.repository.TreatmentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 

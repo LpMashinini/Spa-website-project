@@ -1,6 +1,6 @@
 package com.Spa_website.Backend.repository;
 
-import com.Spa_website.Backend.model.Payment;
+import com.Spa_website.Backend.entity.Payment;
 import jakarta.persistence.LockModeType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;

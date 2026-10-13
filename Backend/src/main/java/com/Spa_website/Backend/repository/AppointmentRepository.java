@@ -1,6 +1,6 @@
 package com.Spa_website.Backend.repository;
 
-import com.Spa_website.Backend.model.Appointment;
+import com.Spa_website.Backend.entity.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

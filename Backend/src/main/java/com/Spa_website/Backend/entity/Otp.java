@@ -1,4 +1,4 @@
-package com.Spa_website.Backend.model;
+package com.Spa_website.Backend.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

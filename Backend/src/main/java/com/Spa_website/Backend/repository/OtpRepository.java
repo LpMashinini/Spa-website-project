@@ -1,7 +1,7 @@
 package com.Spa_website.Backend.repository;
 
-import com.Spa_website.Backend.model.Otp;
-import com.Spa_website.Backend.model.OtpType;
+import com.Spa_website.Backend.entity.Otp;
+import com.Spa_website.Backend.entity.OtpType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
