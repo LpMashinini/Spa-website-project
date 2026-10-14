@@ -61,7 +61,7 @@ public class AuthController {
         final String token = jwtUtil.generateToken(userDetails);
 
         User user = userService.getUserByEmail(request.getEmail());
-        return ResponseEntity.ok(new AuthResponse(token, user.getId(), user.getEmail(), user.getIsVerified()));
+        return ResponseEntity.ok(new AuthResponse(token, user.getId(), user.getName(), user.getEmail(), user.getIsVerified()));
     }
 
     @PostMapping("/verify-email")

@@ -212,6 +212,7 @@ public class AppointmentEmailService {
         );
 
         try {
+
             MimeMessage message = mailSender.createMimeMessage();
 
             MimeMessageHelper helper = new MimeMessageHelper(
