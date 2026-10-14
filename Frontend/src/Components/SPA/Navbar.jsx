@@ -8,40 +8,38 @@ import "./Navbar.css";
 const Navbar = () => {
 
   const [openMenu, setOpenMenu] = useState(false);
-  const [user, setUser] = useState(null);
+
+
+  const [user, setUser] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("user") || "null");
+    } catch {
+      return null;
+    }
+  });
 
   useEffect(() => {
-
-    const loadUser = () => {
-
+    const syncUser = () => {
       try {
-
+        const token = localStorage.getItem("token");
         const savedUser = JSON.parse(
           localStorage.getItem("user") || "null"
         );
 
-        setUser(
-          localStorage.getItem("token") && savedUser
-            ? savedUser
-            : null
-        );
-
+        setUser(token && savedUser ? savedUser : null);
       } catch {
-
         setUser(null);
-
       }
-
     };
 
-    loadUser();
+    window.addEventListener("authChanged", syncUser);
+    window.addEventListener("storage", syncUser);
 
-    window.addEventListener("authChanged", loadUser);
-    window.addEventListener("storage", loadUser);
+    syncUser();
 
     return () => {
-      window.removeEventListener("authChanged", loadUser);
-      window.removeEventListener("storage", loadUser);
+      window.removeEventListener("authChanged", syncUser);
+      window.removeEventListener("storage", syncUser);
     };
 
   }, []);

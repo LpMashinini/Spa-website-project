@@ -2,7 +2,24 @@ import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./ProfileMenu.css";
 
+
+function getSavedUser() {
+
+  try {
+
+    return JSON.parse(localStorage.getItem("user") || "{}");
+
+  } catch {
+
+    return {};
+
+  }
+
+}
+
+
 function getInitials(name = "") {
+
   return name
     .trim()
     .split(/\s+/)
@@ -13,15 +30,35 @@ function getInitials(name = "") {
 }
 
 export default function ProfileMenu({ user, onLogout }) {
+
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
+
   const navigate = useNavigate();
 
-  const name = user?.name || user?.fullName || "My Account";
-  const email = user?.email || "";
-  const initials = getInitials(user?.name || user?.fullName || "");
+
+  const savedUser = getSavedUser();
+
+  const currentUser = {
+    ...savedUser,
+    ...user,
+  };
+
+  const name =
+    currentUser.name ||
+    currentUser.fullName ||
+    currentUser.firstName ||
+    "My Account";
+
+  const email =
+    currentUser.email ||
+    localStorage.getItem("email") ||
+    "";
+
+  const initials = getInitials(name); 
 
   useEffect(() => {
+
     function handleOutsideClick(event) {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setOpen(false);
@@ -42,11 +79,15 @@ export default function ProfileMenu({ user, onLogout }) {
   }, []);
 
   function handleLogout() {
+
     setOpen(false);
 
     if (onLogout) {
+
       onLogout();
+
     } else {
+
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       localStorage.removeItem("userId");
@@ -55,6 +96,7 @@ export default function ProfileMenu({ user, onLogout }) {
 
       window.dispatchEvent(new Event("authChanged"));
       navigate("/login");
+
     }
   }
 

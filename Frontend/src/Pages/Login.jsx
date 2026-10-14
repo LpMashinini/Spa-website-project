@@ -26,6 +26,7 @@ function Login() {
 
 
     const handleSubmit = async (e) => {
+
         e.preventDefault();
 
         const email = formData.email.trim();
@@ -37,6 +38,7 @@ function Login() {
         }
 
         try {
+
             setLoading(true);
             setError("");
 
@@ -46,6 +48,8 @@ function Login() {
             );
 
             const data = response.data;
+
+            console.log("Login response:", data);
 
             // Check that the backend returned a token.
             if (!data?.token) {
@@ -66,13 +70,17 @@ function Login() {
 
             localStorage.setItem("verified", String(data.verified ?? false));
 
+
             const user = {
                 id: data.userId ?? data.user?.id ?? null,
                 name: data.name ?? data.user?.name ?? "",
-                fullName: data.fullName ?? data.user?.fullName ?? "",
                 email: data.email ?? data.user?.email ?? email,
             };
 
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("userId", String(user.id ?? ""));
+            localStorage.setItem("email", user.email);
+            localStorage.setItem("verified", String(data.verified));
             localStorage.setItem("user", JSON.stringify(user));
 
             // Notify components that authentication information changed.
@@ -80,6 +88,8 @@ function Login() {
 
             // Navigate after successful login.
             navigate("/");
+
+
         } catch (err) {
             console.error("Login error:", err);
             console.error("Backend response:", err.response?.data);
