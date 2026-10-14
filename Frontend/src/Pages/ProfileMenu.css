@@ -1,0 +1,224 @@
+
+.profile-menu {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.profile-menu__trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid #d4dfce;
+  border-radius: 50%;
+  background: #e5eddf;
+  color: #405745;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.profile-menu__trigger:hover,
+.profile-menu__trigger[aria-expanded="true"] {
+  background: #d5e3ce;
+}
+
+.profile-menu__trigger:active {
+  transform: scale(0.96);
+}
+
+.profile-menu__trigger:focus-visible {
+  outline: 2px solid #657b67;
+  outline-offset: 3px;
+}
+
+.profile-avatar {
+  display: grid;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 50%;
+  background: #dce7d5;
+  color: #405745;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.profile-menu__identity {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profile-menu__name {
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-menu__subtitle {
+  overflow: hidden;
+  color: #b9beb8;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-menu__chevron {
+  color: #aeb5ad;
+  font-size: 27px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.profile-menu__chevron.is-open {
+  transform: rotate(90deg);
+}
+
+.profile-dropdown {
+  position: absolute;
+  z-index: 1000;
+  top: calc(100% + 10px);
+  right: 0;
+  left: auto;
+  width: 260px;
+  max-width: calc(100vw - 24px);
+  box-sizing: border-box;
+  padding: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  background: #292d29;
+  color: #f0f1ed;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+  animation: profile-dropdown-enter 0.18s ease-out;
+}
+
+.profile-dropdown__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 10px 16px;
+}
+
+.profile-avatar--large {
+  width: 46px;
+  height: 46px;
+  font-size: 15px;
+}
+
+.profile-dropdown__user {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.profile-dropdown__user strong {
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.profile-dropdown__user span {
+  overflow-wrap: anywhere;
+  color: #adb5ac;
+  font-size: 11px;
+}
+
+.profile-dropdown__divider {
+  height: 1px;
+  margin: 5px 2px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.profile-dropdown__item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 13px;
+  padding: 12px 11px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #f0f1ed;
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.profile-dropdown__item:hover {
+  background: rgba(220, 231, 213, 0.1);
+  color: #dce7d5;
+}
+
+.profile-dropdown__icon {
+  display: grid;
+  flex-shrink: 0;
+  width: 22px;
+  place-items: center;
+  color: #dce7d5;
+  font-size: 19px;
+}
+
+.profile-dropdown__logout {
+  color: #f0d0c9;
+}
+
+.profile-dropdown__logout .profile-dropdown__icon {
+  color: #f0b8aa;
+}
+
+.profile-dropdown__logout:hover {
+  background: rgba(205, 105, 85, 0.12);
+  color: #ffd8cf;
+}
+
+.profile-menu button:focus-visible,
+.profile-dropdown a:focus-visible {
+  outline: 2px solid #b7cba9;
+  outline-offset: 2px;
+}
+
+@keyframes profile-dropdown-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-dropdown {
+    right: -6px;
+    width: 260px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-menu *,
+  .profile-menu *::before,
+  .profile-menu *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

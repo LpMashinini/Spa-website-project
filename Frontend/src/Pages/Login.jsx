@@ -4,6 +4,7 @@ import axios from "axios";
 import "./Login.css";
 
 function Login() {
+
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -23,12 +24,13 @@ function Login() {
         setError("");
     };
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const { email, password } = formData;
+        const email = formData.email.trim();
+        const password = formData.password;
 
-        // Frontend validation
         if (!email || !password) {
             setError("Please enter your email and password.");
             return;
@@ -40,49 +42,66 @@ function Login() {
 
             const response = await axios.post(
                 "http://localhost:8080/api/auth/login",
-                {
-                    email,
-                    password,
-                }
+                { email, password }
             );
 
             const data = response.data;
 
-            console.log("Login successful:", data);
+            // Check that the backend returned a token.
+            if (!data?.token) {
+                console.error("Unexpected login response:", data);
+                setError("Login response is missing the authentication token.");
+                return;
+            }
 
-            // Store JWT
             localStorage.setItem("token", data.token);
 
-            // Store basic user information
-            localStorage.setItem("userId", data.userId);
-            localStorage.setItem("email", data.email);
-            localStorage.setItem("verified", data.verified);
+            if (data.userId != null) {
+                localStorage.setItem("userId", String(data.userId));
+            }
 
-            // Redirect after successful login
+            if (data.email) {
+                localStorage.setItem("email", data.email);
+            }
+
+            localStorage.setItem("verified", String(data.verified ?? false));
+
+            const user = {
+                id: data.userId ?? data.user?.id ?? null,
+                name: data.name ?? data.user?.name ?? "",
+                fullName: data.fullName ?? data.user?.fullName ?? "",
+                email: data.email ?? data.user?.email ?? email,
+            };
+
+            localStorage.setItem("user", JSON.stringify(user));
+
+            // Notify components that authentication information changed.
+            window.dispatchEvent(new Event("authChanged"));
+
+            // Navigate after successful login.
             navigate("/");
-
         } catch (err) {
             console.error("Login error:", err);
+            console.error("Backend response:", err.response?.data);
 
-            if (err.response) {
-                if (err.response.status === 401) {
-                    setError("Incorrect email or password.");
-                } else if (typeof err.response.data === "string") {
-                    setError(err.response.data);
-                } else if (err.response.data?.message) {
-                    setError(err.response.data.message);
-                } else {
-                    setError("Login failed. Please try again.");
-                }
+            if (err.response?.status === 401) {
+                setError("Incorrect email or password.");
+            } else if (err.response?.data?.message) {
+                setError(err.response.data.message);
+            } else if (typeof err.response?.data === "string") {
+                setError(err.response.data);
+            } else if (err.response) {
+                setError(`Login failed (HTTP ${err.response.status}).`);
             } else {
                 setError(
-                    "Unable to connect to the server. Please try again later."
+                    "Unable to reach the backend. Check that the server is running and the URL is correct."
                 );
             }
         } finally {
             setLoading(false);
         }
     };
+
 
     return (
         <div className="login-page">
