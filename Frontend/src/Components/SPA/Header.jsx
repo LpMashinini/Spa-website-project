@@ -1,19 +1,31 @@
-import Navbar from './Navbar'
-import './Header.css'
+
+import Navbar from "./Navbar";
+import "./Header.css";
 
 const Header = () => {
-
-
   return (
-    
-    <div className='container' id='home'>
+    <header className="container" id="home">
       <Navbar />
-      <div className="header-content">
-        <h3>spa <span>&</span> beauty salon</h3>
-        <p>refrsh and revitalize yourself with the best spa & beauty salon.</p>
-      </div>
-    </div>
-  )
-}
 
-export default Header
+      <div className="header-content">
+        <p className="header-eyebrow">BLISSFUL &amp; BALANCE</p>
+
+        <h1>
+          Relax. Restore.
+          <br />
+          <span>Renew.</span>
+        </h1>
+
+        <p className="header-description">
+          A peaceful escape for your mind, body, and soul.
+        </p>
+
+        <a href="#services" className="header-cta">
+          Explore Treatments
+        </a>
+      </div>
+    </header>
+  );
+};
+
+export default Header;

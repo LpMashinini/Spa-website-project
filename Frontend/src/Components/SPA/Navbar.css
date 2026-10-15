@@ -1,19 +1,23 @@
+
 :root {
-  --primary-color: #ffffff;
-  --accent-color: salmon;
+  --nav-emerald: #064E3B;
+  --nav-dark-emerald: #04392B;
+  --nav-champagne: #F8E7C9;
+  --nav-cream: #FFF9EF;
 }
 
 /* Main navbar */
 .nav-container {
-  width: 100%;
-  box-sizing: border-box;
+  position: relative;
+  z-index: 1000;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 24px;
-  padding: 24px 40px;
-  position: relative;
-  z-index: 1000;
+  gap: 30px;
+  width: 100%;
+  padding: 26px 5%;
+  box-sizing: border-box;
+  background: transparent;
 }
 
 /* Logo */
@@ -24,28 +28,19 @@
 }
 
 .logo {
-  position: relative;
   margin: 0;
-  color: var(--primary-color);
-  font-size: 30px;
-  font-weight: 700;
+  color: var(--nav-cream);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(22px, 2.2vw, 30px);
+  font-weight: 500;
+  letter-spacing: -0.5px;
   white-space: nowrap;
 }
 
 .logo span {
-  color: var(--accent-color);
-}
-
-.logo::after {
-  content: "";
-  position: absolute;
-  width: 70%;
-  height: 4px;
-  left: 50%;
-  bottom: -12px;
-  transform: translateX(-50%);
-  background: var(--accent-color);
-  border-radius: 2px;
+  color: var(--nav-champagne);
+  font-style: italic;
+  font-weight: 400;
 }
 
 /* Center navigation */
@@ -57,7 +52,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 28px;
+  gap: clamp(18px, 2.2vw, 32px);
   list-style: none;
   padding: 0;
   margin: 0;
@@ -72,38 +67,45 @@
   position: relative;
   display: inline-block;
   padding: 8px 0;
-  margin: 0;
-  color: var(--primary-color);
-  font-size: 17px;
+  color: var(--nav-cream);
+  font-family: "Parkinsans", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
   text-decoration: none;
   white-space: nowrap;
+  transition: color 0.2s ease;
 }
 
+/* Fine champagne underline */
 .navbar-links li a::after {
   content: "";
   position: absolute;
-  left: 50%;
-  bottom: 0;
+  bottom: 1px;
+  left: 0;
   width: 0;
-  height: 3px;
-  transform: translateX(-50%);
-  border-radius: 2px;
-  background: var(--primary-color);
+  height: 1px;
+  background: var(--nav-champagne);
   transition: width 0.25s ease;
+}
+
+.navbar-links li a:hover,
+.navbar-links li a:focus-visible {
+  color: var(--nav-champagne);
 }
 
 .navbar-links li a:hover::after,
 .navbar-links li a:focus-visible::after {
-  width: 55%;
+  width: 100%;
 }
 
-/* Account icon and burger button */
+/* Account and menu controls */
 .navbar-actions {
   justify-self: end;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 12px;
+  gap: 14px;
 }
 
 .navbar-account {
@@ -113,73 +115,90 @@
 }
 
 .navbar-profile-circle {
-  width: 42px;
-  height: 42px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 40px;
+  height: 40px;
   box-sizing: border-box;
-  border: 1px solid var(--accent-color);
+  border: 1px solid rgb(248 231 201 / 70%);
   border-radius: 50%;
-  color: var(--primary-color);
-  font-size: 21px;
+  background: transparent;
+  color: var(--nav-cream);
+  font-size: 19px;
   text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .navbar-profile-circle:hover {
-  background: var(--accent-color);
-  color: #ffffff;
+  border-color: var(--nav-champagne);
+  background: var(--nav-champagne);
+  color: var(--nav-emerald);
 }
 
-/* Hidden on desktop */
+/* Mobile menu toggle */
 .navbar-menu-toggle {
   display: none;
   align-items: center;
   justify-content: center;
-  padding: 8px;
-  border: 0;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid rgb(248 231 201 / 55%);
+  border-radius: 50%;
   background: transparent;
-  color: var(--primary-color);
-  font-size: 27px;
+  color: var(--nav-cream);
+  font-size: 22px;
   cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
-/* Laptop and smaller screens */
-@media (max-width: 1100px) {
-  .nav-container {
-    gap: 16px;
-    padding: 22px 24px;
-  }
+.navbar-menu-toggle:hover {
+  background: var(--nav-champagne);
+  color: var(--nav-emerald);
+}
 
-  .logo {
-    font-size: 25px;
+/* Tablet and smaller screens */
+@media (max-width: 1000px) {
+  .nav-container {
+    gap: 18px;
+    padding: 22px 4%;
   }
 
   .navbar-links {
-    gap: 18px;
+    gap: 16px;
   }
 
   .navbar-links li a {
-    font-size: 15px;
+    font-size: 12px;
+  }
+
+  .logo {
+    font-size: 23px;
   }
 }
 
-/* Burger menu appears only when the browser is narrow */
+/* Mobile navigation */
 @media (max-width: 850px) {
   .nav-container {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     gap: 12px;
     padding: 20px 24px;
   }
 
   .logo {
-    font-size: 24px;
+    font-size: clamp(20px, 4vw, 25px);
   }
 
   .navbar-actions {
     grid-column: 2;
     grid-row: 1;
+    gap: 10px;
   }
 
   .navbar-menu-toggle {
@@ -189,13 +208,14 @@
   .navbar-navigation {
     display: none;
     position: absolute;
-    top: calc(100% - 4px);
+    top: calc(100% - 2px);
     left: 24px;
     right: 24px;
-    padding: 12px 20px;
-    border-radius: 12px;
-    background: var(--accent-color);
-    box-shadow: 0 10px 25px rgb(0 0 0 / 15%);
+    padding: 12px;
+    border: 1px solid rgb(248 231 201 / 20%);
+    border-radius: 8px;
+    background: var(--nav-dark-emerald);
+    box-shadow: 0 12px 30px rgb(0 0 0 / 20%);
   }
 
   .navbar-navigation.is-open {
@@ -205,13 +225,19 @@
   .navbar-links {
     flex-direction: column;
     align-items: stretch;
-    gap: 4px;
+    gap: 2px;
   }
 
   .navbar-links li a {
     display: block;
-    padding: 12px 8px;
-    font-size: 16px;
+    padding: 13px 12px;
+    color: var(--nav-cream);
+    font-size: 14px;
+  }
+
+  .navbar-links li a:hover,
+  .navbar-links li a:focus-visible {
+    color: var(--nav-champagne);
   }
 
   .navbar-links li a::after {
@@ -219,32 +245,39 @@
   }
 }
 
-/* Very narrow phones */
+/* Small phones */
 @media (max-width: 400px) {
   .nav-container {
     padding: 18px 14px;
   }
 
   .logo {
-    font-size: 20px;
+    font-size: 19px;
+    letter-spacing: -0.7px;
   }
 
-  .navbar-profile-circle {
+  .navbar-profile-circle,
+  .navbar-menu-toggle {
     width: 36px;
     height: 36px;
   }
 
-  .navbar-menu-toggle {
-    font-size: 24px;
-    padding: 6px;
+  .navbar-actions {
+    gap: 7px;
   }
 
   .navbar-navigation {
     left: 14px;
     right: 14px;
   }
+}
 
-  .navbar-actions {
-    gap: 6px;
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .navbar-links li a,
+  .navbar-links li a::after,
+  .navbar-profile-circle,
+  .navbar-menu-toggle {
+    transition: none;
   }
 }
