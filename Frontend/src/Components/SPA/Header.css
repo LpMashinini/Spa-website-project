@@ -16,7 +16,8 @@
 
   /* Original image with a subtle dark overlay */
 background-image:
-  linear-gradient(rgb(23, 22, 22), rgba(6, 5, 5, 0.519)),
+  linear-gradient(rgba(3, 16, 13, 0.864),
+      rgba(6, 31, 24, 0.84)),
   url("../../assets/Header.jpg");
 
   background-size: cover;
