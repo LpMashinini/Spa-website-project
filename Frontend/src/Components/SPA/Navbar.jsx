@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu as MenuIcon, X as CloseIcon } from "lucide-react";
-import { FiUser } from "react-icons/fi";
+import {
+  FiMenu as MenuIcon,
+  FiX as CloseIcon,
+  FiUser,
+} from "react-icons/fi";
 import ProfileMenu from "../../Pages/ProfileMenu";
 import "./Navbar.css";
 
 const Navbar = () => {
-
   const [openMenu, setOpenMenu] = useState(false);
-
 
   const [user, setUser] = useState(() => {
     try {
@@ -41,55 +42,76 @@ const Navbar = () => {
       window.removeEventListener("authChanged", syncUser);
       window.removeEventListener("storage", syncUser);
     };
-
   }, []);
+
+  const closeMenu = () => setOpenMenu(false);
 
   const toggleMenu = () => {
     setOpenMenu((previous) => !previous);
   };
 
-  const closeMenu = () => setOpenMenu(false);
-
   return (
-    <div className="nav-container">
+    <header className="nav-container">
+      {/* Logo */}
       <Link to="/" className="navbar-logo-link" onClick={closeMenu}>
         <h1 className="logo">
           Blissful <span>&</span> Balance
         </h1>
       </Link>
 
-      <button
-        type="button"
-        className="navbar-menu-toggle"
-        onClick={toggleMenu}
-        aria-label="Toggle navigation"
+      {/* Desktop navigation / mobile menu */}
+      <nav
+        className={`navbar-navigation ${openMenu ? "is-open" : ""}`}
+        aria-label="Main navigation"
       >
-        {openMenu ? <CloseIcon className="menu" /> : <MenuIcon className="menu" />}
-      </button>
+        <ul className="navbar-links">
+          <li>
+            <Link to="/" onClick={closeMenu}>Home</Link>
+          </li>
+          <li>
+            <a href="/#about" onClick={closeMenu}>About us</a>
+          </li>
+          <li>
+            <a href="/#Service" onClick={closeMenu}>Service</a>
+          </li>
+          <li>
+            <Link to="/contact" onClick={closeMenu}>Contact</Link>
+          </li>
+          <li>
+            <Link to="/appointment" onClick={closeMenu}>
+              Appointment
+            </Link>
+          </li>
+        </ul>
+      </nav>
 
-      <ul className={openMenu ? "open" : ""}>
-        <li><Link to="/" onClick={closeMenu}>Home</Link></li>
-        <li><a href="/#about" onClick={closeMenu}>About us</a></li>
-        <li><a href="/#Service" onClick={closeMenu}>Service</a></li>
-        <li><Link to="/contact" onClick={closeMenu}>Contact</Link></li>
-        <li><Link to="/appointment" onClick={closeMenu}>Appointment</Link></li>
-      </ul>
+      {/* Account and responsive menu controls */}
+      <div className="navbar-actions">
+        <div className="navbar-account">
+          {user ? (
+            <ProfileMenu user={user} />
+          ) : (
+            <Link
+              to="/login"
+              className="navbar-profile-circle"
+              aria-label="Log in"
+            >
+              <FiUser />
+            </Link>
+          )}
+        </div>
 
-      {/* Only the avatar is displayed in the navbar */}
-      <div className="navbar-account">
-        {user ? (
-          <ProfileMenu user={user} />
-        ) : (
-          <Link
-            to="/login"
-            className="navbar-profile-circle"
-            aria-label="Log in"
-          >
-            <FiUser />
-          </Link>
-        )}
+        <button
+          type="button"
+          className="navbar-menu-toggle"
+          onClick={toggleMenu}
+          aria-label={openMenu ? "Close navigation" : "Open navigation"}
+          aria-expanded={openMenu}
+        >
+          {openMenu ? <CloseIcon /> : <MenuIcon />}
+        </button>
       </div>
-    </div>
+    </header>
   );
 };
 
