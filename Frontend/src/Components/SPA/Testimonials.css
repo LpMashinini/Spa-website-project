@@ -1,289 +1,365 @@
-@import url("https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Parkinsans:wght@300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 
-:root {
-    --primary-color: white;
-    --accent-color: salmon;
-    --secondary-color: black;
-    --font--: "Playfair Display", serif;
-    --font2--: "EB Garamond", serif;
-    --pColor: rgb(136, 133, 133);
-    --teamBack: rgb(255, 255, 255);
-    --teamIcons: rgb(255, 159, 148);
-    --teamDetail: rgba(150, 147, 147, 0.942);
-    --testShadow: rgba(0, 0, 0, 0.2);
-}
+/* =========================================
+   BLISSFUL & BALANCE — TESTIMONIALS
+   Section: Emerald Ink
+   Card: Champagne
+   Card text: Emerald Ink
+   Header text: Champagne
+   ========================================= */
 
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Parkinsans:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap");
 
 .testimonials {
-    padding: 50px 90px;
+  --emerald: #064E3B;
+  --emerald-dark: #04392B;
+  --champagne: #FFF9EF;
+  --champagne-light: #FFF9EF;
+  --emerald-muted: #315E4E;
+  --emerald-border: rgba(6, 78, 59, 0.2);
+
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: clamp(50px, 7vw, 90px) 24px;
+  overflow: hidden;
+
+  /* Entire section */
+  background-color: var(--emerald);
+  color: var(--champagne);
+
+  font-family: "Parkinsans", sans-serif;
+}
+
+.testimonials *,
+.testimonials *::before,
+.testimonials *::after {
+  box-sizing: border-box;
 }
 
 .testimonials-container {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    font-family: var(--font2--);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+  min-width: 0;
+  margin: 0 auto;
 }
+
+/* =========================================
+   HEADER — CHAMPAGNE TEXT
+   ========================================= */
 
 .testimonials-header-text {
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  text-align: center;
 }
 
+.testimonials-divider {
+  display: block;
+  width: 54px;
+  height: 3px;
+  margin: 0 0 22px;
+  border-radius: 10px;
+  background-color: var(--champagne);
+}
+
+.testimonials-eyebrow {
+  margin: 0 0 12px;
+  color: var(--champagne);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.2px;
+  line-height: 1.7;
+}
 
 .testimonials-header-text h2 {
-    color: var(--accent-color);
-    text-transform: capitalize;
-    text-align: center;
-    font-size: 2.5rem;
-    font-family: var(--font--);
+  margin: 0;
+  color: var(--champagne);
+  font-family: "Playfair Display", serif;
+  font-size: clamp(32px, 4.5vw, 48px);
+  font-weight: 500;
+  line-height: 1.2;
+  text-transform: none;
 }
 
-.testimonials-header-text span {
-    background-color: var(--accent-color);
-    border-radius: 5px;
-    width: 90px;
-    height: 4px;
-    text-align: center;
-    margin: 15px 0px;
+.testimonials-subtitle {
+  max-width: 100%;
+  margin: 16px 0 0;
+  color: var(--champagne);
+  font-family: "EB Garamond", serif;
+  font-size: clamp(18px, 2.2vw, 22px);
+  font-style: italic;
+  line-height: 1.6;
 }
 
-
-.testimonials-header-text p {
-    color: var(--pColor);
-    text-transform: capitalize;
-    margin: 30px 0px;
-    font-family: var(--font2--);
+.testimonials-header-text .testimonials-divider:last-child {
+  margin: 24px 0 0;
 }
+
+/* =========================================
+   TESTIMONIAL CARD — CHAMPAGNE BACKGROUND
+   ========================================= */
 
 .testimonial {
-    width: 90%;
-    max-width: 800px;
-    margin: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  min-width: 0;
+  margin: 42px auto 0;
+  padding: clamp(28px, 5vw, 52px) clamp(20px, 6vw, 60px) 30px;
 
+  border: 1px solid rgba(248, 231, 201, 0.5);
+  border-radius: 20px;
+  background-color: var(--champagne);
+  color: var(--emerald);
+
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.12);
+  text-align: center;
+}
+
+/* Decorative quotation mark */
+
+.testimonial-quote-mark {
+  height: 55px;
+  color: var(--emerald);
+  font-family: "Playfair Display", serif;
+  font-size: 82px;
+  line-height: 1;
 }
 
 .testimonials-text {
-    color: var(--secondary-color);
-    font-size: 20px;
-    width: 100%;
-    height: 350px;
-    position: relative;
-    box-shadow: 0px 25px 30px var(--testShadow);
-
+  width: 100%;
+  max-width: 660px;
+  min-width: 0;
+  margin: 12px auto 0;
 }
+
+.testimonial-review {
+  margin: 0;
+  color: var(--emerald);
+  font-family: "EB Garamond", serif;
+  font-size: clamp(19px, 2.5vw, 25px);
+  font-weight: 400;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+  animation: testimonial-fade-in 0.35s ease both;
+}
+
+/* =========================================
+   REVIEWER INFORMATION — EMERALD TEXT
+   ========================================= */
+
+.testimonial-author {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.testimonial-author-line {
+  display: block;
+  width: 36px;
+  height: 2px;
+  margin-bottom: 15px;
+  background-color: var(--emerald);
+}
+
+.testimonial-author h3 {
+  margin: 0;
+  color: var(--emerald);
+  font-family: "Playfair Display", serif;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.testimonial-author p {
+  margin: 6px 0 0;
+  color: var(--emerald-muted);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  line-height: 1.7;
+  text-transform: uppercase;
+}
+
+/* =========================================
+   REVIEWER SELECTION BUTTONS
+   ========================================= */
 
 .testimonials-pic {
-    margin-top: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-
-}
-
-.user-text {
-    width: 80%;
-    text-align: center;
-    line-height: 30px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none;
-
-}
-
-.user-text.active-text {
-    color: var(--secondary-color);
-    display: block;
-    animation: moveup 0.5s linear forwards;
-
-}
-
-.user-text span {
-    display: block;
-    font-size: 17px;
-    margin-top: 70px;
-    font-weight: 500;
-
-}
-
-.user-pic {
-    cursor: pointer;
-    width: 70px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 10px;
-
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  margin-top: 36px;
 }
 
 .user-review {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    background-color: var(--accent-color);
-    box-shadow: 0px 25px 30px var(--testShadow);
-    margin: 10px;
-    padding: 10px;
-    cursor: pointer;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 52px;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+
+  border: 1px solid var(--emerald);
+  border-radius: 50%;
+  background-color: transparent;
+  color: var(--emerald);
+
+  font-family: "Parkinsans", sans-serif;
+  cursor: pointer;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .user-review span {
-    font-size: 20px;
-    font-weight: 600;
+  font-size: 13px;
+  font-weight: 600;
 }
 
-.user-pic.active-pic {
-    width: 130px;
+.user-review:hover {
+  transform: translateY(-3px);
+  background-color: rgba(6, 78, 59, 0.08);
 }
 
-@keyframes moveup {
-
-    0% {
-        margin-top: 25px;
-    }
-
-    100% {
-        margin-top: 0px;
-    }
-
+.user-review.active-pic {
+  background-color: var(--emerald);
+  color: var(--champagne);
+  box-shadow: 0 0 0 5px rgba(6, 78, 59, 0.1);
+  transform: translateY(-2px);
 }
 
-
-/* Media Query for Responsiveness */
-
-@media (min-width: 300px) and (max-width: 480px) {
-
-    /* Mobile - Portrait */
-
-    .testimonial {
-        padding: 30px 0px;
-    }
-
-    .testimonials-header-text p {
-        margin-top: 5rem;
-    }
-
-    .testimonials-pic {
-        display: none;
-    }
-
-    .testimonial {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .testimonials-text {
-        width: 290px;
-        height: 520px;
-    }
-
-    .user-text span {
-        display: none;
-    }
+.user-review:focus-visible {
+  outline: 3px solid var(--emerald);
+  outline-offset: 5px;
 }
 
-
-@media (min-width: 481px) and (max-width: 767px) {
-
-    /* Mobile - Landscape */
-
-    .testimonial {
-        padding: 30px 0px;
-    }
-
-    .testimonials-header-text p {
-        margin-top: 5rem;
-    }
-
-    .testimonials-pic {
-        display: none;
-    }
-
-    .testimonial {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .testimonials-text {
-        width: 290px;
-        height: 420px;
-    }
-
-    .user-text span {
-        display: none;
-    }
-
+.testimonial-counter {
+  margin: 24px 0 0;
+  color: var(--emerald-muted);
+  font-size: 11px;
+  letter-spacing: 2px;
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-    /* Tablet - portrait */
+/* =========================================
+   ANIMATION
+   ========================================= */
 
+@keyframes testimonial-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
 
-    .testimonials-header-text p {
-        margin-top: 5rem;
-    }
-
-    .testimonials-pic {
-        margin-top: 7.5rem;
-    }
-
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+/* =========================================
+   TABLET
+   ========================================= */
 
-    /* Tablet - Landscape*/
+@media (max-width: 768px) {
+  .testimonials {
+    padding: 60px 20px;
+  }
 
-    .testimonials-header-text p {
-        margin-top: 5rem;
-    }
+  .testimonial {
+    margin-top: 32px;
+    padding: 36px 28px 28px;
+  }
 
-    .testimonials-pic {
-        margin-top: 7.5rem;
-    }
-
-
+  .testimonials-pic {
+    gap: 12px;
+    margin-top: 30px;
+  }
 }
 
-@media (min-width: 1024px) and (max-width: 1280px) {
+/* =========================================
+   MOBILE
+   ========================================= */
 
-    /* Laptop/ Desktop */
+@media (max-width: 480px) {
+  .testimonials {
+    padding: 48px 16px;
+  }
 
-    .testimonial {
-        padding: 0px 0px;
-    } 
+  .testimonials-eyebrow {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+  }
 
-    .testimonials-header-text {
-        padding: 40px 0px;
-    }
+  .testimonials-subtitle {
+    max-width: 300px;
+  }
 
-    .testimonials-header-text p {
-        margin-top: 8rem;
-    }
+  .testimonial {
+    margin-top: 26px;
+    padding: 28px 18px 24px;
+    border-radius: 16px;
+  }
 
+  .testimonial-quote-mark {
+    height: 44px;
+    font-size: 68px;
+  }
 
+  .testimonial-review {
+    font-size: 19px;
+    line-height: 1.75;
+  }
+
+  .testimonial-author {
+    margin-top: 24px;
+  }
+
+  .testimonial-author h3 {
+    font-size: 17px;
+  }
+
+  .testimonials-pic {
+    gap: 10px;
+    margin-top: 26px;
+  }
+
+  .user-review {
+    flex-basis: 44px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .user-review span {
+    font-size: 12px;
+  }
 }
 
-@media (min-width: 1281px) {
-    /* Desktop */
+/* =========================================
+   REDUCED MOTION ACCESSIBILITY
+   ========================================= */
 
-    .testimonials {
-
-        padding: 60px 0px;
-    }
+@media (prefers-reduced-motion: reduce) {
+  .testimonials *,
+  .testimonials *::before,
+  .testimonials *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }
