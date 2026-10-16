@@ -52,9 +52,11 @@ const Appointment = ({ currentYear = new Date().getFullYear() }) => {
   };
 
   useEffect(() => {
+
     let isMounted = true;
 
     const fetchTreatments = async () => {
+      
       setIsLoadingTreatments(true);
       setTreatmentError("");
 
