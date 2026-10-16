@@ -5,8 +5,7 @@ services:
     ports:
       - "80:80"
     depends_on:
-      spa-backend:
-        condition: service_healthy
+      - spa-backend
     restart: unless-stopped
     networks:
       - spa-network
@@ -17,39 +16,30 @@ services:
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: "jdbc:mysql://spa-database-mysql:3306/spa?useSSL=false&serverTimezone=UTC"
-      SPRING_DATASOURCE_USERNAME: ${MYSQL_USERNAME:?Set MYSQL_USERNAME in .env}
-      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env}
+      SPRING_DATASOURCE_URL: "jdbc:mysql://spa-database-mysql:3306/spa"
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
     depends_on:
-      spa-database-mysql:
-        condition: service_healthy
+      - spa-database-mysql
     restart: unless-stopped
     networks:
       - spa-network
-    # Add a backend health check once Spring Boot Actuator
-    # and its health endpoint are confirmed to be available.
+
 
   spa-database-mysql:
     image: mysql:8.0
     container_name: spa-database-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in .env}
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-spa}
-      MYSQL_USER: ${MYSQL_USERNAME:?Set MYSQL_USERNAME in .env}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env}
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: spa
+    ports:
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     restart: unless-stopped
     networks:
       - spa-network
-    healthcheck:
-      test:
-        - CMD-SHELL
-        - 'mysqladmin ping -h localhost -u root -p"$${MYSQL_ROOT_PASSWORD}" --silent'
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 30s
+
 
 networks:
   spa-network:
