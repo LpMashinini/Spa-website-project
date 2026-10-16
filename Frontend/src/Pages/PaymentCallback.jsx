@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
@@ -5,6 +6,11 @@ import "./PaymentCallback.css";
 
 export default function PaymentCallback() {
   const [searchParams] = useSearchParams();
+
+  const reference =
+    searchParams.get("reference") ||
+    searchParams.get("trxref");
+
   const [status, setStatus] = useState("loading");
   const [message, setMessage] = useState(
     "Please wait while we confirm your payment."
@@ -14,17 +20,13 @@ export default function PaymentCallback() {
     let cancelled = false;
 
     async function verifyPayment() {
-      const reference =
-        searchParams.get("reference") ||
-        searchParams.get("trxref");
-
-      const token = localStorage.getItem("token");
-
       if (!reference) {
         setStatus("error");
         setMessage("We couldn't find your payment reference.");
         return;
       }
+
+      const token = localStorage.getItem("token");
 
       if (!token) {
         setStatus("login");
@@ -34,9 +36,12 @@ export default function PaymentCallback() {
         return;
       }
 
+      setStatus("loading");
+      setMessage("Please wait while we confirm your payment.");
+
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/v1/payments/verify-payment/${encodeURIComponent(
+          `/api/v1/payments/verify-payment/${encodeURIComponent(
             reference
           )}`,
           {
@@ -50,12 +55,15 @@ export default function PaymentCallback() {
 
         const result = response.data;
 
-        const paymentSucceeded =
-          result?.data?.status === "SUCCESS" ||
-          result?.status === "SUCCESS" ||
-          result?.success === true;
+        // Adjust these checks after confirming the backend DTO.
+        const paymentStatus =
+          result?.data?.status ??
+          result?.status;
 
-        if (paymentSucceeded) {
+        if (
+          typeof paymentStatus === "string" &&
+          paymentStatus.toUpperCase() === "SUCCESS"
+        ) {
           setStatus("success");
           setMessage(
             "Your payment has been verified and your appointment is booked."
@@ -68,17 +76,17 @@ export default function PaymentCallback() {
           );
         }
       } catch (error) {
+        if (cancelled) return;
+
         console.error(
           "Payment verification failed:",
           error.response?.data || error.message
         );
 
-        if (!cancelled) {
-          setStatus("error");
-          setMessage(
-            "We couldn't verify your payment right now. Your payment may still have been processed, so please check your appointments before trying again."
-          );
-        }
+        setStatus("error");
+        setMessage(
+          "We couldn't verify your payment right now. Your payment may still have been processed, so please check your appointments before trying again."
+        );
       }
     }
 
@@ -87,7 +95,7 @@ export default function PaymentCallback() {
     return () => {
       cancelled = true;
     };
-  }, [searchParams]);
+  }, [reference]);
 
   const statusContent = {
     loading: {
@@ -99,7 +107,8 @@ export default function PaymentCallback() {
     success: {
       eyebrow: "PAYMENT CONFIRMED",
       title: "Your moment of calm awaits.",
-      description: "Your payment is confirmed. We look forward to welcoming you.",
+      description:
+        "Your payment is confirmed. We look forward to welcoming you.",
       icon: "✓",
     },
     pending: {
@@ -155,9 +164,7 @@ export default function PaymentCallback() {
         </div>
 
         <p className="payment-eyebrow">{content.eyebrow}</p>
-
         <h1>{content.title}</h1>
-
         <p className="payment-description">{content.description}</p>
 
         <div className={`payment-notice payment-notice--${status}`}>
@@ -195,13 +202,17 @@ export default function PaymentCallback() {
 
         <div className="payment-security">
           <span>♧</span>
-          <span>Your transaction details are handled securely.</span>
+          <span>
+            Your transaction details are handled securely.
+          </span>
         </div>
       </section>
 
       <footer className="payment-footer">
         <span>PAUSE. BREATHE. RECONNECT.</span>
-        <span>© {new Date().getFullYear()} Blissful & Balance</span>
+        <span>
+          © {new Date().getFullYear()} Blissful & Balance
+        </span>
       </footer>
     </main>
   );

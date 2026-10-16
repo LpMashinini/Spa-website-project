@@ -12,7 +12,7 @@ import SpaOutlinedIcon from "@mui/icons-material/SpaOutlined";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
-const API_URL = "http://localhost:8080";
+const API_URL = "";
 
 const Appointment = ({ currentYear = new Date().getFullYear() }) => {
   const [values, setValues] = useState({
