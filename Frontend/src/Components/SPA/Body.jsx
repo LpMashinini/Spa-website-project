@@ -2,7 +2,7 @@ import "./Body.css";
 import aboutBg from "../../assets/about_us.jpg";
 import stoneMassageImg from "../../assets/stone_massage.jpg";
 import bodyMassageImg from "../../assets/body_massage.jpg";
-import herbalTreatmentImg from "../../assets/herbal_treatment.jpg";
+import herbalTreatmentImg from "../../assets/herbal_Treatment.jpg";
 import team1 from "../../assets/p1.jpg";
 import team2 from "../../assets/p2.jpg"
 import team3 from "../../assets/p3.jpg";
