@@ -1,7 +1,10 @@
+
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./Signup.css";
+
+const API_URL = "";
 
 function Signup() {
     const navigate = useNavigate();
@@ -38,7 +41,13 @@ function Signup() {
         } = formData;
 
         // Frontend validation
-        if (!name || !email || !phoneNumber || !password || !confirmPassword) {
+        if (
+            !name.trim() ||
+            !email.trim() ||
+            !phoneNumber.trim() ||
+            !password ||
+            !confirmPassword
+        ) {
             setError("Please fill in all fields.");
             return;
         }
@@ -58,25 +67,34 @@ function Signup() {
             setError("");
 
             const response = await axios.post(
-                "http://localhost:8080/api/auth/register",
+                `${API_URL}/api/auth/register`,
                 {
-                    name,
-                    email,
+                    name: name.trim(),
+                    email: email.trim(),
                     password,
-                    phoneNumber,
+                    phoneNumber: phoneNumber.trim(),
                 }
             );
 
-            console.log(response.data);
+            console.log("Registration response:", response.data);
 
-            // Save the email so the verification page knows
-            // which account is being verified.
-            sessionStorage.setItem("verificationEmail", response.data.email);
-            sessionStorage.setItem("verificationUserId", response.data.userId);
+            // Save details for the email verification page.
+            if (response.data?.email) {
+                sessionStorage.setItem(
+                    "verificationEmail",
+                    response.data.email
+                );
+            }
 
-            // Go to email verification page
+            if (response.data?.userId != null) {
+                sessionStorage.setItem(
+                    "verificationUserId",
+                    String(response.data.userId)
+                );
+            }
+
+            // Go to email verification page.
             navigate("/verify-email");
-
         } catch (err) {
             console.error("Registration error:", err);
 
@@ -100,9 +118,7 @@ function Signup() {
 
     return (
         <div className="signup-page">
-
             <div className="signup-card">
-
                 <div className="signup-header">
                     <div className="signup-logo">
                         SPA
@@ -116,7 +132,6 @@ function Signup() {
                 </div>
 
                 <form onSubmit={handleSubmit} className="signup-form">
-
                     {error && (
                         <div className="signup-error">
                             {error}
@@ -166,7 +181,6 @@ function Signup() {
                     </div>
 
                     <div className="form-row">
-
                         <div className="form-group">
                             <label htmlFor="password">Password</label>
 
@@ -196,7 +210,6 @@ function Signup() {
                                 autoComplete="new-password"
                             />
                         </div>
-
                     </div>
 
                     <button
@@ -206,7 +219,6 @@ function Signup() {
                     >
                         {loading ? "Creating account..." : "Create Account"}
                     </button>
-
                 </form>
 
                 <div className="signup-footer">
@@ -216,9 +228,7 @@ function Signup() {
                         Sign in
                     </Link>
                 </div>
-
             </div>
-
         </div>
     );
 }
