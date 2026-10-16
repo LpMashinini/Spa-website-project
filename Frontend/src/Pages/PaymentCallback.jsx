@@ -55,7 +55,7 @@ export default function PaymentCallback() {
 
         const result = response.data;
 
-        // Adjust these checks after confirming the backend DTO.
+        // Confirm the exact response structure against the backend DTO.
         const paymentStatus =
           result?.data?.status ??
           result?.status;
