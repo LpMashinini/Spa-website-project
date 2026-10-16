@@ -184,7 +184,7 @@ const Contact = ({ currentYear = new Date().getFullYear() }) => {
               <div>
                 <h4>Visit us</h4>
                 <p>
-                  Add your confirmed business address here.
+                  Pretoria CBD, MAIN STREET, 12345
                 </p>
               </div>
             </div>
@@ -197,7 +197,7 @@ const Contact = ({ currentYear = new Date().getFullYear() }) => {
                 <h4>Email</h4>
                 <p>
                   <a href="mailto:YOUR_EMAIL@example.com">
-                    YOUR_EMAIL@example.com
+                     Blissful&Balance@gmail.com
                   </a>
                 </p>
               </div>
@@ -209,7 +209,7 @@ const Contact = ({ currentYear = new Date().getFullYear() }) => {
               </span>
               <div>
                 <h4>Call us</h4>
-                <p>Add your business phone number.</p>
+                <p>012 345 6789</p>
               </div>
             </div>
 
@@ -219,9 +219,9 @@ const Contact = ({ currentYear = new Date().getFullYear() }) => {
               </span>
               <div>
                 <h4>Opening hours</h4>
-                <p>Monday – Friday: Add your hours</p>
-                <p>Saturday: Add your hours</p>
-                <p>Sunday: Add your hours</p>
+                <p>Monday – Friday: 8:00 AM – 6:00 PM</p>
+                <p>Saturday: 9:00 AM – 4:00 PM</p>
+                <p>Sunday: 10:00 AM – 2:00 PM</p>
               </div>
             </div>
 

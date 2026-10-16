@@ -87,6 +87,7 @@ const Appointment = ({ currentYear = new Date().getFullYear() }) => {
   }, []);
 
   const handleSubmit = async (event) => {
+    
     event.preventDefault();
 
     if (submissionLock.current) return;
