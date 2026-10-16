@@ -1,10 +1,12 @@
+
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
 
-function Login() {
+const API_URL = "";
 
+function Login() {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -24,9 +26,7 @@ function Login() {
         setError("");
     };
 
-
     const handleSubmit = async (e) => {
-
         e.preventDefault();
 
         const email = formData.email.trim();
@@ -38,12 +38,11 @@ function Login() {
         }
 
         try {
-
             setLoading(true);
             setError("");
 
             const response = await axios.post(
-                "http://localhost:8080/api/auth/login",
+                `${API_URL}/api/auth/login`,
                 { email, password }
             );
 
@@ -51,25 +50,13 @@ function Login() {
 
             console.log("Login response:", data);
 
-            // Check that the backend returned a token.
             if (!data?.token) {
                 console.error("Unexpected login response:", data);
-                setError("Login response is missing the authentication token.");
+                setError(
+                    "Login response is missing the authentication token."
+                );
                 return;
             }
-
-            localStorage.setItem("token", data.token);
-
-            if (data.userId != null) {
-                localStorage.setItem("userId", String(data.userId));
-            }
-
-            if (data.email) {
-                localStorage.setItem("email", data.email);
-            }
-
-            localStorage.setItem("verified", String(data.verified ?? false));
-
 
             const user = {
                 id: data.userId ?? data.user?.id ?? null,
@@ -80,7 +67,10 @@ function Login() {
             localStorage.setItem("token", data.token);
             localStorage.setItem("userId", String(user.id ?? ""));
             localStorage.setItem("email", user.email);
-            localStorage.setItem("verified", String(data.verified));
+            localStorage.setItem(
+                "verified",
+                String(data.verified ?? false)
+            );
             localStorage.setItem("user", JSON.stringify(user));
 
             // Notify components that authentication information changed.
@@ -88,8 +78,6 @@ function Login() {
 
             // Navigate after successful login.
             navigate("/");
-
-
         } catch (err) {
             console.error("Login error:", err);
             console.error("Backend response:", err.response?.data);
@@ -112,14 +100,10 @@ function Login() {
         }
     };
 
-
     return (
         <div className="login-page">
-
             <div className="login-card">
-
                 <div className="login-header">
-
                     <div className="login-logo">
                         SPA
                     </div>
@@ -129,11 +113,9 @@ function Login() {
                     <p>
                         Sign in to continue your relaxing experience.
                     </p>
-
                 </div>
 
                 <form onSubmit={handleSubmit} className="login-form">
-
                     {error && (
                         <div className="login-error">
                             {error}
@@ -141,7 +123,6 @@ function Login() {
                     )}
 
                     <div className="login-form-group">
-
                         <label htmlFor="email">
                             Email Address
                         </label>
@@ -155,11 +136,9 @@ function Login() {
                             onChange={handleChange}
                             autoComplete="email"
                         />
-
                     </div>
 
                     <div className="login-form-group">
-
                         <label htmlFor="password">
                             Password
                         </label>
@@ -173,7 +152,6 @@ function Login() {
                             onChange={handleChange}
                             autoComplete="current-password"
                         />
-
                     </div>
 
                     <div className="forgot-password">
@@ -189,21 +167,16 @@ function Login() {
                     >
                         {loading ? "Signing in..." : "Sign In"}
                     </button>
-
                 </form>
 
                 <div className="login-footer">
-
                     <span>Don't have an account?</span>
 
                     <Link to="/signup">
                         Create an account
                     </Link>
-
                 </div>
-
             </div>
-
         </div>
     );
 }
