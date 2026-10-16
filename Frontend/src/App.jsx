@@ -18,7 +18,7 @@ const App = () => {
     <div>
 
       <Routes>
-        <Route path="/" element={<Home currentYear={currentYear()}/>} />
+        <Route path="" element={<Home currentYear={currentYear()}/>} />
         <Route path="/contact" element={<Contact currentYear={currentYear()}/>} />
         <Route path="/appointment" element={<Appointment currentYear={currentYear()}/>} />
         <Route path="/signup" element={<Signup />} />
