@@ -19,9 +19,22 @@ services:
       SPRING_DATASOURCE_URL: "jdbc:mysql://spa-database-mysql:3306/spa"
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+
+      PAYSTACK_SECRET_KEY: ${PAYSTACK_SECRET_KEY}
+      PAYSTACK_CALLBACK_URL: ${PAYSTACK_CALLBACK_URL}
+
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN}
+      TWILIO_PHONE_NUMBER: ${TWILIO_PHONE_NUMBER}
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID}
+
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+
     depends_on:
       - spa-database-mysql
+
     restart: unless-stopped
+    
     networks:
       - spa-network
 
