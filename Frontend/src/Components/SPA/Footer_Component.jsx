@@ -42,7 +42,7 @@ const Footer = ({ currentYear = new Date().getFullYear() }) => {
           Step away from the everyday and reconnect with yourself.
         </p>
 
-        <Link to="/appointment" className="footer-book-button">
+        <Link to="#" className="footer-book-button">
           Book an appointment
         </Link>
       </div>
@@ -50,7 +50,7 @@ const Footer = ({ currentYear = new Date().getFullYear() }) => {
       {/* Main footer */}
       <div className="footer-main">
         <div className="footer-brand">
-          <Link to="/" className="footer-logo">
+          <Link to="#" className="footer-logo">
             Blissful <span>&amp;</span> Balance
           </Link>
 
@@ -89,10 +89,10 @@ const Footer = ({ currentYear = new Date().getFullYear() }) => {
         <div className="footer-column">
           <h3>Customer care</h3>
           <ul>
-            <li><Link to="/booking-policy">Booking policy</Link></li>
-            <li><Link to="/cancellation-policy">Cancellation policy</Link></li>
-            <li><Link to="/refund-policy">Refund policy</Link></li>
-            <li><Link to="/faq">Frequently asked questions</Link></li>
+            <li><Link to="#">Booking policy</Link></li>
+            <li><Link to="#">Cancellation policy</Link></li>
+            <li><Link to="#">Refund policy</Link></li>
+            <li><Link to="#">Frequently asked questions</Link></li>
           </ul>
         </div>
 
@@ -104,14 +104,14 @@ const Footer = ({ currentYear = new Date().getFullYear() }) => {
                 Terms &amp; conditions
               </Link>
             </li>
-            <li><Link to="/privacy-policy">Privacy policy</Link></li>
+            <li><Link to="#">Privacy policy</Link></li>
             <li>
-              <Link to="/cookie-policy">
+              <Link to="#">
                 Cookie policy
               </Link>
             </li>
             <li>
-              <Link to="/accessibility">
+              <Link to="#">
                 Accessibility statement
               </Link>
             </li>
