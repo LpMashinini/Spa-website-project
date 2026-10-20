@@ -11,17 +11,14 @@ const Footer = ({ currentYear = new Date().getFullYear() }) => {
   const socialLinks = [
     {
       name: "Instagram",
-      href: "https://www.instagram.com/",
       Icon: InstagramIcon,
     },
     {
       name: "Facebook",
-      href: "https://www.facebook.com/",
       Icon: FacebookIcon,
     },
     {
       name: "Twitter",
-      href: "https://twitter.com/",
       Icon: TwitterIcon,
     },
   ];
@@ -63,7 +60,6 @@ const Footer = ({ currentYear = new Date().getFullYear() }) => {
             {socialLinks.map(({ name, href, Icon }) => (
               <a
                 key={name}
-                href={href}
                 className="footer-social-link"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -92,7 +88,7 @@ const Footer = ({ currentYear = new Date().getFullYear() }) => {
             <li><Link to="#">Booking policy</Link></li>
             <li><Link to="#">Cancellation policy</Link></li>
             <li><Link to="#">Refund policy</Link></li>
-            <li><Link to="#">Frequently asked questions</Link></li>
+            <li>Frequently asked questions</li>
           </ul>
         </div>
 
@@ -100,7 +96,7 @@ const Footer = ({ currentYear = new Date().getFullYear() }) => {
           <h3>Legal</h3>
           <ul>
             <li>
-              <Link to="/terms-and-conditions">
+              <Link to="#">
                 Terms &amp; conditions
               </Link>
             </li>
