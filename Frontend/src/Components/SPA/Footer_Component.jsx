@@ -8,6 +8,7 @@ import NorthIcon from "@mui/icons-material/North";
 import { Link } from "react-router-dom";
 
 const Footer = ({ currentYear = new Date().getFullYear() }) => {
+
   const socialLinks = [
     {
       name: "Instagram",
@@ -102,9 +103,9 @@ const Footer = ({ currentYear = new Date().getFullYear() }) => {
             </li>
             <li><Link to="#">Privacy policy</Link></li>
             <li>
-              <Link to="#">
+              <a href="#" target="_blank" rel="noopener noreferrer">
                 Cookie policy
-              </Link>
+              </a>
             </li>
             <li>
               <Link to="#">
