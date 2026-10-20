@@ -10,9 +10,16 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import { useNavigate } from "react-router-dom";
+
 
 const Body = () => {
 
+    const navigate = useNavigate();
+
+    const navigateToAppointment = () => {
+        navigate("/appointment");
+    }
 
     return (
 
@@ -62,7 +69,9 @@ const Body = () => {
                                 and relieve tension. Cold stones may also be used to reduce inflammation and stimulate energy flow.
                             </p>
 
-                            <button>book now</button>
+                            <button onClick={navigateToAppointment}>
+                                book now
+                            </button>
                         </div>
 
                     </div>
@@ -78,7 +87,9 @@ const Body = () => {
                                 improve well-being. It helps reduce stress, alleviate pain, and enhance circulation. Common
                                 types include Swedish, deep tissue, and hot stone massages.
                             </p>
-                            <button>book now</button>
+                            <button onClick={navigateToAppointment}>
+                                book now
+                            </button>
                         </div>
 
                     </div>
@@ -94,7 +105,9 @@ const Body = () => {
                                 It includes herbs, roots, and flowers in forms like teas and tinctures. Often part of
                                 traditional medicine, it complement modern healthcare.
                             </p>
-                            <button>book now</button>
+                            <button onClick={navigateToAppointment}>
+                                book now
+                            </button>
                         </div>
                     </div>
 

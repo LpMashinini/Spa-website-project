@@ -9,6 +9,7 @@ import ProfileMenu from "../../Pages/ProfileMenu";
 import "./Navbar.css";
 
 const Navbar = () => {
+
   const [openMenu, setOpenMenu] = useState(false);
 
   const [user, setUser] = useState(() => {
@@ -20,8 +21,11 @@ const Navbar = () => {
   });
 
   useEffect(() => {
+
     const syncUser = () => {
+
       try {
+
         const token = localStorage.getItem("token");
         const savedUser = JSON.parse(
           localStorage.getItem("user") || "null"
@@ -31,6 +35,7 @@ const Navbar = () => {
       } catch {
         setUser(null);
       }
+      
     };
 
     window.addEventListener("authChanged", syncUser);
