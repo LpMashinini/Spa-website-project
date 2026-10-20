@@ -71,7 +71,6 @@ const Footer = ({ currentYear = new Date().getFullYear() }) => {
             ))}
           </div>
         </div>
-
         <div className="footer-column">
           <h3>Explore</h3>
           <ul>
@@ -86,34 +85,23 @@ const Footer = ({ currentYear = new Date().getFullYear() }) => {
         <div className="footer-column">
           <h3>Customer care</h3>
           <ul>
-            <li><Link to="#">Booking policy</Link></li>
-            <li><Link to="#">Cancellation policy</Link></li>
-            <li><Link to="#">Refund policy</Link></li>
-            <li>Frequently asked questions</li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>Booking policy</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>Cancellation policy</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>Refund policy</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>Frequently asked questions</a></li>
           </ul>
         </div>
 
         <div className="footer-column">
           <h3>Legal</h3>
           <ul>
-            <li>
-              <Link to="#">
-                Terms &amp; conditions
-              </Link>
-            </li>
-            <li><Link to="#">Privacy policy</Link></li>
-            <li>
-              <a href="#" target="_blank" rel="noopener noreferrer">
-                Cookie policy
-              </a>
-            </li>
-            <li>
-              <Link to="#">
-                Accessibility statement
-              </Link>
-            </li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>Terms &amp; conditions</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>Privacy policy</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>Cookie policy</a></li>
+            <li><a href="#" onClick={(e) => e.preventDefault()}>Accessibility statement</a></li>
           </ul>
         </div>
+
       </div>
 
       {/* Bottom bar */}
