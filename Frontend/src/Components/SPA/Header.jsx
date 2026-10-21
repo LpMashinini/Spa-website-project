@@ -13,7 +13,9 @@ const Header = () => {
 
 
   return (
+
     <header className="container" id="home">
+
       <Navbar />
 
       <div className="header-content">
@@ -32,8 +34,11 @@ const Header = () => {
         <button onClick={handleExploreTreatments} className="header-cta">
           Explore Treatments
         </button>
+        
       </div>
+
     </header>
+
   );
 };
 
