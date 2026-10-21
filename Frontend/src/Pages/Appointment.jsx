@@ -232,8 +232,6 @@ const Appointment = ({ currentYear = new Date().getFullYear() }) => {
 
             <nav className="appointment-nav" aria-label="Main navigation">
               <Link to="/">Home</Link>
-              <Link to="/#about">Our philosophy</Link>
-              <Link to="/#Service">Treatments</Link>
             </nav>
 
             <span className="appointment-topbar-note">
@@ -242,10 +240,6 @@ const Appointment = ({ currentYear = new Date().getFullYear() }) => {
           </header>
 
           <div className="appointment-hero-copy">
-            <span className="appointment-eyebrow">
-              <span className="appointment-eyebrow-line" />
-              YOUR WELLNESS JOURNEY STARTS HERE
-            </span>
 
             <h1>
               Make room
@@ -266,7 +260,6 @@ const Appointment = ({ currentYear = new Date().getFullYear() }) => {
 
           <div className="appointment-hero-bottom">
             <span>THOUGHTFUL TREATMENTS. TIME WELL SPENT.</span>
-            <span>BOOKING / 01</span>
           </div>
         </div>
       </section>
@@ -276,9 +269,6 @@ const Appointment = ({ currentYear = new Date().getFullYear() }) => {
         id="appointment-booking"
       >
         <div className="appointment-section-intro">
-          <span className="appointment-section-label">
-            A MOMENT THAT'S YOURS
-          </span>
 
           <h2>
             Your next chapter
@@ -516,7 +506,6 @@ const Appointment = ({ currentYear = new Date().getFullYear() }) => {
 
         <div className="appointment-socials">
           <a
-            href="https://www.instagram.com/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
@@ -524,7 +513,6 @@ const Appointment = ({ currentYear = new Date().getFullYear() }) => {
             <InstagramIcon />
           </a>
           <a
-            href="https://www.facebook.com/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
@@ -532,7 +520,6 @@ const Appointment = ({ currentYear = new Date().getFullYear() }) => {
             <FacebookIcon />
           </a>
           <a
-            href="https://twitter.com/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Twitter"
