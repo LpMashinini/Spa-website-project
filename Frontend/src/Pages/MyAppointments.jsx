@@ -35,7 +35,7 @@ const MyAppointments = () => {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
-                },
+                }
 
                 const [appointmentsResponse, treatmentsResponse] = await Promise.all([
                     axios.get(`${API_URL}/api/v1/appointments/my-appointments`, config),
