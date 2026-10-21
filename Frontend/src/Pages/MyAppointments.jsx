@@ -82,9 +82,15 @@ const MyAppointments = () => {
         return () => {
             isMounted = false; // Cleanup function to set the flag to false when the component unmounts
         };
-
     
     }, []);
+
+    const getTreatmentName = (treatmentId) => {
+
+        const treatment = treatments.find((item) => String(item.id) === String(treatmentId));
+
+        return treatment ? treatment.name : "Treatment";
+    };
 
 
 
