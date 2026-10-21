@@ -1,8 +1,17 @@
-
 import Navbar from "./Navbar";
 import "./Header.css";
+import { useNavigate } from "react-router-dom";
+
 
 const Header = () => {
+
+  const navigate = useNavigate();
+
+  const handleExploreTreatments = () => {
+    navigate("/appointment");
+  }
+
+
   return (
     <header className="container" id="home">
       <Navbar />
@@ -20,9 +29,9 @@ const Header = () => {
           A peaceful escape for your mind, body, and soul.
         </p>
 
-        <a href="#services" className="header-cta">
+        <button onClick={handleExploreTreatments} className="header-cta">
           Explore Treatments
-        </a>
+        </button>
       </div>
     </header>
   );
