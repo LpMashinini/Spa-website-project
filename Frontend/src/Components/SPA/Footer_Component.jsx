@@ -5,9 +5,15 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import NorthIcon from "@mui/icons-material/North";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 
 const Footer = ({ currentYear = new Date().getFullYear() }) => {
+
+  const navigate = useNavigate();
+
+  const navigateToAppointment = () => {
+    navigate("/appointment");
+  }
 
   const socialLinks = [
     {
@@ -40,7 +46,7 @@ const Footer = ({ currentYear = new Date().getFullYear() }) => {
           Step away from the everyday and reconnect with yourself.
         </p>
 
-        <Link to="#" className="footer-book-button">
+        <Link onClick={navigateToAppointment} className="footer-book-button">
           Book an appointment
         </Link>
       </div>
