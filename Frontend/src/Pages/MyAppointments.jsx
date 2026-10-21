@@ -1,27 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "./MyAppointment.css";
 
 const API_URL = "";
 
-
 const MyAppointments = () => {
-
     const [appointments, setAppointments] = useState([]);
     const [treatments, setTreatments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
 
     useEffect(() => {
-
         let isMounted = true; // Flag to track if the component is mounted
 
         const fetchAppointments = async () => {
-
             const token = localStorage.getItem("token");
 
             if (!token) {
-
                 if (isMounted) {
                     setError("User is not authenticated.");
                     setIsLoading(false);
@@ -35,28 +31,28 @@ const MyAppointments = () => {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
-                }
+                };
 
                 const [appointmentsResponse, treatmentsResponse] = await Promise.all([
                     axios.get(`${API_URL}/api/v1/appointments/my-appointments`, config),
-                    axios.get(`${API_URL}/api/v1/treatments`, config)
+                    axios.get(`${API_URL}/api/v1/treatments`, config),
                 ]);
 
                 if (!isMounted) return; // Exit if the component is unmounted
 
                 setAppointments(
-                    Array.isArray(appointmentsResponse.data) ? appointmentsResponse.data : []
+                    Array.isArray(appointmentsResponse.data)
+                        ? appointmentsResponse.data
+                        : [],
                 );
 
                 setTreatments(
-                    Array.isArray(treatmentsResponse.data) ? treatmentsResponse.data : []
+                    Array.isArray(treatmentsResponse.data) ? treatmentsResponse.data : [],
                 );
-
             } catch (error) {
                 console.error("Failed to fetch appointments or treatments:", error);
 
                 if (isMounted) {
-
                     if (error.response && error.response.status === 401) {
                         setError("Your session has expired. Please log in again.");
                     } else if (error.response && error.response.status === 403) {
@@ -64,12 +60,12 @@ const MyAppointments = () => {
                     } else if (error.response && error.response.status === 404) {
                         setError("The requested resource was not found.");
                     } else {
-                        setError("An error occurred while fetching appointments or treatments.");
+                        setError(
+                            "An error occurred while fetching appointments or treatments.",
+                        );
                     }
                 }
-
             } finally {
-
                 if (isMounted) {
                     setIsLoading(false);
                 }
@@ -81,45 +77,36 @@ const MyAppointments = () => {
         return () => {
             isMounted = false; // Cleanup function to set the flag to false when the component unmounts
         };
-
     }, []);
 
     const getTreatmentName = (treatmentId) => {
-
-        const treatment = treatments.find((item) => String(item.id) === String(treatmentId));
+        const treatment = treatments.find(
+            (item) => String(item.id) === String(treatmentId),
+        );
 
         return treatment ? treatment.name : "Treatment";
-
     };
 
-
     if (isLoading) {
-
         return (
             <main>
-                <p>
-                    Loading appointments...
-                </p>
+                <p>Loading appointments...</p>
             </main>
         );
     }
 
     return (
-
-
         <main className="my-appointments-page">
             <header className="my-appointments-header">
-                <span className="appointments-eyebrow">
-                    BLISSFUL &amp; BALANCE
-                </span>
+                <span className="appointments-eyebrow">BLISSFUL &amp; BALANCE</span>
 
                 <h1>
                     My <em>appointments.</em>
                 </h1>
 
                 <p>
-                    Your wellness journey, all in one place.
-                    View the details of your bookings below.
+                    Your wellness journey, all in one place. View the details of your
+                    bookings below.
                 </p>
             </header>
 
@@ -131,8 +118,8 @@ const MyAppointments = () => {
                 <section className="appointments-empty">
                     <h2>No appointments yet</h2>
                     <p>
-                        You haven't made any bookings yet.
-                        When you book a treatment, it will appear here.
+                        You haven't made any bookings yet. When you book a treatment, it
+                        will appear here.
                     </p>
 
                     <Link to="/appointment" className="appointments-book-button">
@@ -147,25 +134,18 @@ const MyAppointments = () => {
                     </div>
 
                     {appointments.map((appointment) => (
-                        <article
-                            className="my-appointment-card"
-                            key={appointment.id}
-                        >
+                        <article className="my-appointment-card" key={appointment.id}>
                             <div className="my-appointment-card-top">
                                 <div>
-                                    <span className="appointment-card-label">
-                                        YOUR TREATMENT
-                                    </span>
+                                    <span className="appointment-card-label">YOUR TREATMENT</span>
 
-                                    <h2>
-                                        {getTreatmentName(appointment.treatmentId)}
-                                    </h2>
+                                    <h2>{getTreatmentName(appointment.treatmentId)}</h2>
                                 </div>
 
                                 {appointment.status && (
                                     <span
                                         className={`my-appointment-status ${String(
-                                            appointment.status
+                                            appointment.status,
                                         ).toLowerCase()}`}
                                     >
                                         {appointment.status}
@@ -184,7 +164,7 @@ const MyAppointments = () => {
                                     <strong>
                                         {appointment.appointmentDate
                                             ? new Date(
-                                                `${appointment.appointmentDate}T12:00:00`
+                                                `${appointment.appointmentDate}T12:00:00`,
                                             ).toLocaleDateString("en-ZA", {
                                                 day: "numeric",
                                                 month: "long",
@@ -201,7 +181,9 @@ const MyAppointments = () => {
 
                                 <div>
                                     <span>Number of guests</span>
-                                    <strong>{appointment.numberOfGuests ?? "Not specified"}</strong>
+                                    <strong>
+                                        {appointment.numberOfGuests ?? "Not specified"}
+                                    </strong>
                                 </div>
                             </div>
                         </article>
@@ -215,6 +197,6 @@ const MyAppointments = () => {
             </footer>
         </main>
     );
-}
+};
 
-export default MyAppointments
+export default MyAppointments;
