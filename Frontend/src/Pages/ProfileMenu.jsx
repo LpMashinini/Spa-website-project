@@ -130,16 +130,6 @@ export default function ProfileMenu({ user, onLogout }) {
 
           <div className="profile-dropdown__divider" />
 
-          {/* <Link
-            to="/profile"
-            className="profile-dropdown__item"
-            role="menuitem"
-            onClick={() => setOpen(false)}
-          >
-            <span className="profile-dropdown__icon">♙</span>
-            My Profile
-          </Link> */}
-
           <Link
             to="/appointments"
             className="profile-dropdown__item"
@@ -149,16 +139,6 @@ export default function ProfileMenu({ user, onLogout }) {
             <span className="profile-dropdown__icon">▦</span>
             My Appointments
           </Link>
-
-          {/* <Link
-            to="/settings"
-            className="profile-dropdown__item"
-            role="menuitem"
-            onClick={() => setOpen(false)}
-          >
-            <span className="profile-dropdown__icon">⚙</span>
-            Settings
-          </Link> */}
 
           <div className="profile-dropdown__divider" />
 

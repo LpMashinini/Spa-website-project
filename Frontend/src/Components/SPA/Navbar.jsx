@@ -13,11 +13,13 @@ const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
 
   const [user, setUser] = useState(() => {
+
     try {
       return JSON.parse(localStorage.getItem("user") || "null");
     } catch {
       return null;
     }
+    
   });
 
   useEffect(() => {
