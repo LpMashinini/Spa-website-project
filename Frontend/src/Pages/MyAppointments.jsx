@@ -12,12 +12,15 @@ const MyAppointments = () => {
     const [error, setError] = useState("");
 
     useEffect(() => {
+
         let isMounted = true; // Flag to track if the component is mounted
 
         const fetchAppointments = async () => {
+
             const token = localStorage.getItem("token");
 
             if (!token) {
+
                 if (isMounted) {
                     setError("User is not authenticated.");
                     setIsLoading(false);
@@ -27,6 +30,7 @@ const MyAppointments = () => {
             }
 
             try {
+
                 const config = {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -34,7 +38,7 @@ const MyAppointments = () => {
                 };
 
                 const [appointmentsResponse, treatmentsResponse] = await Promise.all([
-                    axios.get(`${API_URL}/api/v1/appointments/my-appointments`, config),
+                    axios.get(`${API_URL}/api/v1/appointments/user-appointments`, config),
                     axios.get(`${API_URL}/api/v1/treatments`, config),
                 ]);
 
