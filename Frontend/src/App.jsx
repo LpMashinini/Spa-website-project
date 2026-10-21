@@ -5,6 +5,7 @@ import Signup from "./Pages/Signup"
 import Login from "./Pages/Login"
 import VerifyEmail from "./Pages/VerifyEmail"
 import PaymentCallback from "./Pages/PaymentCallback"
+import MyAppointments from "./Pages/MyAppointments"
 import { Route, Routes } from "react-router-dom"
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/payment/callback" element={<PaymentCallback />} />
+        <Route path="/my-appointments" element={<MyAppointments currentYear={currentYear()}/>} />
       </Routes>
 
     </div>

@@ -131,7 +131,7 @@ export default function ProfileMenu({ user, onLogout }) {
           <div className="profile-dropdown__divider" />
 
           <Link
-            to="/appointments"
+            to="/my-appointments"
             className="profile-dropdown__item"
             role="menuitem"
             onClick={() => setOpen(false)}
