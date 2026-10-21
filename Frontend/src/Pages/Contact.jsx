@@ -57,9 +57,6 @@ const Contact = ({ currentYear = new Date().getFullYear() }) => {
         </div>
 
         <div className="contact-hero-copy">
-          <p className="contact-kicker">
-            WE’RE HERE FOR YOU
-          </p>
 
           <h1>
             Let’s start a
@@ -75,7 +72,6 @@ const Contact = ({ currentYear = new Date().getFullYear() }) => {
 
         <div className="contact-hero-bottom">
           <span>PERSONAL CARE, THOUGHTFULLY DELIVERED</span>
-          <span>CONTACT / 01</span>
         </div>
       </section>
 
@@ -266,7 +262,6 @@ const Contact = ({ currentYear = new Date().getFullYear() }) => {
 
         <div className="contact-socials">
           <a
-            href="https://www.instagram.com/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
@@ -274,7 +269,6 @@ const Contact = ({ currentYear = new Date().getFullYear() }) => {
             <InstagramIcon />
           </a>
           <a
-            href="https://www.facebook.com/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
@@ -282,7 +276,6 @@ const Contact = ({ currentYear = new Date().getFullYear() }) => {
             <FacebookIcon />
           </a>
           <a
-            href="https://twitter.com/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Twitter"
