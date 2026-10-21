@@ -38,7 +38,7 @@ public class AppointmentController {
     }
 
     @GetMapping("/user-appointments")
-    public ResponseEntity<List<AppointmentResponse>> getAllAppointments(){
+    public ResponseEntity<List<AppointmentResponse>> getMyAppointments(){
 
         List<AppointmentResponse> appointments = appointmentService.getAllAppointments();
 
