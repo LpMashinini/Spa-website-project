@@ -102,7 +102,16 @@ const MyAppointments = () => {
     return (
         <main className="my-appointments-page">
             <header className="my-appointments-header">
-                <span className="appointments-eyebrow">BLISSFUL &amp; BALANCE</span>
+                <Link to="/" className="my-appointments-brand">
+                    <span className="brand-icon">✧</span>
+                    <span className="brand-name">
+                        Blissful <em>&amp; Balance</em>
+                    </span>
+                </Link>
+
+                <span className="appointments-eyebrow">
+                    YOUR WELLNESS, YOUR TIME
+                </span>
 
                 <h1>
                     My <em>appointments.</em>
