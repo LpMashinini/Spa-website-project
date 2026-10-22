@@ -28,7 +28,7 @@
   font-style: italic;
 }
 
-/* Hero */
+/* Hero background image and overlay */
 .my-appointments-header {
   position: relative;
   isolation: isolate;
@@ -48,7 +48,7 @@
       rgb(4 35 27 / 57%) 52%,
       rgb(4 35 27 / 30%) 100%
     ),
-    url("../../src/assets/user-appointment.jpg") center 48% / cover no-repeat;
+    url("../assets/user-appointment.jpg") center 48% / cover no-repeat;
 }
 
 .my-appointments-header .my-appointments-brand {
@@ -109,6 +109,7 @@
   font-size: 13px;
 }
 
+/* Individual appointment cards */
 .my-appointment-card {
   margin-bottom: 16px;
   padding: 28px 30px;
@@ -150,6 +151,7 @@
   line-height: 1.35;
 }
 
+/* Appointment status badges */
 .my-appointment-status {
   flex-shrink: 0;
   display: inline-flex;
@@ -187,6 +189,7 @@
   color: #876c2f;
 }
 
+/* Appointment details */
 .my-appointment-details {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -228,6 +231,7 @@
   background: #fff;
   text-align: center;
   line-height: 1.8;
+  box-shadow: 0 3px 12px rgb(36 43 32 / 3%);
 }
 
 .appointments-empty h2 {
@@ -298,7 +302,7 @@
   outline-offset: 4px;
 }
 
-/* Responsive */
+/* Responsive layout */
 @media (max-width: 600px) {
   .my-appointments-header {
     min-height: 310px;
@@ -358,8 +362,14 @@
     margin: 30px auto;
     padding: 35px 20px;
   }
+
+  .my-appointments-footer {
+    gap: 16px;
+    padding-bottom: 30px;
+  }
 }
 
+/* Reduced motion accessibility */
 @media (prefers-reduced-motion: reduce) {
   .my-appointment-card,
   .my-appointments-brand,
