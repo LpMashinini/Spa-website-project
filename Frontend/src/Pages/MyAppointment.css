@@ -401,7 +401,7 @@
 }
 
 .appointment-brand {
-  color: var(--spa-green);
+  color: rgb(255 249 239 / 72%);
   font-family: Georgia, "Times New Roman", serif;
   font-size: 25px;
   font-weight: 400;
@@ -421,7 +421,7 @@
 
 .appointment-footer p {
   margin: 0;
-  color: rgb(255 249 239 / 72%);
+  color: #7c847d;
   font-size: 12px;
   line-height: 1.8;
 }
