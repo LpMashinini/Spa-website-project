@@ -495,7 +495,7 @@ const Appointment = ({ currentYear = new Date().getFullYear() }) => {
         </div>
       </section>
 
-      <footer className="appointment-footer">
+      <footer className="appointment-footer-a">
         <Link to="/" className="appointment-brand">
           Blissful <span>&amp;</span> Balance
         </Link>
@@ -504,7 +504,7 @@ const Appointment = ({ currentYear = new Date().getFullYear() }) => {
           © {currentYear} Blissful &amp; Balance. All rights reserved.
         </p>
 
-        <div className="appointment-socials">
+        <div className="appointment-socials-a">
           <a
             target="_blank"
             rel="noopener noreferrer"

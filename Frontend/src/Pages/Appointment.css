@@ -588,7 +588,7 @@
 
 /* FOOTER */
 
-.appointment-footer {
+.appointment-footer-a {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -597,24 +597,25 @@
   background: var(--appointment-dark);
 }
 
-.appointment-footer .appointment-brand {
+.appointment-footer-a .appointment-brand {
   font-size: 22px;
+  color: var(--appointment-cream);
 }
 
-.appointment-footer > p {
+.appointment-footer-a > p {
   margin: 0;
   color: rgb(255 249 239 / 72%);
   font-size: 10px;
   line-height: 1.7;
 }
 
-.appointment-socials {
+.appointment-socials-a {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.appointment-socials a {
+.appointment-socials-a a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -628,7 +629,7 @@
     color 0.2s ease;
 }
 
-.appointment-socials a:hover {
+.appointment-socials-a a:hover {
   background: var(--appointment-champagne);
   color: var(--appointment-emerald);
 }
