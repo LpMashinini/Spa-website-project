@@ -41,6 +41,12 @@ const Contact = ({ currentYear = new Date().getFullYear() }) => {
     setStatus("Your form is ready to connect to the contact service.");
   };
 
+  try{
+
+  } catch (error) {
+
+  }
+
   return (
     <main className="contact-page">
       {/* Hero */}

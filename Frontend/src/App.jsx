@@ -6,6 +6,7 @@ import Login from "./Pages/Login"
 import VerifyEmail from "./Pages/VerifyEmail"
 import PaymentCallback from "./Pages/PaymentCallback"
 import MyAppointments from "./Pages/MyAppointments"
+import RateLimitPage from "./Pages/RateLimitPage"
 import { Route, Routes } from "react-router-dom"
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/payment/callback" element={<PaymentCallback />} />
         <Route path="/my-appointments" element={<MyAppointments currentYear={currentYear()}/>} />
+        <Route path="/rate-limit" element={<RateLimitPage />} />
       </Routes>
 
     </div>

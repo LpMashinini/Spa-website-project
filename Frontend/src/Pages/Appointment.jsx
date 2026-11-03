@@ -11,6 +11,7 @@ import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import SpaOutlinedIcon from "@mui/icons-material/SpaOutlined";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import RateLimitPage from "../Pages/RateLimitPage";
 
 const API_URL = "";
 
@@ -21,6 +22,8 @@ const Appointment = ({ currentYear = new Date().getFullYear() }) => {
     numberOfGuests: "",
     treatmentId: "",
   });
+
+  const [isRateLimited, setIsRateLimited] = useState(false);
 
   const [treatments, setTreatments] = useState([]);
   const [isLoadingTreatments, setIsLoadingTreatments] = useState(true);
@@ -68,6 +71,15 @@ const Appointment = ({ currentYear = new Date().getFullYear() }) => {
         }
       } catch (error) {
         console.error("Failed to fetch treatments:", error);
+
+        if (error.response?.status === 429) {
+          console.log("Rate limit activated");
+
+          if (isMounted) {
+            setIsRateLimited(true);
+          } 
+          return;
+        }
 
         if (isMounted) {
           setTreatmentError(
@@ -221,7 +233,12 @@ const Appointment = ({ currentYear = new Date().getFullYear() }) => {
     (treatment) => String(treatment.id) === String(values.treatmentId)
   );
 
+  if (isRateLimited) {
+    return <RateLimitPage />;
+  }
+
   return (
+
     <main className="appointment-page">
       <section className="appointment-hero">
         <div className="appointment-hero-inner">

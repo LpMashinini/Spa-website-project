@@ -106,15 +106,18 @@ function Signup() {
                 } else {
                     setError("Registration failed. Please try again.");
                 }
+
             } else {
                 setError(
                     "Unable to connect to the server. Please try again later."
                 );
             }
+
         } finally {
             setLoading(false);
         }
     };
+
 
     return (
         <div className="signup-page">
