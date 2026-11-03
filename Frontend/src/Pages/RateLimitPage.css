@@ -1,0 +1,95 @@
+
+.rate-limit-page {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+
+    background: #ffffff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 999999;
+    overflow-y: auto;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.rate-limit-content {
+    width: 100%;
+    max-width: 650px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+}
+
+.rate-limit-illustration {
+    width: 100%;
+    max-width: 480px;
+    max-height: 55vh;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+.rate-limit-content h1 {
+    font-size: clamp(25px, 4vw, 36px);
+    color: #27213c;
+    margin: 10px 0;
+}
+
+.rate-limit-content p {
+    color: #777;
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 450px;
+}
+
+.rate-limit-countdown {
+    font-size: 42px;
+    font-weight: 700;
+    color: #ef669f;
+    margin-top: 15px;
+}
+
+.rate-limit-subtitle {
+    font-size: 14px;
+    color: #888;
+    margin-top: 5px;
+}
+
+.rate-limit-ready {
+    color: #16a34a !important;
+    font-weight: 600;
+}
+
+.rate-limit-content button {
+    background: #7c63db;
+    color: white;
+    border: none;
+    padding: 13px 28px;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.rate-limit-content button:hover {
+    background: #654bc4;
+}
+
+@media (max-width: 600px) {
+    .rate-limit-illustration {
+        max-width: 100%;
+        max-height: 45vh;
+    }
+
+    .rate-limit-content p {
+        font-size: 14px;
+    }
+}
