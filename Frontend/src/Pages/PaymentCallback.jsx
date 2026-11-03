@@ -78,10 +78,6 @@ export default function PaymentCallback() {
         }
       } catch (error) {
 
-        if(error.response.status === 429) {
-          console.log("Rate limited at payment callback page.");
-        }
-
         if (cancelled) return;
 
         console.error(
