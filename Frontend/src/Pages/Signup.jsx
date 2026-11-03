@@ -3,10 +3,13 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./Signup.css";
+import RateLimitPage from "./RateLimitPage";
 
 const API_URL = "";
 
 function Signup() {
+
+    
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -16,6 +19,8 @@ function Signup() {
         password: "",
         confirmPassword: "",
     });
+
+    const [isRateLimted, setIsRateLimited] = useState(false);
 
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
@@ -63,6 +68,7 @@ function Signup() {
         }
 
         try {
+
             setLoading(true);
             setError("");
 
@@ -95,10 +101,13 @@ function Signup() {
 
             // Go to email verification page.
             navigate("/verify-email");
-        } catch (err) {
-            console.error("Registration error:", err);
 
+        } catch (err) {
+
+
+            
             if (err.response) {
+
                 if (typeof err.response.data === "string") {
                     setError(err.response.data);
                 } else if (err.response.data?.message) {
@@ -113,11 +122,15 @@ function Signup() {
                 );
             }
 
+
         } finally {
             setLoading(false);
         }
     };
 
+    // if (isRateLimted) {
+    //     return <RateLimitPage />;
+    // }
 
     return (
         <div className="signup-page">

@@ -40,6 +40,7 @@ export default function PaymentCallback() {
       setMessage("Please wait while we confirm your payment.");
 
       try {
+
         const response = await axios.get(
           `/api/v1/payments/verify-payment/${encodeURIComponent(
             reference
@@ -76,6 +77,7 @@ export default function PaymentCallback() {
           );
         }
       } catch (error) {
+
         if (cancelled) return;
 
         console.error(

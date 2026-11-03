@@ -3,10 +3,10 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./MyAppointment.css";
-
+import RateLimitPage from "../Pages/RateLimitPage";
 const API_URL = "";
 
-/* Social media icons — no additional icon package required */
+/* Social media icons */
 
 const InstagramIcon = () => (
     <svg
@@ -49,8 +49,10 @@ const MyAppointments = ({ currentYear = new Date().getFullYear() }) => {
     const [treatments, setTreatments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
+    const [isRateLimited, setIsRateLimited] = useState(false);
 
     useEffect(() => {
+
         let isMounted = true;
 
         const fetchAppointments = async () => {
@@ -117,6 +119,13 @@ const MyAppointments = ({ currentYear = new Date().getFullYear() }) => {
                         setError(
                             "The requested resource was not found."
                         );
+                    } else if (error.response?.status === 429) {
+
+                        if (isMounted) {
+                            setIsRateLimited(true);
+                            console.log("Rate limited at my appointments page.");
+                            return;
+                        }
                     } else {
                         setError(
                             "An error occurred while fetching appointments or treatments."
@@ -174,6 +183,10 @@ const MyAppointments = ({ currentYear = new Date().getFullYear() }) => {
             .replace(/[^a-z0-9]+/g, "-")
             .replace(/^-|-$/g, "");
     };
+
+    if (isRateLimited) {
+        return <RateLimitPage />;
+    }
 
     return (
         <main className="my-appointments-page">

@@ -19,8 +19,10 @@ function VerifyEmail() {
     const [resending, setResending] = useState(false);
 
     useEffect(() => {
+
         const storedEmail = sessionStorage.getItem("verificationEmail");
         const storedUserId = sessionStorage.getItem("verificationUserId");
+        
 
         if (storedEmail) {
             setEmail(storedEmail);
