@@ -1,10 +1,9 @@
-
 .rate-limit-page {
     position: fixed;
     inset: 0;
     width: 100%;
-    height: 100vh;
-    height: 100dvh;
+    height: 100%;
+    min-height: 100dvh;
 
     background: #ffffff;
 
@@ -14,13 +13,16 @@
 
     z-index: 999999;
     overflow-y: auto;
-    padding: 24px;
+    overflow-x: hidden;
+
+    padding: 20px;
     box-sizing: border-box;
 }
 
 .rate-limit-content {
     width: 100%;
     max-width: 650px;
+    min-width: 0;
 
     display: flex;
     flex-direction: column;
@@ -30,11 +32,18 @@
 }
 
 .rate-limit-illustration {
-    width: 100%;
-    max-width: 480px;
-    max-height: 55vh;
+    display: block;
+    width: auto;
+    height: auto;
+
+    max-width: 100%;
+    max-height: 45vh;
+    max-height: 45dvh;
+
     object-fit: contain;
-    margin-bottom: 20px;
+    object-position: center;
+
+    margin: 0 auto 20px;
 }
 
 .rate-limit-content h1 {
@@ -48,6 +57,7 @@
     font-size: 16px;
     line-height: 1.6;
     max-width: 450px;
+    margin: 0 auto;
 }
 
 .rate-limit-countdown {
@@ -84,9 +94,19 @@
 }
 
 @media (max-width: 600px) {
+    .rate-limit-page {
+        padding: 16px;
+        align-items: flex-start;
+    }
+
+    .rate-limit-content {
+        margin: auto 0;
+    }
+
     .rate-limit-illustration {
         max-width: 100%;
-        max-height: 45vh;
+        max-height: 35dvh;
+        margin-bottom: 15px;
     }
 
     .rate-limit-content p {

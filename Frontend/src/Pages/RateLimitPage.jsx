@@ -1,14 +1,18 @@
 import React from 'react'
-import "./RateLimitPage.css"
-import RateLimitImg from "../../assets/rate_limit.jpg"
+import "./RateLimit.css"
+import RateLimitImg from "../assets/RateLimit.jpg"
 
 const RateLimitPage = () => {
   return (
 
-    <div className="">
+    <div className="rate-limit-page">
 
-      <div>
-        <img src={RateLimitImg} alt="Rate Limit" />
+      <div className="rate-limit-content">
+        <img 
+        src={RateLimitImg} 
+        alt="Rate Limit" 
+        className="rate-limit-illustration"
+        />
         <h1>Oops! Too many Requests</h1>
 
         <p>
