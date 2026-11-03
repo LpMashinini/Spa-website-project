@@ -49,8 +49,10 @@ const MyAppointments = ({ currentYear = new Date().getFullYear() }) => {
     const [treatments, setTreatments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
+    const [isRateLimited, setIsRateLimited] = useState(false);
 
     useEffect(() => {
+
         let isMounted = true;
 
         const fetchAppointments = async () => {
@@ -117,7 +119,14 @@ const MyAppointments = ({ currentYear = new Date().getFullYear() }) => {
                         setError(
                             "The requested resource was not found."
                         );
-                    } else {
+                    }  else if (error.response?.status === 429) {
+                        
+                        setIsRateLimited(true);
+                        setError(
+                            "You have made too many requests. Please try again later."
+                        );
+                        console.log("Rate limited at my appointments page.");
+                    }else {
                         setError(
                             "An error occurred while fetching appointments or treatments."
                         );
